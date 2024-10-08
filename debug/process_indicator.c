@@ -1,0 +1,1 @@
+/* Crear un fichero de logs donde mostrar la progresión del renderizado y llamarla desde distintos puntos del programa*/

@@ -1,4 +1,4 @@
-// CABECERA
+# CABECERA
 
 NAME		= miniRT
 
@@ -6,22 +6,26 @@ DIR_LIBFT	= ./lib/libft
 LIBFT_AR	= ./lib/libft/libft.a
 
 #___MLX___
-MLX_DIR		= ./lib/minilibx-linux/
-MLX			= libmlx.a
+DIR_MLX		= ./lib/minilibx-linux/
+MLX_AR		= ./lib/minilibx-linux/libmlx.a
 
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
-MLXFLAGS	= -lmlx -lXext -lx11
+MLXFLAGS	= -L$(DIR_MLX) -lmlx -lXext -lX11
 LIBFT		= -L$(DIR_LIBFT) -lft
 
-INCLUDE		= -Iinclude -I$(LIBFT_DIR) -I$(MLX_DIR)
+INCLUDE		= -Iinclude -I$(DIR_LIBFT) -I$(DIR_MLX)
 
-SRCS		= #INCLUIR LOS FICHEROS .ca.c
-
+SRCS		=	./src/main.c ./src/mlx_utils/mlx_utils.c #INCLUIR LOS FICHEROS .c a.c
+				
 #Object files
-OBJS		= $(addprefix $(OBJS_DIR), $(notdir $(patsubst %.c, %.o, $(SRCS))))
+DIR_OBJS	= ./build/
+OBJS		= $(addprefix $(DIR_OBJS), $(notdir $(patsubst %.c, %.o, $(SRCS))))
 
 HEADERS		= ./include/mini_rt.h
+
+# Directories
+DIR_MLX_UTILS = ./src/mlx_utils/
 
 all: libft mlx $(NAME)
 
@@ -29,26 +33,28 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -lm $(MLXFLAGS) -o $(NAME)
 
 # Creación de directorio objectos si no existen
-$(OBJS_DIR):
-	mkdir $(OBJS_DIR)
+$(DIR_OBJS):
+	mkdir $(DIR_OBJS)
 
-
-$(OBJS_DIR)%.o: $(SRC) $(HEADERS) Makefile | $(OBJS_DIR)
+$(DIR_OBJS)%.o: $(DIR_MLX_UTILS)%.c $(HEADERS) Makefile | $(DIR_OBJS)
 	$(CC) -c $(CFLAGS) $(INCLUDE) $< -o $@
 
-mlx:
-	@make -C $(DIR_MLX) all
+$(DIR_OBJS)%.o: ./src/main.c $(HEADERS) Makefile | $(DIR_OBJS)
+	$(CC) -c $(CFLAGS) $(INCLUDE) $< -o $@
 
 libft:
-	$(MAKE) -C $(DIR_LIBFT)
+	make -C $(DIR_LIBFT)
+
+mlx:
+	make -C $(DIR_MLX)
 
 clean:
-	rm -rf $(OBJS_DIR)
-	make clean -C $(LIBFT_DIR)
+	rm -rf $(DIR_OBJS)
+	make clean -C $(DIR_LIBFT)
 	
 fclean: clean
 	rm miniRT
-	make fclean -C $(LIBFT_DIR)
+	make fclean -C $(DIR_LIBFT)
 
 re: fclean all
 
