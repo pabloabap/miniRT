@@ -89,5 +89,7 @@ typedef struct s_env
 
 // ___MLX___
 void	ft_mlx_pixel_put(t_canvas *img, int x, int y, int color);
+int		ft_create_trgb(unsigned char t, unsigned char r, unsigned char g, unsigned char b);
+
 
 #endif

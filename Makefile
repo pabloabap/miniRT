@@ -16,7 +16,8 @@ LIBFT		= -L$(DIR_LIBFT) -lft
 
 INCLUDE		= -Iinclude -I$(DIR_LIBFT) -I$(DIR_MLX)
 
-SRCS		=	./src/main.c ./src/mlx_utils/mlx_utils.c #INCLUIR LOS FICHEROS .c a.c
+SRCS		=	./src/main.c \
+				./src/mlx_utils/mlx_utils.c
 				
 #Object files
 DIR_OBJS	= ./build/
