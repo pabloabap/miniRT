@@ -1,3 +1,5 @@
+// Negar tuplas: Vector opuesto.
+
 #include "../../include/mini_rt.h"
 
 void ft_add(double a[4], double b[4])

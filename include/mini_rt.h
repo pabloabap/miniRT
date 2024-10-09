@@ -1,7 +1,7 @@
 // CABECERA !!!
 
-#ifndef MINI_RT
-# define MINI_RT
+#ifndef MINI_RT_H
+# define MINI_RT_H
 
 # define WIDTH 500
 # define HEIGHT 500
@@ -69,27 +69,35 @@ typedef struct s_vec3
 	*/
 }	t_vec3;
 
+/**
+ * Creamos la estrucutra matrix para hacer operaciones con matrices. Como el máximo
+ * rango de las matrices de transformación será 4x4 al trabajar en 3D, reservamos por 
+ * defecto este espacio en el stack para evitar gestionar memoría dinámica y leaks de memoria.
+ * Al crear la matriz se llenara toda de ceros y con las rows y cols sabremos las dimensiones reales
+ * de cada matriz creada.
+ */
+typedef struct s_matrix
+{
+	int	rows;
+	int cols;
+	int	determinant;
+	int val[4][4];
+}	t_matrix;
+
 typedef struct s_ray
 {
 	t_vec3	direction;
 	t_point	origin;
 }	t_ray;
 
-typedef struct s_proyectil
-{
-	int	pos[2];
-	int	vel[2];
-}	t_proyectil;
-
-typedef struct s_env
-{
-	int	grav[2];
-	int	wind[2];
-}	t_env;
-
 // ___MLX___
-void	ft_mlx_pixel_put(t_canvas *img, int x, int y, int color);
-int		ft_create_trgb(unsigned char t, unsigned char r, unsigned char g, unsigned char b);
+void		ft_mlx_pixel_put(t_canvas *img, int x, int y, int color);
+int			ft_create_trgb(unsigned char t, unsigned char r, unsigned char g, unsigned char b);
+
+//___OPERACIONES CON MATRICES___
+t_matrix	ft_build_matrix (int rows, int cols);
+t_matrix	ft_matrix_mult(t_matrix m1, t_matrix m2);
+void		ft_matrix_transpos(t_matrix *m1);
 
 
 #endif
