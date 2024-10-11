@@ -17,6 +17,7 @@ t_matrix	ft_build_matrix(int rows, int cols)
   j = 0;
   matrix.rows = rows;
   matrix.cols = cols;
+  matrix.det = 0;
   while (i < 4)
   {
     while (j < 4)

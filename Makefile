@@ -16,11 +16,17 @@ LIBFT		= -L$(DIR_LIBFT) -lft
 
 INCLUDE		= -Iinclude -I$(DIR_LIBFT) -I$(DIR_MLX)
 
-SRCS		=	./src/main.c \
+MAIN		= ./src/main.c
+
+SRCS		=	$(MAIN) \
 				./src/mlx_utils/mlx_utils.c \
-				src/utils/ft_build_matrix.c \
-				src/utils/ft_matrix_mult.c \
-				./src/utils/ft_matrix_transpos.c
+				./src/utils/ft_build_matrix.c \
+				./src/utils/ft_matrix_transpos.c \
+				./src/utils/ft_matrix_mult.c \
+				./src/utils/ft_matrix_det.c \
+				./src/utils/ft_errors.c \
+				./debug/ft_print_matrix.c \
+				debug/ft_fill_matrix.c
 				
 #Object files
 DIR_OBJS	= ./build/
@@ -31,6 +37,7 @@ HEADERS		= ./include/mini_rt.h
 # Directories
 DIR_MLX_UTILS = ./src/mlx_utils/
 DIR_UTILS = ./src/utils/
+DIR_DEBUG = ./debug/
 
 all: libft mlx $(NAME)
 
@@ -41,14 +48,19 @@ $(NAME): $(OBJS)
 $(DIR_OBJS):
 	mkdir $(DIR_OBJS)
 
+# ELIMINAR, funciones debugging
+$(DIR_OBJS)%.o: $(DIR_DEBUG)%.c $(HEADERS) Makefile | $(DIR_OBJS)
+	$(CC) -c $(CFLAGS) $(INCLUDE) $< -o $@
+
 $(DIR_OBJS)%.o: $(DIR_MLX_UTILS)%.c $(HEADERS) Makefile | $(DIR_OBJS)
 	$(CC) -c $(CFLAGS) $(INCLUDE) $< -o $@
 
 $(DIR_OBJS)%.o: $(DIR_UTILS)%.c $(HEADERS) Makefile | $(DIR_OBJS)
 	$(CC) -c $(CFLAGS) $(INCLUDE) $< -o $@
 
-$(DIR_OBJS)%.o: ./src/main.c $(HEADERS) Makefile | $(DIR_OBJS)
+$(DIR_OBJS)%.o: $(MAIN) $(HEADERS) Makefile | $(DIR_OBJS)
 	$(CC) -c $(CFLAGS) $(INCLUDE) $< -o $@
+
 
 libft:
 	make -C $(DIR_LIBFT)

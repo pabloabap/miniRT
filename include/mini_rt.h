@@ -15,6 +15,7 @@
 #include <string.h>		//strerror
 #include <math.h>		//math
 #include "../lib/minilibx-linux/mlx.h"
+#include "../lib/libft/libft.h"
 
 typedef enum e_coor
 {
@@ -80,7 +81,7 @@ typedef struct s_matrix
 {
 	int	rows;
 	int cols;
-	int	determinant;
+	int	det;
 	int val[4][4];
 }	t_matrix;
 
@@ -98,6 +99,16 @@ int			ft_create_trgb(unsigned char t, unsigned char r, unsigned char g, unsigned
 t_matrix	ft_build_matrix (int rows, int cols);
 t_matrix	ft_matrix_mult(t_matrix m1, t_matrix m2);
 void		ft_matrix_transpos(t_matrix *m1);
+//void		ft_matrix_det(t_matrix *m1);
+int		ft_matrix_det(t_matrix m, int r, int c);
 
+//___GESTION DE ERRORES___
+void	ft_matrix_det_check(t_matrix m);
+void	ft_matrix_mult_check(t_matrix m1, t_matrix m2);
+t_matrix	ft_submatrix(t_matrix m, int row, int col);
+
+// ___DEBUGING___
+void	ft_print_matrix(t_matrix m);
+void 	ft_fill_matrix(t_matrix *m, char *arr);
 
 #endif

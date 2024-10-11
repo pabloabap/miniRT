@@ -12,14 +12,8 @@ t_matrix	ft_matrix_mult(t_matrix m1, t_matrix m2)
 	t_matrix	final_matrix;
 
 	final_matrix = ft_build_matrix(m1.rows, m2.cols);
-	if (m1.rows != m2.cols)
-	{
-		perror("ERROR - El número de filas de la primera matriz tiene");
-		perror(" que ser igual al número de columnas de la segunda \n");
-		exit (1);
-	}
-	else
-		ft_mult(m1, m2, &final_matrix);
+	ft_matrix_mult_check(m1, m2);
+	ft_mult(m1, m2, &final_matrix);
 	return (final_matrix);
 }
 
