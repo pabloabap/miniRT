@@ -11,7 +11,7 @@ void	ft_print_matrix(t_matrix m)
 	{
 		while (j < m.cols)
 		{
-			printf("%02d,", m.val[i][j]);
+			printf("%02f,", m.val[i][j]);
 			j ++;
 		}
 		printf ("\n");

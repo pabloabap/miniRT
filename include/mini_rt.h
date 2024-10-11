@@ -25,6 +25,13 @@ typedef enum e_coor
 	W
 }	t_coor;
 
+typedef enum e_elemet_type
+{
+	VECTOR,
+	POINT,
+	MATRIX
+}	t_element_type;
+
 typedef struct s_canvas
 {
 	void			*mlx_init;
@@ -43,13 +50,23 @@ typedef struct s_canvas
 	int				max_y;
 }					t_canvas;
 
-
-typedef struct s_point
+/*
+ * Estructura para puntos y vectores. Los diferenciamos con el atributo w,
+ * asignando 0 a los vectors y 1 a los puntos. Esto nos permite comprobar
+ * si se puede realizar una operación con ellos o no. Por ejemplo,
+ * matemáticamente no tiene sentido sumar dos puntos, por lo que si
+ * los sumas w=2 y esto nos alertara de que se está intentando hacer una 
+ * operación no permitida. Sin embargo, si sumas un vector a un punto
+ * w = 1, lo que significa que se genera otro punto desplazado las unidades
+ * especificadas por el vector.
+*/
+typedef struct s_tuple
 {
 	double	x;
 	double	y;
 	double	z;
-}	t_point;
+	int		w;
+}	t_tuple;
 
 
 typedef struct s_vec3
@@ -81,31 +98,43 @@ typedef struct s_matrix
 {
 	int	rows;
 	int cols;
-	int	det;
-	int val[4][4];
+	double	det;
+	double val[4][4];
 }	t_matrix;
 
-typedef struct s_ray
+/*typedef struct s_ray
 {
 	t_vec3	direction;
 	t_point	origin;
 }	t_ray;
+*/
 
 // ___MLX___
 void		ft_mlx_pixel_put(t_canvas *img, int x, int y, int color);
 int			ft_create_trgb(unsigned char t, unsigned char r, unsigned char g, unsigned char b);
 
+//___OPERACIONES GENERALES
+// PENDIENTES DE REVISION
+void	ft_add_tuples(double *a, double b[4]);
+void	ft_sub_tuples(double *a, double b[4]);
+void	ft_negate_tuple(double *a);
+void	ft_mult_tuples(double *a, double b[4]);
+void	ft_scalar_mult (void *elem, double s, int elem_type);
+
 //___OPERACIONES CON MATRICES___
 t_matrix	ft_build_matrix (int rows, int cols);
 t_matrix	ft_matrix_mult(t_matrix m1, t_matrix m2);
 void		ft_matrix_transpos(t_matrix *m1);
-//void		ft_matrix_det(t_matrix *m1);
-int		ft_matrix_det(t_matrix m, int r, int c);
+int			ft_cofactor(int row, int col);
+t_matrix	ft_submatrix(t_matrix m, int row, int col);
+int			ft_matrix_det(t_matrix m, int r, int c);
+t_matrix	ft_inverse_matrix(t_matrix *m);
+
 
 //___GESTION DE ERRORES___
+void	ft_tuples_check(int w);
 void	ft_matrix_det_check(t_matrix m);
 void	ft_matrix_mult_check(t_matrix m1, t_matrix m2);
-t_matrix	ft_submatrix(t_matrix m, int row, int col);
 
 // ___DEBUGING___
 void	ft_print_matrix(t_matrix m);

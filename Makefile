@@ -20,10 +20,14 @@ MAIN		= ./src/main.c
 
 SRCS		=	$(MAIN) \
 				./src/mlx_utils/mlx_utils.c \
+				./src/utils/general_op.c \
 				./src/utils/ft_build_matrix.c \
 				./src/utils/ft_matrix_transpos.c \
 				./src/utils/ft_matrix_mult.c \
+				./src/utils/ft_cofactor.c \
+				./src/utils/ft_submatrix.c \
 				./src/utils/ft_matrix_det.c \
+				./src/utils/ft_inverse_matrix.c \
 				./src/utils/ft_errors.c \
 				./debug/ft_print_matrix.c \
 				debug/ft_fill_matrix.c
