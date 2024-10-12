@@ -28,7 +28,7 @@ void	ft_matrix_det_check(t_matrix m)
 
 void	ft_matrix_mult_check(t_matrix m1, t_matrix m2)
 {
-	if (m1.rows != m2.cols)
+	if (m1.cols != m2.rows)
 	{
 		ft_putstr_fd("ERROR - El número de filas de la primera matriz tiene", 2);
 		ft_putendl_fd(" que ser igual al número de columnas de la segunda.", 2);

@@ -5,8 +5,10 @@
 int main(void)
 {
 	t_matrix	m1;
+	t_matrix	m2;
 
 	m1 = ft_build_matrix(4,4);
+	m2 = ft_build_matrix(4,2);
 
 	m1.val[0][0] = -5; 
 	m1.val[0][1] = 2;
@@ -25,10 +27,23 @@ int main(void)
 	m1.val[3][2] = 7;
 	m1.val[3][3] = 4;
 
+	m2.val[0][0] = -5; 
+	m2.val[0][1] = 2;
+	m2.val[1][0] = 6;
+	m2.val[1][1] = -8;
+	m2.val[2][0] = 1;
+	m2.val[2][1] = -5;
+	m2.val[3][0] = 1;
+	m2.val[3][1] = 8;
+
+	printf("___MATRIX 1: r: %d c: %d___\n", m1.rows, m1.cols);
 	ft_print_matrix(m1);
-	printf ("%d\n",ft_matrix_det(m1, 0, 0));
-	ft_inverse_matrix(&m1);
-	return (ft_matrix_det(m1, 0, 0));
+	printf("___MATRIX 2: r: %d c: %d___\n", m2.rows, m2.cols);
+	ft_print_matrix(m2);
+	printf("___FINAL MATRIX___\n");
+	ft_matrix_mult(&m1, m2);
+	ft_print_matrix(m1);
+	return (0);
 }
 
 /*
