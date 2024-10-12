@@ -13,8 +13,7 @@ t_matrix ft_inverse_matrix(t_matrix *m)
 	i = 0;
 	j = 0;
 	m->det = ft_matrix_det(*m, 0, 0);
-	inverse_matrix = *m;
-	ft_matrix_transpos(&inverse_matrix);
+	inverse_matrix = ft_matrix_transpos(*m);
 	tmp = inverse_matrix;
 	printf ("___TRASPUESTA___\n");
 	ft_print_matrix(inverse_matrix);

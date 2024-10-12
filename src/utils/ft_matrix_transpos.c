@@ -1,25 +1,27 @@
 //CABERECA
 #include "../../include/mini_rt.h"
 
-/** Traspone la matriz recibida como parametro. */
-void	ft_matrix_transpos(t_matrix *m1)
+/** Traspone la matriz recibida como parametro.
+ * @return Nueva matriz con la traspuesta de `m`.
+ */
+t_matrix	ft_matrix_transpos(t_matrix m)
 {
 	int			i;
 	int			j;
 	t_matrix	tmp_matrix;
 
-	tmp_matrix = ft_build_matrix(m1->cols, m1->rows);
+	tmp_matrix = ft_build_matrix(m.cols, m.rows);
 	i = 0;
 	j = 0;
-	while (i < m1->rows)
+	while (i < m.rows)
 	{
-		while (j < m1->cols)
+		while (j < m.cols)
 		{
-			tmp_matrix.val[j][i] = (*m1).val[i][j];
+			tmp_matrix.val[j][i] = m.val[i][j];
 			j++;
 		}
 		j = 0;
 		i ++;
 	}
-	*m1 = tmp_matrix;
+	return (tmp_matrix);
 }

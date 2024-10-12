@@ -3,18 +3,20 @@
 
 static void ft_mult(t_matrix m1, t_matrix m2, t_matrix *final_matrix);
 
-/** Multiplica las dos matrices recibidas como parametro.
+/** 
+ * Multiplica las dos matrices recibidas como parametro.
  * En caso de ser incompatibles para multiplicarse retorna
  * mensaje de error y termina el programa.
+ * @return Matriz resultante de la multiplicación.
 */
-void	ft_matrix_mult(t_matrix *m1, t_matrix m2)
+t_matrix	ft_matrix_mult(t_matrix m1, t_matrix m2)
 {
 	t_matrix	final_matrix;
 
-	final_matrix = ft_build_matrix(m1->rows, m2.cols);
-	ft_matrix_mult_check(*m1, m2);
-	ft_mult(*m1, m2, &final_matrix);
-	*m1 = final_matrix;
+	final_matrix = ft_build_matrix(m1.rows, m2.cols);
+	ft_matrix_mult_check(m1, m2);
+	ft_mult(m1, m2, &final_matrix);
+	return (final_matrix);
 }
 
 /** Realiza la operación de multiplicación si las matrices sean compatbles 

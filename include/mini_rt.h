@@ -123,8 +123,8 @@ void	ft_scalar_mult (void *elem, double s, int elem_type);
 
 //___OPERACIONES CON MATRICES___
 t_matrix	ft_build_matrix (int rows, int cols);
-void		ft_matrix_mult(t_matrix *m1, t_matrix m2);
-void		ft_matrix_transpos(t_matrix *m1);
+t_matrix	ft_matrix_mult(t_matrix m1, t_matrix m2);
+t_matrix	ft_matrix_transpos(t_matrix m);
 int			ft_cofactor(int row, int col);
 t_matrix	ft_submatrix(t_matrix m, int row, int col);
 int			ft_matrix_det(t_matrix m, int r, int c);

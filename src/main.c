@@ -41,8 +41,7 @@ int main(void)
 	printf("___MATRIX 2: r: %d c: %d___\n", m2.rows, m2.cols);
 	ft_print_matrix(m2);
 	printf("___FINAL MATRIX___\n");
-	ft_matrix_mult(&m1, m2);
-	ft_print_matrix(m1);
+	ft_print_matrix(ft_matrix_mult(m1, m2));
 	return (0);
 }
 
