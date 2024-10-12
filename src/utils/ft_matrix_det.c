@@ -2,7 +2,7 @@
 #include "../../include/mini_rt.h"
 
 static int	ft_process_matrix(t_matrix m, int r, int *c);
- /*
+ /**
   * Calcula el determinante de la matriz `m` por adjuntos. 
   * `r`y `c` se utilizan para descartar filas y columnas
   * correspondientes en cada operación recursiva.

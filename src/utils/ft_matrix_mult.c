@@ -19,7 +19,8 @@ t_matrix	ft_matrix_mult(t_matrix m1, t_matrix m2)
 	return (final_matrix);
 }
 
-/** Realiza la operación de multiplicación si las matrices sean compatbles 
+/** 
+ * Realiza la operación de multiplicación si las matrices sean compatbles 
  * y actualiza el valor de final_matrix.val con el resultado.
 */
 static void	ft_mult(t_matrix m1, t_matrix m2, t_matrix *final_matrix)

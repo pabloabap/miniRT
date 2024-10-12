@@ -65,7 +65,7 @@ typedef struct s_tuple
 	double	x;
 	double	y;
 	double	z;
-	int		w;
+	double	w;
 }	t_tuple;
 
 
@@ -115,14 +115,32 @@ int			ft_create_trgb(unsigned char t, unsigned char r, unsigned char g, unsigned
 
 //___OPERACIONES GENERALES
 // PENDIENTES DE REVISION
+
 void	ft_add_tuples(double *a, double b[4]);
 void	ft_sub_tuples(double *a, double b[4]);
 void	ft_negate_tuple(double *a);
 void	ft_mult_tuples(double *a, double b[4]);
 void	ft_scalar_mult (void *elem, double s, int elem_type);
 
+//___TRANSFORMACIONES DE PUNTO Y VECTORES
+
+t_matrix	ft_tuple_to_matrix(t_tuple tuple);
+t_tuple		ft_matrix_to_tuple(t_matrix tuple);
+t_tuple		ft_tuple_translation(t_tuple p, double x, double y, double z);
+t_tuple		ft_inverse_tuple_translation(t_tuple p, double x, double y, \
+			double z);
+t_tuple		ft_tuple_scalation(t_tuple p, double x, double y, double z);
+t_tuple		ft_inverse_tuple_scalation(t_tuple p, double x, double y, \
+			double z);
+t_tuple		ft_tuple_x_rotation(t_tuple t, double rot_deg);
+t_tuple		ft_tuple_y_rotation(t_tuple t, double rot_deg);
+t_tuple		ft_tuple_z_rotation(t_tuple t, double rot_deg);
+
 //___OPERACIONES CON MATRICES___
+
 t_matrix	ft_build_matrix (int rows, int cols);
+t_matrix	ft_identity_matrix(int rows, int cols);
+t_matrix	ft_tuple_to_matrix(t_tuple tuple);
 t_matrix	ft_matrix_mult(t_matrix m1, t_matrix m2);
 t_matrix	ft_matrix_transpos(t_matrix m);
 int			ft_cofactor(int row, int col);
@@ -131,10 +149,14 @@ int			ft_matrix_det(t_matrix m, int r, int c);
 t_matrix	ft_inverse_matrix(t_matrix *m);
 
 
+
 //___GESTION DE ERRORES___
+
 void	ft_tuples_check(int w);
 void	ft_matrix_det_check(t_matrix m);
 void	ft_matrix_mult_check(t_matrix m1, t_matrix m2);
+void	ft_matrix_to_tuple_check(t_matrix m);
+
 
 // ___DEBUGING___
 void	ft_print_matrix(t_matrix m);

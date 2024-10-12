@@ -2,7 +2,7 @@
 
 #include "../../include/mini_rt.h"
 
-/*
+/**
  * Suma de elementos tipo tupla (punto o vector). 
  * `a` se actualiza con el valor de la operación.
 */
@@ -15,7 +15,7 @@ void	ft_add_tuples(double *a, double b[4])
 	a[W] += b[W];
 }
 
-/*
+/**
  * Resta de elementos tipo tupla (punto o vector). 
  * `a` se actualiza con el valor de la operación.
 */
@@ -28,7 +28,7 @@ void	ft_sub_tuples(double *a, double b[4])
 	a[W] -= b[W];
 }
 
-/*
+/**
  * Punto o vector opueto al recibido. 
  * `a` se actualiza con el valor de la operación.
 */
@@ -51,7 +51,7 @@ void ft_mult_tuples(double *a, double b[4])
 	a[W] *= b[W];
 }
 
-/*
+/**
  * Escalar `elem` (punto, vector o matrz) por `s`. Como la operacion es la
  * misma para todos los elementos geométricos `elem_type` informa del 
  * elemento recibido para castearlo según corresponda.

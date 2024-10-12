@@ -35,3 +35,14 @@ void	ft_matrix_mult_check(t_matrix m1, t_matrix m2)
 		exit (1);
 	}
 }
+
+void	ft_matrix_to_tuple_check(t_matrix m)
+{
+	if ((m.rows != 1 && m.cols != 4 && m.val[0][4] > 1) \
+		&& (m.rows != 4 && m.cols != 1 && m.val[4][1] > 1))
+	{
+		ft_putstr_fd("ERROR - La matriz tiene que ser de 1x4 o de 4x1", 2);
+		ft_putendl_fd(" para poder transformala el tupla.", 2);
+		exit (1);
+	}
+}

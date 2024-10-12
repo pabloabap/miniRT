@@ -1,5 +1,5 @@
 #include "../../include/mini_rt.h"
- /* 
+ /**
   * De la matriz `m` y el número de fila (`row`) y columna (`col`) a eliminar,
   * retorna la submatriz resultante.
  */

@@ -1,6 +1,6 @@
 #include "../../include/mini_rt.h"
 
-/* 
+/**
  * Aplica los cambios de signo de cofactor en el 
  * calculo de determinates de una matriz.
 */

@@ -1,7 +1,8 @@
 //CABERECA
 #include "../../include/mini_rt.h"
 
-/** Traspone la matriz recibida como parametro.
+/** 
+ * Traspone la matriz recibida como parametro.
  * @return Nueva matriz con la traspuesta de `m`.
  */
 t_matrix	ft_matrix_transpos(t_matrix m)
