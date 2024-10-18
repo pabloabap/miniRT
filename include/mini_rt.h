@@ -116,10 +116,10 @@ int			ft_create_trgb(unsigned char t, unsigned char r, unsigned char g, unsigned
 //___OPERACIONES GENERALES
 // PENDIENTES DE REVISION
 
-void	ft_add_tuples(double *a, double b[4]);
-void	ft_sub_tuples(double *a, double b[4]);
-void	ft_negate_tuple(double *a);
-void	ft_mult_tuples(double *a, double b[4]);
+void	ft_add_tuples(t_tuple *a, t_tuple b);
+void	ft_sub_tuples(t_tuple *a, t_tuple b);
+void	ft_negate_tuple(t_tuple *a);
+void 	ft_mult_tuples(t_tuple *a, t_tuple b);
 void	ft_scalar_mult (void *elem, double s, int elem_type);
 
 //___TRANSFORMACIONES DE PUNTO Y VECTORES
@@ -135,7 +135,7 @@ t_tuple		ft_inverse_tuple_scalation(t_tuple p, double x, double y, \
 t_tuple		ft_tuple_rotation(t_tuple t, int axis, double rot_deg);
 t_tuple		ft_inverse_tuple_rotation(t_tuple t, int axis, double rot_deg);
 t_tuple		ft_tuple_shearing(t_tuple t, int axis, int over_axis, double val);
-t_tuple		ft_inverse_tuple_shearing(t_tuple t, int axis, int over_axis, double val)
+t_tuple		ft_inverse_tuple_shearing(t_tuple t, int axis, int over_axis, double val);
 
 
 

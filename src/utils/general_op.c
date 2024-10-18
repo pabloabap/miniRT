@@ -6,49 +6,49 @@
  * Suma de elementos tipo tupla (punto o vector). 
  * `a` se actualiza con el valor de la operación.
 */
-void	ft_add_tuples(double *a, double b[4])
+void	ft_add_tuples(t_tuple *a, t_tuple b)
 {
-	ft_tuples_check(a[W] + b[W]);
-	a[X] += b[X];
-	a[Y] += b[Y];
-	a[Z] += b[Z];
-	a[W] += b[W];
+	ft_tuples_check(a->w + b.w);
+	a->x += b.x;
+	a->y += b.y;
+	a->z += b.z;
+	a->w += b.w;
 }
 
 /**
  * Resta de elementos tipo tupla (punto o vector). 
  * `a` se actualiza con el valor de la operación.
 */
-void	ft_sub_tuples(double *a, double b[4])
+void	ft_sub_tuples(t_tuple *a, t_tuple b)
 {
-	ft_tuples_check(a[W] - b[W]);
-	a[X] -= b[X];
-	a[Y] -= b[Y];
-	a[Z] -= b[Z];
-	a[W] -= b[W];
+	ft_tuples_check(a->w - b.w);
+	a->x += b.x;
+	a->y += b.y;
+	a->z += b.z;
+	a->w += b.w;
 }
 
 /**
  * Punto o vector opueto al recibido. 
  * `a` se actualiza con el valor de la operación.
 */
-void	ft_negate_tuple(double *a)
+void	ft_negate_tuple(t_tuple *a)
 {
-	a[X] *= -1;
-	a[Y] *= -1;
-	a[Z] *= -1;
+	a->x *= -1;
+	a->y *= -1;
+	a->z *= -1;
 }
 
 /**
  * Multiplicando colores se obtiene un nuevo color
  * con la mezcla. `a` se actualiza con el valor de la operación
  */
-void ft_mult_tuples(double *a, double b[4])
+void ft_mult_tuples(t_tuple *a, t_tuple b)
 {
-	a[X] *= b[X];
-	a[Y] *= b[Y];
-	a[Z] *= b[Z];
-	a[W] *= b[W];
+	a->x *= b.x;
+	a->y *= b.y;
+	a->z *= b.z;
+	a->w *= b.w;
 }
 
 /**
