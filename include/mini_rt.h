@@ -132,9 +132,9 @@ t_tuple		ft_inverse_tuple_translation(t_tuple p, double x, double y, \
 t_tuple		ft_tuple_scalation(t_tuple p, double x, double y, double z);
 t_tuple		ft_inverse_tuple_scalation(t_tuple p, double x, double y, \
 			double z);
-t_tuple		ft_tuple_x_rotation(t_tuple t, double rot_deg);
-t_tuple		ft_tuple_y_rotation(t_tuple t, double rot_deg);
-t_tuple		ft_tuple_z_rotation(t_tuple t, double rot_deg);
+t_tuple		ft_tuple_rotation(t_tuple t, int axis, double rot_deg);
+t_tuple		ft_inverse_tuple_rotation(t_tuple t, int axis, double rot_deg);
+
 
 //___OPERACIONES CON MATRICES___
 
@@ -145,7 +145,7 @@ t_matrix	ft_matrix_mult(t_matrix m1, t_matrix m2);
 t_matrix	ft_matrix_transpos(t_matrix m);
 int			ft_cofactor(int row, int col);
 t_matrix	ft_submatrix(t_matrix m, int row, int col);
-int			ft_matrix_det(t_matrix m, int r, int c);
+double			ft_matrix_det(t_matrix m, int r, int c);
 t_matrix	ft_inverse_matrix(t_matrix *m);
 
 

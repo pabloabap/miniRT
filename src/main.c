@@ -24,17 +24,18 @@ int main(void)
 	p33 = p;
 
 	printf("(%f, %f, %f, %f)\n", p.x,p.y,p.z,p.w);
-	p = ft_tuple_x_rotation(p, 45);
+	p = ft_inverse_tuple_rotation(p, X, 45);
 	printf("1.45 - (%f, %f, %f, %f)\n", p.x,p.y,p.z,p.w);
-	p = ft_tuple_x_rotation(p3, 90);
+	p = ft_tuple_rotation(p3, X, 90);
 	printf("1.90 - (%f, %f, %f, %f)\n", p.x,p.y,p.z,p.w);
-	p2 = ft_tuple_y_rotation(p2, 45);
+	p2 = ft_tuple_rotation(p2, Y, 45);
 	printf("2.45 - (%f, %f, %f, %f)\n", p2.x,p2.y,p2.z,p2.w);
-	p2 = ft_tuple_y_rotation(p22, 90);
+	p2 = ft_tuple_rotation(p22, Y, 90);
 	printf("2.90 - (%f, %f, %f, %f)\n", p2.x,p2.y,p2.z,p2.w);
-	p3 = ft_tuple_z_rotation(p3, 45);
-	printf("45 - (%f, %f, %f, %f)\n", p3.x,p3.y,p3.z,p3.w);
-	p3 = ft_tuple_z_rotation(p33, 90);
-	printf("90 - (%f, %f, %f, %f)\n", p3.x,p3.y,p3.z,p3.w);
+	p3 = ft_tuple_rotation(p3, Z, 90);
+	printf("3.90 - (%f, %f, %f, %f)\n", p3.x,p3.y,p3.z,p3.w);
+	p3 = ft_tuple_rotation(p33, Z, 45);
+	printf("3.45 - (%f, %f, %f, %f)\n", p3.x,p3.y,p3.z,p3.w);
+
 	return (0);
 }

@@ -1,14 +1,14 @@
 //CABERECA
 #include "../../include/mini_rt.h"
 
-static int	ft_process_matrix(t_matrix m, int r, int *c);
+static double	ft_process_matrix(t_matrix m, int r, int *c);
  /**
   * Calcula el determinante de la matriz `m` por adjuntos. 
   * `r`y `c` se utilizan para descartar filas y columnas
   * correspondientes en cada operación recursiva.
   * @return Determinante de la matriz.
  */
-int	ft_matrix_det(t_matrix m, int r, int c)
+double	ft_matrix_det(t_matrix m, int r, int c)
 {
 	int i;
 
@@ -23,7 +23,7 @@ int	ft_matrix_det(t_matrix m, int r, int c)
 	return (m.det);
 }
 
-static int	ft_process_matrix(t_matrix m, int r, int *c)
+static double	ft_process_matrix(t_matrix m, int r, int *c)
 {
 	while (*c < m.cols)
 	{
