@@ -34,6 +34,7 @@ SRCS		=	$(MAIN) \
 				./src/utils/ft_tuple_translations.c \
 				./src/utils/ft_tuple_scalation.c \
 				./src/utils/ft_tuple_rotation.c \
+				./src/utils/ft_tuple_shearing.c \
 				./src/utils/ft_errors.c \
 				./debug/ft_print_matrix.c \
 				./debug/ft_fill_matrix.c

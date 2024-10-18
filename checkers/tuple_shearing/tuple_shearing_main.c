@@ -1,5 +1,3 @@
-// CABECERA
-
 #include "../include/mini_rt.h"
 
 int main(void)
