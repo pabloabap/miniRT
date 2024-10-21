@@ -1,5 +1,6 @@
 //CABERECA
-#include "../../include/mini_rt.h"
+
+#include "../../../include/mini_rt.h"
 
 /* Calculo de la matriz inversa de la matriz `m` recibida como parametro*/
 t_matrix ft_inverse_matrix(t_matrix *m)

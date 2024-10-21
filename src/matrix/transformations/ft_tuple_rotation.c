@@ -1,6 +1,6 @@
 //CABECERA
 
-#include "../../include/mini_rt.h"
+#include "../../../include/mini_rt.h"
 
 static t_matrix ft_build_x_rot_matrix(double rot_deg);
 static t_matrix ft_build_y_rot_matrix(double rot_deg);

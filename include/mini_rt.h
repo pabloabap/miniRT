@@ -32,6 +32,11 @@ typedef enum e_elemet_type
 	MATRIX
 }	t_element_type;
 
+typedef enum e_objects
+{
+	SPHERE
+}	t_objects;
+
 typedef struct s_canvas
 {
 	void			*mlx_init;
@@ -65,27 +70,8 @@ typedef struct s_tuple
 	double	x;
 	double	y;
 	double	z;
-	double	w;
+	int		w;
 }	t_tuple;
-
-
-typedef struct s_vec3
-{
-	// double, hasta 14 decimales | float, hasta 6 decimales. Las coordenadas representan la dirección del vector.
-	double	coor[3];
-	double	norm[3];
-	//double unit_vec //Vector de magnitud 1.0
-	double	magnitude; // |v| = sqrt(x*x + y*y + z*z) Longitud del vector
-	/* ___OPERACIONES___
-		- Resta de dos puntos = vector
-		- Suma vectores -> Equivalente a poner un vector detras de otro
-		- Multiplicar vector por un número = Escalar vector, hacerlo más largo o corto
-		- Dot product -> Define si dos vectores apuntan a la misma direccion ( > 0), son 
-			perpendiculares (0) u opuestos ( < 0). 
-		- Cross product -> Devuelve otro vector perpendicular a ambos, se usa para calcular el vector
-			normal de una superficie (Vector perpendicular a la superficie en el punto de interés).
-	*/
-}	t_vec3;
 
 /**
  * Creamos la estrucutra matrix para hacer operaciones con matrices. Como el máximo
@@ -102,27 +88,54 @@ typedef struct s_matrix
 	double val[4][4];
 }	t_matrix;
 
-/*typedef struct s_ray
+typedef struct s_ray
 {
-	t_vec3	direction;
-	t_point	origin;
+	t_tuple	origin;		//Matrix
+	t_tuple	direction; //Vector
+	//struct s_ray	*next;
 }	t_ray;
-*/
+
+typedef struct s_sphere
+{
+	int		id;
+	t_tuple	origin; //Centro de la circunferencia (punto)
+	double	radius; //Radio de la circunferencia
+}	t_sphere;
+
+typedef struct s_intersection
+{
+	int		inter_count;
+	double	inter_points[2];
+	int		obj_id;
+	struct s_intersection *prev;
+	struct s_intersection *next;
+}	t_intersection;
+
 
 // ___MLX___
 void		ft_mlx_pixel_put(t_canvas *img, int x, int y, int color);
 int			ft_create_trgb(unsigned char t, unsigned char r, unsigned char g, unsigned char b);
 
-//___OPERACIONES GENERALES
-// PENDIENTES DE REVISION
 
-void	ft_add_tuples(t_tuple *a, t_tuple b);
-void	ft_sub_tuples(t_tuple *a, t_tuple b);
-void	ft_negate_tuple(t_tuple *a);
-void 	ft_mult_tuples(t_tuple *a, t_tuple b);
+//___OPERACIONES GENERALES___
+
+t_tuple	ft_build_tuple(double x, double y, double z, int w);
+t_tuple	ft_add_tuples(t_tuple a, t_tuple b);
+t_tuple	ft_sub_tuples(t_tuple a, t_tuple b);
+t_tuple	ft_negate_tuple(t_tuple a);
+t_tuple	ft_mult_tuples(t_tuple a, t_tuple b);
 void	ft_scalar_mult (void *elem, double s, int elem_type);
 
-//___TRANSFORMACIONES DE PUNTO Y VECTORES
+
+//___OPERACIONES CON VECTORES___
+
+double	ft_magnitude(t_tuple v);
+void	ft_normalize(t_tuple *v);
+double	ft_dot(t_tuple v1, t_tuple v2);
+t_tuple	ft_cross(t_tuple v1, t_tuple v2);
+
+
+//___TRANSFORMACIONES DE PUNTO Y VECTORES___
 
 t_matrix	ft_tuple_to_matrix(t_tuple tuple);
 t_tuple		ft_matrix_to_tuple(t_matrix tuple);
@@ -138,8 +151,6 @@ t_tuple		ft_tuple_shearing(t_tuple t, int axis, int over_axis, double val);
 t_tuple		ft_inverse_tuple_shearing(t_tuple t, int axis, int over_axis, double val);
 
 
-
-
 //___OPERACIONES CON MATRICES___
 
 t_matrix	ft_build_matrix (int rows, int cols);
@@ -152,14 +163,20 @@ t_matrix	ft_submatrix(t_matrix m, int row, int col);
 double		ft_matrix_det(t_matrix m, int r, int c);
 t_matrix	ft_inverse_matrix(t_matrix *m);
 
+//___RAYTRACING___
+
+t_tuple	ft_rc_position(t_ray ray, double position);
+void	ft_sphere_intersection(t_ray ray, t_sphere sphere, double *tan);
 
 
 //___GESTION DE ERRORES___
 
+void	ft_vectors_op_check(t_tuple a, t_tuple b);
 void	ft_tuples_check(int w);
 void	ft_matrix_det_check(t_matrix m);
 void	ft_matrix_mult_check(t_matrix m1, t_matrix m2);
 void	ft_matrix_to_tuple_check(t_matrix m);
+void	ft_intersection_check(double *tan);
 
 
 // ___DEBUGING___

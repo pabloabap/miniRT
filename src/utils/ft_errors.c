@@ -1,11 +1,21 @@
 //CABECERA
 #include "../../include/mini_rt.h"
 
+void	ft_vectors_op_check(t_tuple a, t_tuple b)
+{
+	if (a.w != VECTOR || b.w != VECTOR)
+	{
+		ft_putstr_fd("ERROR - No se pueden operar elementos distintos ", 2);
+		ft_putendl_fd(" a vector en una operación vectorial.", 2);
+		exit (1);
+	}
+};
+
 void	ft_tuples_check(int w)
 {
 	if(w > 1)
 	{
-		ft_putendl_fd("ERROR - Sumar de dos puntos, operación invalida.", 2);
+		ft_putendl_fd("ERROR - Suma de dos puntos, operación invalida.", 2);
 		exit (1);
 	}
 	else if (w < 0)

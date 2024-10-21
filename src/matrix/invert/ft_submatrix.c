@@ -1,7 +1,10 @@
-#include "../../include/mini_rt.h"
- /**
-  * De la matriz `m` y el número de fila (`row`) y columna (`col`) a eliminar,
-  * retorna la submatriz resultante.
+//CABECERA
+
+#include "../../../include/mini_rt.h"
+
+/**
+ * De la matriz `m` y el número de fila (`row`) y columna (`col`) a eliminar,
+ * retorna la submatriz resultante.
  */
 t_matrix	ft_submatrix(t_matrix m, int row, int col)
 {

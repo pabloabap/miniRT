@@ -1,11 +1,11 @@
 //CABECERA
 
-#include "../../include/mini_rt.h"
+#include "../../../include/mini_rt.h"
 
-static t_matrix ft_build_trans_matrix(double x, double y, double z);
+static t_matrix ft_build_scal_matrix(double x, double y, double z);
 
 /**
- * Traslada puntos en el espacio.
+ * Escala puntos en el espacio.
  * En caso de que `p` sea vector la operación será ignorada.
  * Un vector representa una dirección de desplazamiento, moverlo en el espacio
  * no varía su dirección.
@@ -17,18 +17,18 @@ static t_matrix ft_build_trans_matrix(double x, double y, double z);
  * @return Punto nuevo con las coordenadas del punto `p`
  * tras aplicar la traslación.
  */
-t_tuple	ft_tuple_translation(t_tuple p, double x, double y, double z)
+t_tuple	ft_tuple_scalation(t_tuple p, double x, double y, double z)
 {
 	t_matrix	tmp;
-	t_matrix	trans_matrix;
+	t_matrix	scal_matrix;
 
-	trans_matrix = ft_build_trans_matrix(x, y, z);
-	tmp = ft_matrix_mult(trans_matrix, ft_tuple_to_matrix(p));
+	scal_matrix = ft_build_scal_matrix(x, y, z);
+	tmp = ft_matrix_mult(scal_matrix, ft_tuple_to_matrix(p));
 	return (ft_matrix_to_tuple(tmp));
 }
 
 /**
- * Traslación inversa. Sirve para mover puntos en el espacio
+ * Escalación inversa. Sirve para escalar puntos en el espacio
  * en la dirección opesta a las coordenadas indicadas.
  * En caso de que `p` sea vector la operación será ignorada.
  * Un vector representa una dirección de desplazamiento, moverlo en el espacio
@@ -41,14 +41,14 @@ t_tuple	ft_tuple_translation(t_tuple p, double x, double y, double z)
  * @return Punto nuevo con las coordenadas del punto `p`
  * tras aplicar la traslación.
  */
-t_tuple	ft_inverse_tuple_translation(t_tuple p, double x, double y, double z)
+t_tuple	ft_inverse_tuple_scalation(t_tuple p, double x, double y, double z)
 {
 	t_matrix	tmp;
-	t_matrix	trans_matrix;
+	t_matrix	scal_matrix;
 
-	trans_matrix = ft_build_trans_matrix(x, y, z);
-	trans_matrix = ft_inverse_matrix(&trans_matrix);
-	tmp = ft_matrix_mult(trans_matrix, ft_tuple_to_matrix(p));
+	scal_matrix = ft_build_scal_matrix(x, y, z);
+	scal_matrix = ft_inverse_matrix(&scal_matrix);
+	tmp = ft_matrix_mult(scal_matrix, ft_tuple_to_matrix(p));
 	return (ft_matrix_to_tuple(tmp));
 }
 
@@ -58,14 +58,14 @@ t_tuple	ft_inverse_tuple_translation(t_tuple p, double x, double y, double z)
  * que queramos desplazar un punto en las tres primeras posiciones de la 
  * última columna de la matriz respectivamente.
  */
-static t_matrix ft_build_trans_matrix(double x, double y, double z)
+static t_matrix ft_build_scal_matrix(double x, double y, double z)
 {
 	t_matrix	trans_matrix;
 
 	trans_matrix = ft_identity_matrix(4,4);
-	trans_matrix.val[0][3] = x;
-	trans_matrix.val[1][3] = y;
-	trans_matrix.val[2][3] = z;
+	trans_matrix.val[0][0] = x;
+	trans_matrix.val[1][1] = y;
+	trans_matrix.val[2][2] = z;
 	trans_matrix.val[3][3] = 1;
 	return (trans_matrix);
 }

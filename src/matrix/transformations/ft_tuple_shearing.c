@@ -1,6 +1,6 @@
 //CABECERA
 
-#include "../../include/mini_rt.h"
+#include "../../../include/mini_rt.h"
 
 /**
  * Permite inclinar puntos/vectores en base a otros ejes.
