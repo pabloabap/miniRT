@@ -29,13 +29,9 @@ typedef enum e_elemet_type
 {
 	VECTOR,
 	POINT,
-	MATRIX
-}	t_element_type;
-
-typedef enum e_objects
-{
+	MATRIX,
 	SPHERE
-}	t_objects;
+}	t_element_type;
 
 typedef struct s_canvas
 {
@@ -97,19 +93,33 @@ typedef struct s_ray
 
 typedef struct s_sphere
 {
-	int		id;
-	t_tuple	origin; //Centro de la circunferencia (punto)
-	double	radius; //Radio de la circunferencia
+	int		obj_id;			//Identificador único del objeto
+	int		obj_type;	//Identificador de tipo de objeto
+	t_tuple	origin;		//Centro de la circunferencia (punto)
+	double	radius;		//Radio de la circunferencia
 }	t_sphere;
 
-typedef struct s_intersection
+typedef struct s_objs_list
 {
-	int		inter_count;
-	double	inter_points[2];
+	void	*obj_struct;
+	int		obj_type;
+	struct s_objs_list *next;
+}	t_objs_list;
+
+typedef struct s_ray_inters
+{
+	double	inter_point;
 	int		obj_id;
-	struct s_intersection *prev;
-	struct s_intersection *next;
-}	t_intersection;
+	int		hit;
+	struct s_ray_inters *prev;
+	struct s_ray_inters *next;
+}	t_ray_inters;
+
+typedef struct s_inters
+{
+	t_ray_inters *r_i;
+	struct s_inters *next;
+}	t_inters;
 
 
 // ___MLX___
@@ -119,12 +129,15 @@ int			ft_create_trgb(unsigned char t, unsigned char r, unsigned char g, unsigned
 
 //___OPERACIONES GENERALES___
 
-t_tuple	ft_build_tuple(double x, double y, double z, int w);
-t_tuple	ft_add_tuples(t_tuple a, t_tuple b);
-t_tuple	ft_sub_tuples(t_tuple a, t_tuple b);
-t_tuple	ft_negate_tuple(t_tuple a);
-t_tuple	ft_mult_tuples(t_tuple a, t_tuple b);
-void	ft_scalar_mult (void *elem, double s, int elem_type);
+t_tuple		ft_build_tuple(double x, double y, double z, int w);
+t_matrix	ft_build_matrix (int rows, int cols);
+t_sphere	ft_build_sphere(double x_center, double y_center, \
+			double z_center, double radius);
+t_tuple		ft_add_tuples(t_tuple a, t_tuple b);
+t_tuple		ft_sub_tuples(t_tuple a, t_tuple b);
+t_tuple		ft_negate_tuple(t_tuple a);
+t_tuple		ft_mult_tuples(t_tuple a, t_tuple b);
+void		ft_scalar_mult (void *elem, double s, int elem_type);
 
 
 //___OPERACIONES CON VECTORES___
@@ -153,7 +166,6 @@ t_tuple		ft_inverse_tuple_shearing(t_tuple t, int axis, int over_axis, double va
 
 //___OPERACIONES CON MATRICES___
 
-t_matrix	ft_build_matrix (int rows, int cols);
 t_matrix	ft_identity_matrix(int rows, int cols);
 t_matrix	ft_tuple_to_matrix(t_tuple tuple);
 t_matrix	ft_matrix_mult(t_matrix m1, t_matrix m2);
@@ -163,10 +175,14 @@ t_matrix	ft_submatrix(t_matrix m, int row, int col);
 double		ft_matrix_det(t_matrix m, int r, int c);
 t_matrix	ft_inverse_matrix(t_matrix *m);
 
+
 //___RAYTRACING___
 
 t_tuple	ft_rc_position(t_ray ray, double position);
-void	ft_sphere_intersection(t_ray ray, t_sphere sphere, double *tan);
+void	ft_sphere_inters(t_ray ray, t_sphere sphere, t_ray_inters **i_list);
+int		ft_add_inters_sorted(t_ray_inters **i_list, double inter_point, \
+		int obj_id);
+void	ft_identify_hit(t_ray_inters *i_list);
 
 
 //___GESTION DE ERRORES___
@@ -177,6 +193,11 @@ void	ft_matrix_det_check(t_matrix m);
 void	ft_matrix_mult_check(t_matrix m1, t_matrix m2);
 void	ft_matrix_to_tuple_check(t_matrix m);
 void	ft_intersection_check(double *tan);
+
+
+//___UTILS___
+
+int		ft_obj_id_assignment(void);
 
 
 // ___DEBUGING___

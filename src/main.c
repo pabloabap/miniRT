@@ -4,16 +4,30 @@
 
 int main(void)
 {
-	t_ray		ray;
-	t_sphere	sphere;
-	double		tan[2];
+	t_ray			ray;
+	t_sphere		sphere;
+	t_sphere		sphere2;
+	t_ray_inters	*inters_list;
+	t_ray_inters	*tmp;
+	
 
 	ray.origin =  ft_build_tuple(0, 0, 0, POINT);
 	ray.direction =  ft_build_tuple(0, 0, 1, VECTOR);
-	sphere.id = 0;
-	sphere.origin = ft_build_tuple(0, 0, 0, POINT);
-	sphere.radius = 1;
-	ft_sphere_intersection(ray, sphere, &tan[0]);
-	printf ("t1 = %f, t2 = %f\n", tan[0], tan[1]);
+	inters_list = NULL;
+	sphere = ft_build_sphere(0, 0, 6, 1);
+	ft_sphere_inters(ray, sphere, &inters_list);
+	sphere = ft_build_sphere(0, 0, 3, 1);
+	ft_sphere_inters(ray, sphere, &inters_list);
+	sphere = ft_build_sphere(0, 0, 3, 1);
+	ft_sphere_inters(ray, sphere, &inters_list);
+	tmp = inters_list;
+	ft_identify_hit(inters_list);
+	printf("__INTERSECTIONS LIST___\n");
+	while (tmp)
+	{
+		printf("INTERS: %f | OBJ_ID: %i | HIT %i | P: %p| PREV: %p | NEXT: %p\n", \
+			tmp->inter_point, tmp->obj_id, tmp->hit, tmp, tmp->prev, tmp->next);
+		tmp = tmp->next;
+	}
 	return (0);
 }
