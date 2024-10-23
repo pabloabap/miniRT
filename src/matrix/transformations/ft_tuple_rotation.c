@@ -37,7 +37,7 @@ t_tuple	ft_tuple_rotation(t_tuple t, int axis, double rot_deg)
  * 
  * @return Punto/vector `t` rotado.
  */
-t_tuple	ft_inverse_tuple_rotation(t_tuple t, int axis, double rot_deg)
+t_tuple	ft_tuple_inverse_rotation(t_tuple t, int axis, double rot_deg)
 {
 	t_matrix rotation_matrix;
 	

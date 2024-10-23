@@ -41,7 +41,7 @@ t_tuple	ft_tuple_translation(t_tuple p, double x, double y, double z)
  * @return Punto nuevo con las coordenadas del punto `p`
  * tras aplicar la traslación.
  */
-t_tuple	ft_inverse_tuple_translation(t_tuple p, double x, double y, double z)
+t_tuple	ft_tuple_inverse_translation(t_tuple p, double x, double y, double z)
 {
 	t_matrix	tmp;
 	t_matrix	trans_matrix;

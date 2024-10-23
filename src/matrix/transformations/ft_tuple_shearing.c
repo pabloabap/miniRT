@@ -32,7 +32,7 @@ t_tuple	ft_tuple_shearing(t_tuple t, int axis, int over_axis, double val)
  * 
  * @return El punto/vector inclinado.
  */
-t_tuple	ft_inverse_tuple_shearing(t_tuple t, int axis, int over_axis, double val)
+t_tuple	ft_tuple_inverse_shearing(t_tuple t, int axis, int over_axis, double val)
 {
 	t_matrix	shearing_matrix;
 

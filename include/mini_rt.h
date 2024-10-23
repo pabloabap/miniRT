@@ -66,7 +66,7 @@ typedef struct s_tuple
 	double	x;
 	double	y;
 	double	z;
-	int		w;
+	double	w;
 }	t_tuple;
 
 /**
@@ -95,6 +95,7 @@ typedef struct s_sphere
 {
 	int		obj_id;			//Identificador único del objeto
 	int		obj_type;	//Identificador de tipo de objeto
+	int		color;		//Color circunferencia
 	t_tuple	origin;		//Centro de la circunferencia (punto)
 	double	radius;		//Radio de la circunferencia
 }	t_sphere;
@@ -142,10 +143,10 @@ void		ft_scalar_mult (void *elem, double s, int elem_type);
 
 //___OPERACIONES CON VECTORES___
 
-double	ft_magnitude(t_tuple v);
-void	ft_normalize(t_tuple *v);
-double	ft_dot(t_tuple v1, t_tuple v2);
-t_tuple	ft_cross(t_tuple v1, t_tuple v2);
+double		ft_magnitude(t_tuple v);
+t_tuple		ft_normalize(t_tuple v);
+double		ft_dot(t_tuple v1, t_tuple v2);
+t_tuple		ft_cross(t_tuple v1, t_tuple v2);
 
 
 //___TRANSFORMACIONES DE PUNTO Y VECTORES___
@@ -153,21 +154,20 @@ t_tuple	ft_cross(t_tuple v1, t_tuple v2);
 t_matrix	ft_tuple_to_matrix(t_tuple tuple);
 t_tuple		ft_matrix_to_tuple(t_matrix tuple);
 t_tuple		ft_tuple_translation(t_tuple p, double x, double y, double z);
-t_tuple		ft_inverse_tuple_translation(t_tuple p, double x, double y, \
+t_tuple		ft_tuple_inverse_translation(t_tuple p, double x, double y, \
 			double z);
 t_tuple		ft_tuple_scalation(t_tuple p, double x, double y, double z);
-t_tuple		ft_inverse_tuple_scalation(t_tuple p, double x, double y, \
+t_tuple		ft_tuple_inverse_scalation(t_tuple p, double x, double y, \
 			double z);
 t_tuple		ft_tuple_rotation(t_tuple t, int axis, double rot_deg);
-t_tuple		ft_inverse_tuple_rotation(t_tuple t, int axis, double rot_deg);
+t_tuple		ft_tuple_inverse_rotation(t_tuple t, int axis, double rot_deg);
 t_tuple		ft_tuple_shearing(t_tuple t, int axis, int over_axis, double val);
-t_tuple		ft_inverse_tuple_shearing(t_tuple t, int axis, int over_axis, double val);
+t_tuple		ft_tuple_inverse_shearing(t_tuple t, int axis, int over_axis, double val);
 
 
 //___OPERACIONES CON MATRICES___
 
 t_matrix	ft_identity_matrix(int rows, int cols);
-t_matrix	ft_tuple_to_matrix(t_tuple tuple);
 t_matrix	ft_matrix_mult(t_matrix m1, t_matrix m2);
 t_matrix	ft_matrix_transpos(t_matrix m);
 int			ft_cofactor(int row, int col);
@@ -178,11 +178,12 @@ t_matrix	ft_inverse_matrix(t_matrix *m);
 
 //___RAYTRACING___
 
-t_tuple	ft_rc_position(t_ray ray, double position);
-void	ft_sphere_inters(t_ray ray, t_sphere sphere, t_ray_inters **i_list);
-int		ft_add_inters_sorted(t_ray_inters **i_list, double inter_point, \
-		int obj_id);
-void	ft_identify_hit(t_ray_inters *i_list);
+t_tuple		ft_rc_position(t_ray ray, double position);
+void		ft_sphere_inters(t_ray ray, t_sphere sphere, t_ray_inters **i_list);
+int			ft_add_inters_sorted(t_ray_inters **i_list, double inter_point, \
+			int obj_id);
+int			ft_identify_hit(t_ray_inters *i_list);
+t_ray_inters	*ft_get_hit(t_ray_inters *i_list);
 
 
 //___GESTION DE ERRORES___

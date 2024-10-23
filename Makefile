@@ -34,6 +34,7 @@ SRCS		=	$(MAIN) \
 				./src/matrix/transformations/ft_tuple_shearing.c \
 				./src/matrix/transformations/ft_tuple_translations.c \
 				./src/ray_intersections/ft_add_inters_sorted.c \
+				./src/ray_intersections/ft_get_hit.c \
 				./src/ray_intersections/ft_identify_hit.c \
 				./src/ray_intersections/ft_rc_position.c \
 				./src/ray_intersections/ft_sphere_inters.c \

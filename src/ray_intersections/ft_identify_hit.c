@@ -1,7 +1,7 @@
 //CABECERA
 
 #include "../../include/mini_rt.h"
-void	ft_identify_hit(t_ray_inters *i_list)
+int	ft_identify_hit(t_ray_inters *i_list)
 {
 	int	hit;
 
@@ -15,4 +15,5 @@ void	ft_identify_hit(t_ray_inters *i_list)
 		}
 		i_list = i_list->next;
 	}
+	return (hit);
 }

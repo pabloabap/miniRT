@@ -6,8 +6,8 @@ static double	ft_discriminant(double *v);
 static void		ft_fill_v(t_ray ray, t_sphere sphere, double *v);
 
 /**
- * Devuelve los puntos de intersección del rayo `ray` con la esfera `sphere`
- * en el argumento `tan` (tiene que ser un array de dos double).
+ * Añade los puntos de intersección del rayo `ray` con la esfera `sphere`
+ * en la lista `i_list`.
  */
 void	ft_sphere_inters(t_ray ray, t_sphere sphere, t_ray_inters **i_list)
 {
