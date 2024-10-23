@@ -5,17 +5,15 @@
 static t_matrix ft_build_scal_matrix(double x, double y, double z);
 
 /**
- * Escala puntos en el espacio.
- * En caso de que `p` sea vector la operación será ignorada.
- * Un vector representa una dirección de desplazamiento, moverlo en el espacio
- * no varía su dirección.
- * @param p Punto a trasladar.
- * @param x Unidades de traslando en la coordenada X.
- * @param y Unidades de traslando en la coordenada Y.
- * @param z Unidades de traslando en la coordenada Z.
+ * Escala puntos/vectores en el espacio.
+ * Escalar un vector, lo hace más largo.
+ * @param p Punto a escalar.
+ * @param x Unidades de escalado en la coordenada X.
+ * @param y Unidades de escalado en la coordenada Y.
+ * @param z Unidades de escalado en la coordenada Z.
  * 
- * @return Punto nuevo con las coordenadas del punto `p`
- * tras aplicar la traslación.
+ * @return Punto nuevo con las coordenadas de `p`
+ * tras aplicar el escalado.
  */
 t_tuple	ft_tuple_scalation(t_tuple p, double x, double y, double z)
 {
@@ -28,18 +26,15 @@ t_tuple	ft_tuple_scalation(t_tuple p, double x, double y, double z)
 }
 
 /**
- * Escalación inversa. Sirve para escalar puntos en el espacio
+ * Escalación inversa. Sirve para escalar puntos/vectores en el espacio
  * en la dirección opesta a las coordenadas indicadas.
- * En caso de que `p` sea vector la operación será ignorada.
- * Un vector representa una dirección de desplazamiento, moverlo en el espacio
- * no varía su dirección.
- * @param p Punto a trasladar.
- * @param x Unidades de traslando en la coordenada X.
- * @param y Unidades de traslando en la coordenada Y.
- * @param z Unidades de traslando en la coordenada Z.
+ * @param p Punto a escalar.
+ * @param x Unidades de escalado en la coordenada X.
+ * @param y Unidades de escalado en la coordenada Y.
+ * @param z Unidades de escalado en la coordenada Z.
  * 
- * @return Punto nuevo con las coordenadas del punto `p`
- * tras aplicar la traslación.
+ * @return Punto nuevo con las coordenadas de `p`
+ * tras aplicar el escalado inverso.
  */
 t_tuple	ft_inverse_tuple_scalation(t_tuple p, double x, double y, double z)
 {
@@ -53,10 +48,9 @@ t_tuple	ft_inverse_tuple_scalation(t_tuple p, double x, double y, double z)
 }
 
 /**
- * Construcción de la matriz para realizar la operación de traslación.
- * Se obtiene añadiendo a la matriz identidad las unidades `x`, `y` y `z`
- * que queramos desplazar un punto en las tres primeras posiciones de la 
- * última columna de la matriz respectivamente.
+ * Construcción de la matriz para realizar la operación de escalado.
+ * Se obtiene cambiando los tres primeros elementos de la diagonal de la 
+ * matriz identidad por  las unidades `x`, `y` y `z` que queramos escalar.
  */
 static t_matrix ft_build_scal_matrix(double x, double y, double z)
 {

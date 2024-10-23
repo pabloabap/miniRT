@@ -11,6 +11,7 @@ double ft_magnitude(t_tuple v)
 		sqrt( v.x * v.x \
 			+ v.y * v.y \
 			+ v.z * v.z \
+			+ v.w * v.w \
 		) \
 	);
 }
@@ -19,15 +20,17 @@ double ft_magnitude(t_tuple v)
  * Normailiza un vector.
  * @return Actualiza el vector al vector normalizado.
  */
-void	ft_normalize(t_tuple *v)
+t_tuple	ft_normalize(t_tuple v)
 {
-	int	v_lenght;
+	double	v_lenght;
 
-	ft_vectors_op_check(*v, *v);
-	v_lenght = ft_magnitude(*v);
-	v->x = v->x / v_lenght;
-	v->y = v->y / v_lenght;
-	v->x = v->z / v_lenght;
+	ft_vectors_op_check(v, v);
+	v_lenght = ft_magnitude(v);
+	v.x = v.x / v_lenght;
+	v.y = v.y / v_lenght;
+	v.z = v.z / v_lenght;
+	v.w = v.w / v_lenght;
+	return (v);
 }
 
 /**
