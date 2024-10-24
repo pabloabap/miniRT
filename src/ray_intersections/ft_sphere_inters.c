@@ -49,5 +49,5 @@ static void	ft_fill_v(t_ray ray, t_sphere sphere, double *v)
 	v_sphere_to_ray = ft_sub_tuples(ray.origin, sphere.origin);
 	v[0] = ft_dot(ray.direction, ray.direction);
 	v[1] = 2 * ft_dot(ray.direction, v_sphere_to_ray);
-	v[2] = ft_dot(v_sphere_to_ray, v_sphere_to_ray) - 1;
+	v[2] = ft_dot(v_sphere_to_ray, v_sphere_to_ray) - (sphere.radius * sphere.radius);
 }
