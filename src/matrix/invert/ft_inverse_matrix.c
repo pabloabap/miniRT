@@ -14,6 +14,11 @@ t_matrix ft_inverse_matrix(t_matrix *m)
 	i = 0;
 	j = 0;
 	m->det = ft_matrix_det(*m, 0, 0);
+	if (m->det == 0)
+	{
+		printf("MATRIZ DE TRANSFORMACION SIN DETERMINANTE, NO SE PUEDE APLICAR TRANSFORMACION\n");
+		return (ft_identity_matrix(4, 4));
+	}
 	inverse_matrix = ft_matrix_transpos(*m);
 	tmp = inverse_matrix;
 	// printf ("___TRASPUESTA___\n");

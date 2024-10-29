@@ -9,3 +9,14 @@ void	ft_intersection_check(double *tan)
 		exit (1);
 	}
 };
+
+void	ft_sp_normal_at_check(double w)
+{
+	if (VECTOR == w)
+	{
+		ft_putstr_fd("ERROR - Vector recibido, se necesita punto ", 2);
+		ft_putstr_fd("de la superfice de la esfera para obtener ", 2);
+		ft_putendl_fd("su vector de normalización.", 2);
+		exit (1);
+	}
+};

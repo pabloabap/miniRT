@@ -5,51 +5,49 @@
 static t_matrix ft_build_trans_matrix(double x, double y, double z);
 
 /**
- * Traslada puntos en el espacio.
- * En caso de que `p` sea vector la operación será ignorada.
- * Un vector representa una dirección de desplazamiento, moverlo en el espacio
- * no varía su dirección.
- * @param p Punto a trasladar.
+ * Traslada matrices en el espacio.
+ * En caso de que `m` represente un vector (elemento 4,4 de la matriz = 0)
+ * la operación será ignorada. Un vector representa una dirección de 
+ * desplazamiento, moverlo en el espacio no varía su dirección.
+ * @param m Matriz a trasladar.
  * @param x Unidades de traslando en la coordenada X.
  * @param y Unidades de traslando en la coordenada Y.
  * @param z Unidades de traslando en la coordenada Z.
  * 
- * @return Punto nuevo con las coordenadas del punto `p`
- * tras aplicar la traslación.
+ * @return Matriz `m`trasladada.
  */
-t_tuple	ft_tuple_translation(t_tuple p, double x, double y, double z)
+t_matrix	ft_matrix_translation(t_matrix m, double x, double y, double z)
 {
-	t_matrix	tmp;
+	t_matrix	final_matrix;
 	t_matrix	trans_matrix;
 
 	trans_matrix = ft_build_trans_matrix(x, y, z);
-	tmp = ft_matrix_mult(trans_matrix, ft_tuple_to_matrix(p));
-	return (ft_matrix_to_tuple(tmp));
+	final_matrix = ft_matrix_mult(trans_matrix, m);
+	return (final_matrix);
 }
 
 /**
- * Traslación inversa. Sirve para mover puntos en el espacio
+ * Traslación inversa. Sirve para mover matrices en el espacio
  * en la dirección opesta a las coordenadas indicadas.
- * En caso de que `p` sea vector la operación será ignorada.
- * Un vector representa una dirección de desplazamiento, moverlo en el espacio
- * no varía su dirección.
- * @param p Punto a trasladar.
+ * En caso de que `m` represente un vector (elemento 4,4 de la matriz = 0)
+ * la operacion será ignorada. Un vector representa una dirección de 
+ * desplazamiento, moverlo en el espacio no varía su dirección.
+ * @param m Matriz a trasladar.
  * @param x Unidades de traslando en la coordenada X.
  * @param y Unidades de traslando en la coordenada Y.
  * @param z Unidades de traslando en la coordenada Z.
  * 
- * @return Punto nuevo con las coordenadas del punto `p`
- * tras aplicar la traslación.
+ * @return Matriz `m` con la traslación inversa aplicada.
  */
-t_tuple	ft_tuple_inverse_translation(t_tuple p, double x, double y, double z)
+t_matrix	ft_matrix_inverse_translation(t_matrix m, double x, double y, double z)
 {
-	t_matrix	tmp;
+	t_matrix	final_matrix;
 	t_matrix	trans_matrix;
 
 	trans_matrix = ft_build_trans_matrix(x, y, z);
 	trans_matrix = ft_inverse_matrix(&trans_matrix);
-	tmp = ft_matrix_mult(trans_matrix, ft_tuple_to_matrix(p));
-	return (ft_matrix_to_tuple(tmp));
+	final_matrix = ft_matrix_mult(trans_matrix, m);
+	return (final_matrix);
 }
 
 /**

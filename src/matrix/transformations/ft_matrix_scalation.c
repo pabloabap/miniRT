@@ -5,50 +5,43 @@
 static t_matrix ft_build_scal_matrix(double x, double y, double z);
 
 /**
- * Escala puntos/vectores en el espacio.
- * Escalar un vector, lo hace más largo.
- * @param p Punto a escalar.
+ * Escala matrices en el espacio.
+ * @param m Matriz a escalar.
  * @param x Unidades de escalado en la coordenada X.
  * @param y Unidades de escalado en la coordenada Y.
  * @param z Unidades de escalado en la coordenada Z.
  * 
- * @return Punto nuevo con las coordenadas de `p`
- * tras aplicar el escalado.
+ * @return Matriz `m`escalada.
  */
-t_tuple	ft_tuple_scalation(t_tuple p, double x, double y, double z)
+t_matrix	ft_matrix_scalation(t_matrix m, double x, double y, double z)
 {
-	t_matrix	tmp;
 	t_matrix	scal_matrix;
 
 	scal_matrix = ft_build_scal_matrix(x, y, z);
-	tmp = ft_matrix_mult(scal_matrix, ft_tuple_to_matrix(p));
-	return (ft_matrix_to_tuple(tmp));
+	return (ft_matrix_mult(scal_matrix, m));
 }
 
 /**
- * Escalación inversa. Sirve para escalar puntos/vectores en el espacio
+ * Escalación inversa. Sirve para escalar matrices en el espacio
  * en la dirección opesta a las coordenadas indicadas.
- * @param p Punto a escalar.
+ * @param m Matriz a escalar.
  * @param x Unidades de escalado en la coordenada X.
  * @param y Unidades de escalado en la coordenada Y.
  * @param z Unidades de escalado en la coordenada Z.
  * 
- * @return Punto nuevo con las coordenadas de `p`
- * tras aplicar el escalado inverso.
+ * @return Matriz de escalación inversa de `m`.
  */
-t_tuple	ft_tuple_inverse_scalation(t_tuple p, double x, double y, double z)
+t_matrix	ft_matrix_inverse_scalation(t_matrix m, double x, double y, double z)
 {
-	t_matrix	tmp;
 	t_matrix	scal_matrix;
 
 	scal_matrix = ft_build_scal_matrix(x, y, z);
 	scal_matrix = ft_inverse_matrix(&scal_matrix);
-	tmp = ft_matrix_mult(scal_matrix, ft_tuple_to_matrix(p));
-	return (ft_matrix_to_tuple(tmp));
+	return (ft_matrix_mult(scal_matrix, m));
 }
 
 /**
- * Construcción de la matriz para realizar la operación de escalado.
+ * Construye de la matriz para realizar la operación de escalado.
  * Se obtiene cambiando los tres primeros elementos de la diagonal de la 
  * matriz identidad por  las unidades `x`, `y` y `z` que queramos escalar.
  */

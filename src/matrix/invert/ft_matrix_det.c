@@ -14,6 +14,7 @@ double	ft_matrix_det(t_matrix m, int r, int c)
 	int i;
 
 	i = 0;
+	m.det = 0;
 	ft_matrix_det_check(m);
 	if (m.rows > 3)
 		m.det += ft_process_matrix(m, r, &c);

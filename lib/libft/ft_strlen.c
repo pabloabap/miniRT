@@ -17,7 +17,10 @@ size_t	ft_strlen(const char *s)
 	size_t	contador;
 
 	contador = 0;
-	while (s[contador])
-		contador ++;
+	if (s)
+	{
+		while (s[contador])
+			contador ++;
+	}
 	return (contador);
 }

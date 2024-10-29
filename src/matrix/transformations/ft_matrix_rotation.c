@@ -7,14 +7,14 @@ static t_matrix ft_build_y_rot_matrix(double rot_deg);
 static t_matrix ft_build_z_rot_matrix(double rot_deg);
 
 /**
- * Rota puntos/vectores en el espacio.
- * @param t Punto/vector a trasladar.
+ * Rota matrices en el espacio.
+ * @param m Matriz a rotar.
  * @param axis Eje sobre el que rotar (X=0,Y=1,Z=2).
  * @param rot_deg Angulo de rotación.
  * 
- * @return Punto/vector `t` rotado.
+ * @return Matriz `m` rotada.
  */
-t_tuple	ft_tuple_rotation(t_tuple t, int axis, double rot_deg)
+t_matrix	ft_matrix_rotation(t_matrix m, int axis, double rot_deg)
 {
 	t_matrix rotation_matrix;
 	
@@ -24,20 +24,18 @@ t_tuple	ft_tuple_rotation(t_tuple t, int axis, double rot_deg)
 		rotation_matrix = ft_build_y_rot_matrix(rot_deg);
 	else if (Z == axis)
 		rotation_matrix = ft_build_z_rot_matrix(rot_deg);
-
-	rotation_matrix = ft_matrix_mult(rotation_matrix, ft_tuple_to_matrix(t));
-	return (ft_matrix_to_tuple(rotation_matrix));
+	return (ft_matrix_mult(rotation_matrix, m));
 }
 
 /**
- * Rota inversa de puntos/vectores en el espacio.
- * @param t Punto/vector a trasladar.
+ * Rotación inversa de una matriz en el espacio.
+ * @param m Matriz a rotar.
  * @param axis Eje sobre el que rotar (X=0,Y=1,Z=2).
  * @param rot_deg Angulo de rotación.
  * 
- * @return Punto/vector `t` rotado.
+ * @return Matriz `m` rotada.
  */
-t_tuple	ft_tuple_inverse_rotation(t_tuple t, int axis, double rot_deg)
+t_matrix	ft_matrix_inverse_rotation(t_matrix m, int axis, double rot_deg)
 {
 	t_matrix rotation_matrix;
 	
@@ -47,12 +45,14 @@ t_tuple	ft_tuple_inverse_rotation(t_tuple t, int axis, double rot_deg)
 		rotation_matrix = ft_build_y_rot_matrix(rot_deg);
 	else if (Z == axis)
 		rotation_matrix = ft_build_z_rot_matrix(rot_deg);
-
 	rotation_matrix = ft_inverse_matrix(&rotation_matrix);
-	rotation_matrix = ft_matrix_mult(rotation_matrix, ft_tuple_to_matrix(t));
-	return (ft_matrix_to_tuple(rotation_matrix));
+	return (ft_matrix_mult(rotation_matrix, m));
 }
 
+/** Constructuor de la matriz de rotación sobre el eje X
+ * @param rot_deg Ángulo de rotación en grados.
+ * @return Matriz de rotación sobre el eje X.
+ */
 static t_matrix ft_build_x_rot_matrix(double rot_deg)
 {
 	double		rot_rad;
@@ -67,6 +67,10 @@ static t_matrix ft_build_x_rot_matrix(double rot_deg)
 	return (rot_matrix);
 }
 
+/** Constructuor de la matriz de rotación sobre el eje X
+ * @param rot_deg Ángulo de rotación en grados.
+ * @return Matriz de rotación sobre el eje Y.
+ */
 static t_matrix ft_build_y_rot_matrix(double rot_deg)
 {
 	t_matrix	rot_matrix;
@@ -81,6 +85,10 @@ static t_matrix ft_build_y_rot_matrix(double rot_deg)
 	return (rot_matrix);
 }
 
+/** Constructuor de la matriz de rotación sobre el eje X
+ * @param rot_deg Ángulo de rotación en grados.
+ * @return Matriz de rotación sobre el eje Z.
+ */
 static t_matrix ft_build_z_rot_matrix(double rot_deg)
 {
 	t_matrix	rot_matrix;

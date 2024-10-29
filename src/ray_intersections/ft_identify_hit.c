@@ -1,6 +1,10 @@
 //CABECERA
 
 #include "../../include/mini_rt.h"
+
+/** Retorna 1 si encuentra un punto de interseccion de un rayo
+ *  en una lista de impactos, o 0 si no.
+ */
 int	ft_identify_hit(t_ray_inters *i_list)
 {
 	int	hit;

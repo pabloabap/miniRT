@@ -5,17 +5,18 @@
 
 # define WIDTH 500
 # define HEIGHT 500
+# define BUFFER_SIZE 100
 
-#include <sys/types.h>	//open
-#include <sys/stat.h>	//open
-#include <fcntl.h>		//open
-#include <unistd.h>		//close, read, write
-#include <stdio.h>		//printf, perror
-#include <stdlib.h>		//malloc, free, exit
-#include <string.h>		//strerror
-#include <math.h>		//math
-#include "../lib/minilibx-linux/mlx.h"
-#include "../lib/libft/libft.h"
+# include <sys/types.h>	//open
+# include <sys/stat.h>	//open
+# include <fcntl.h>		//open
+# include <unistd.h>		//close, read, write
+# include <stdio.h>		//printf, perror
+# include <stdlib.h>		//malloc, free, exit
+# include <string.h>		//strerror
+# include <math.h>		//math
+# include "../lib/minilibx-linux/mlx.h"
+# include "../lib/libft/libft.h"
 
 typedef enum e_coor
 {
@@ -30,7 +31,12 @@ typedef enum e_elemet_type
 	VECTOR,
 	POINT,
 	MATRIX,
-	SPHERE
+	SPHERE,
+	PLANE,
+	CYLINDER,
+	LIGHT,
+	AMBIENT_LIGHT,
+	CAMERA
 }	t_element_type;
 
 typedef struct s_canvas
@@ -86,27 +92,61 @@ typedef struct s_matrix
 
 typedef struct s_ray
 {
-	t_tuple	origin;		//Matrix
+	t_tuple	origin;		//Punto
 	t_tuple	direction; //Vector
 	//struct s_ray	*next;
 }	t_ray;
 
+typedef struct s_material
+{
+	double	color;
+	double	ambient;
+	double	diffuse;
+	double	specular;
+	double	shininess;
+}	t_material;
+
+// Lista de todos los objetos de la escena
+typedef struct s_oitem
+{
+	int		obj_id;
+	int		obj_type;
+	t_material	material;
+	void	*obj_struct;
+	struct s_oitem *prev;
+	struct s_oitem *next;
+
+}	t_oitem;
+
 typedef struct s_sphere
 {
-	int		obj_id;			//Identificador único del objeto
-	int		obj_type;	//Identificador de tipo de objeto
-	int		color;		//Color circunferencia
-	t_tuple	origin;		//Centro de la circunferencia (punto)
-	double	radius;		//Radio de la circunferencia
+	t_tuple		origin;		//Centro de la circunferencia (punto)
+	double		radius;		//Radio de la circunferencia
+	t_matrix	transformations_matrix;
 }	t_sphere;
 
-typedef struct s_objs_list
+typedef struct	s_plane
 {
-	void	*obj_struct;
-	int		obj_type;
-	struct s_objs_list *next;
-}	t_objs_list;
+	t_tuple	origin;
+	t_tuple	nrm_vector;
+}	t_plane;
 
+typedef struct	s_cylinder
+{
+	t_tuple	origin;
+	t_tuple	nrm_vector;
+	double	diameter;
+	double	height;
+}	t_cylinder;
+
+typedef union u_model
+{
+	t_sphere	sp;
+	t_plane		pl;
+	t_cylinder	cy;
+}	t_omodel;
+
+//Estructura de intersecciones de un rayo
 typedef struct s_ray_inters
 {
 	double	inter_point;
@@ -116,11 +156,18 @@ typedef struct s_ray_inters
 	struct s_ray_inters *next;
 }	t_ray_inters;
 
+//Estructura que apunta a las intersecciones de todos los rayos, para poder liberarlos al final del programa.
 typedef struct s_inters
 {
 	t_ray_inters *r_i;
 	struct s_inters *next;
 }	t_inters;
+
+typedef struct s_point_light
+{
+	t_tuple	position;
+	double	brightnes;
+}	t_point_light;
 
 
 // ___MLX___
@@ -132,8 +179,7 @@ int			ft_create_trgb(unsigned char t, unsigned char r, unsigned char g, unsigned
 
 t_tuple		ft_build_tuple(double x, double y, double z, int w);
 t_matrix	ft_build_matrix (int rows, int cols);
-t_sphere	ft_build_sphere(double x_center, double y_center, \
-			double z_center, double radius);
+t_sphere	ft_build_sphere(t_tuple center, double radius);
 t_tuple		ft_add_tuples(t_tuple a, t_tuple b);
 t_tuple		ft_sub_tuples(t_tuple a, t_tuple b);
 t_tuple		ft_negate_tuple(t_tuple a);
@@ -153,16 +199,16 @@ t_tuple		ft_cross(t_tuple v1, t_tuple v2);
 
 t_matrix	ft_tuple_to_matrix(t_tuple tuple);
 t_tuple		ft_matrix_to_tuple(t_matrix tuple);
-t_tuple		ft_tuple_translation(t_tuple p, double x, double y, double z);
-t_tuple		ft_tuple_inverse_translation(t_tuple p, double x, double y, \
+t_matrix	ft_matrix_translation(t_matrix m, double x, double y, double z);
+t_matrix	ft_matrix_inverse_translation(t_matrix m, double x, double y, \
 			double z);
-t_tuple		ft_tuple_scalation(t_tuple p, double x, double y, double z);
-t_tuple		ft_tuple_inverse_scalation(t_tuple p, double x, double y, \
+t_matrix	ft_matrix_scalation(t_matrix m, double x, double y, double z);
+t_matrix	ft_matrix_inverse_scalation(t_matrix m, double x, double y, \
 			double z);
-t_tuple		ft_tuple_rotation(t_tuple t, int axis, double rot_deg);
-t_tuple		ft_tuple_inverse_rotation(t_tuple t, int axis, double rot_deg);
-t_tuple		ft_tuple_shearing(t_tuple t, int axis, int over_axis, double val);
-t_tuple		ft_tuple_inverse_shearing(t_tuple t, int axis, int over_axis, double val);
+t_matrix	ft_matrix_rotation(t_matrix m, int axis, double rot_deg);
+t_matrix	ft_matrix_inverse_rotation(t_matrix m, int axis, double rot_deg);
+t_matrix	ft_matrix_shearing(t_matrix m, int axis, int over_axis, double val);
+t_matrix	ft_matrix_inverse_shearing(t_matrix m, int axis, int over_axis, double val);
 
 
 //___OPERACIONES CON MATRICES___
@@ -179,11 +225,17 @@ t_matrix	ft_inverse_matrix(t_matrix *m);
 //___RAYTRACING___
 
 t_tuple		ft_rc_position(t_ray ray, double position);
-void		ft_sphere_inters(t_ray ray, t_sphere sphere, t_ray_inters **i_list);
+void		ft_sphere_inters(t_ray ray, t_oitem sphere, t_ray_inters **i_list);
 int			ft_add_inters_sorted(t_ray_inters **i_list, double inter_point, \
 			int obj_id);
 int			ft_identify_hit(t_ray_inters *i_list);
-t_ray_inters	*ft_get_hit(t_ray_inters *i_list);
+int			ft_get_hit_color(t_ray_inters *i_list, t_oitem *o_list);
+
+
+//___LIGHT & SHADING
+
+t_tuple	ft_sp_normal_at(t_sphere sp, t_tuple surface_point);
+t_tuple	ft_reflection_vector(t_tuple in, t_tuple normal);
 
 
 //___GESTION DE ERRORES___
@@ -194,14 +246,28 @@ void	ft_matrix_det_check(t_matrix m);
 void	ft_matrix_mult_check(t_matrix m1, t_matrix m2);
 void	ft_matrix_to_tuple_check(t_matrix m);
 void	ft_intersection_check(double *tan);
+void	ft_sp_normal_at_check(double w);
 
 
 //___UTILS___
 
 int		ft_obj_id_assignment(void);
+int		ft_add_obj(t_oitem **o_list, t_omodel o_to_add, int o_type, int color);
+t_material ft_default_material(int color);
+
+
+//___GNL___
+
+char			*get_next_line(int fd);
+size_t			ft_gnl_strlen(const char *s);
+char			*ft_gnl_strjoin(char *s1, char *s2);
+char			*ft_gnl_strchr(const char *s, int c);
+char			*ft_gnl_substr(char const *s, unsigned int start, size_t len);
+char			*ft_gnl_strdup(char *s1);
 
 
 // ___DEBUGING___
+
 void	ft_print_matrix(t_matrix m);
 void 	ft_fill_matrix(t_matrix *m, char *arr);
 

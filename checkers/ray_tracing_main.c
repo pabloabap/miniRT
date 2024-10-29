@@ -116,17 +116,4 @@ int main(void)
 	//printf("X:%f, Y:%f, Z:%f, W:%f\n", norm_vector.x, norm_vector.y, norm_vector.z, norm_vector.w);
 	return (0);
 }
-
-int main(void)
-{
-	t_tuple	in;
-	t_tuple	normal;
-
-	in = ft_build_tuple(1, -1, 0, VECTOR);
-	normal = ft_build_tuple(0,1,0, VECTOR);
-	ft_print_matrix(ft_tuple_to_matrix(ft_reflection_vector(in, normal)));
-	in = ft_build_tuple(0, -1, 0, VECTOR);
-	normal = ft_build_tuple(sqrt(2)/2,sqrt(2)/2,0, VECTOR);
-	ft_print_matrix(ft_tuple_to_matrix(ft_reflection_vector(in, normal)));
-	return (0);
-}*/
+*/
