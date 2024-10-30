@@ -36,7 +36,8 @@ typedef enum e_elemet_type
 	CYLINDER,
 	LIGHT,
 	AMBIENT_LIGHT,
-	CAMERA
+	CAMERA,
+	COLOR
 }	t_element_type;
 
 typedef struct s_canvas
@@ -166,13 +167,17 @@ typedef struct s_inters
 typedef struct s_point_light
 {
 	t_tuple	position;
-	double	brightnes;
+	double	brightness;
 }	t_point_light;
 
 
 // ___MLX___
 void		ft_mlx_pixel_put(t_canvas *img, int x, int y, int color);
 int			ft_create_trgb(unsigned char t, unsigned char r, unsigned char g, unsigned char b);
+unsigned char	ft_get_t(int trgb);
+unsigned char	ft_get_r(int trgb);
+unsigned char	ft_get_g(int trgb);
+unsigned char	ft_get_b(int trgb);
 
 
 //___OPERACIONES GENERALES___
@@ -184,8 +189,7 @@ t_tuple		ft_add_tuples(t_tuple a, t_tuple b);
 t_tuple		ft_sub_tuples(t_tuple a, t_tuple b);
 t_tuple		ft_negate_tuple(t_tuple a);
 t_tuple		ft_mult_tuples(t_tuple a, t_tuple b);
-void		ft_scalar_mult (void *elem, double s, int elem_type);
-
+void 		ft_scalar_mult (void *e, double s, int e_type);
 
 //___OPERACIONES CON VECTORES___
 
@@ -229,11 +233,13 @@ void		ft_sphere_inters(t_ray ray, t_oitem sphere, t_ray_inters **i_list);
 int			ft_add_inters_sorted(t_ray_inters **i_list, double inter_point, \
 			int obj_id);
 int			ft_identify_hit(t_ray_inters *i_list);
+t_ray_inters	*ft_get_hit(t_ray_inters *i_list);
 int			ft_get_hit_color(t_ray_inters *i_list, t_oitem *o_list);
 
 
 //___LIGHT & SHADING
 
+double	ft_lighting(t_material material, t_point_light light, t_tuple point, t_tuple eyev, t_tuple normalv);
 t_tuple	ft_sp_normal_at(t_sphere sp, t_tuple surface_point);
 t_tuple	ft_reflection_vector(t_tuple in, t_tuple normal);
 
@@ -251,9 +257,10 @@ void	ft_sp_normal_at_check(double w);
 
 //___UTILS___
 
-int		ft_obj_id_assignment(void);
-int		ft_add_obj(t_oitem **o_list, t_omodel o_to_add, int o_type, int color);
-t_material ft_default_material(int color);
+t_point_light	ft_build_light(t_tuple position, double brightness);
+int				ft_obj_id_assignment(void);
+int				ft_add_obj(t_oitem **o_list, t_omodel o_to_add, int o_type, int color);
+t_material 		ft_default_material(int color);
 
 
 //___GNL___
@@ -269,6 +276,7 @@ char			*ft_gnl_strdup(char *s1);
 // ___DEBUGING___
 
 void	ft_print_matrix(t_matrix m);
+void	ft_print_tuple(t_tuple t);
 void 	ft_fill_matrix(t_matrix *m, char *arr);
 
 #endif

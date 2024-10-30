@@ -57,35 +57,35 @@ t_tuple ft_mult_tuples(t_tuple a, t_tuple b)
 }
 
 /**
- * Escalar `elem` (punto, vector o matrz) por `s`. Como la operacion es la
+ * Escalar `e` (punto, vector, color o matriz) por `s`. Como la operacion es la
  * misma para todos los elementos geométricos `elem_type` informa del 
  * elemento recibido para castearlo según corresponda.
  * `elem` se actualiza con el valor de la operación.
 */
-void ft_scalar_mult (void *elem, double s, int elem_type)
+void ft_scalar_mult (void *e, double s, int e_type)
 {
 	int	i;
 	int j;
 
 	i = 0;
 	j = 0;
-	if (elem_type == MATRIX)
+	if (e_type == MATRIX)
 	{
-		while (i < ((t_matrix *)elem)->rows)
+		while (i < ((t_matrix *)e)->rows)
 		{
-			while (j < ((t_matrix *)elem)->cols)
+			while (j < ((t_matrix *)e)->cols)
 			{
-				(*(t_matrix *)elem).val[i][j] *= s;
+				(*(t_matrix *)e).val[i][j] *= s;
 				j ++;
 			}
 			i ++;
 			j = 0;
 		}	
 	}
-	else if (elem_type == POINT || elem_type == VECTOR)
+	else if (e_type == POINT || e_type == VECTOR || e_type == COLOR)
 	{
-		((t_tuple *)elem)->x *= s;
-		((t_tuple *)elem)->y *= s;
-		((t_tuple *)elem)->z *= s;
+		((t_tuple *)e)->x *= s;
+		((t_tuple *)e)->y *= s;
+		((t_tuple *)e)->z *= s;
 	}
 }

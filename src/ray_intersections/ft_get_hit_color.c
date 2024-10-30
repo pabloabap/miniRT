@@ -20,6 +20,6 @@ int	ft_get_hit_color(t_ray_inters *i_list, t_oitem *o_list)
 			o_list = o_list->next;
 		return (o_list->material.color);
 	}
-		return (0);
+	return (0);
 }
 

@@ -13,7 +13,7 @@ void	ft_vectors_op_check(t_tuple a, t_tuple b)
 
 void	ft_tuples_check(int w)
 {
-	if(w > 1)
+	if(w > 1 && w != COLOR + COLOR)
 	{
 		ft_putendl_fd("ERROR - Suma de dos puntos, operación invalida.", 2);
 		exit (1);
