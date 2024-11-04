@@ -14,7 +14,10 @@ t_point_light	ft_build_light(t_tuple position, double brightness)
 
 	light.position = position;
 	if (brightness < 0 || brightness > 1)
-		printf("ERROR! - El ratio de luminosidad de una luz tiene que estar en el intervalo 0.0 - 1.0\n");
+	{
+		printf("ERROR! - El ratio de luminosidad de una luz tiene que estar");
+		printf("en el intervalo 0.0 - 1.0\n");
+	}
 	light.brightness = brightness;
 	return (light);
 }

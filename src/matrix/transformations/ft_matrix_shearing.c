@@ -16,10 +16,10 @@ t_matrix	ft_matrix_shearing(t_matrix m, int axis, int over_axis, double val)
 {
 	t_matrix	shearing_matrix;
 
-	shearing_matrix = ft_identity_matrix(4,4);
+	shearing_matrix = ft_identity_matrix(4, 4);
 	shearing_matrix.val[axis][over_axis] = val;
 	shearing_matrix = ft_matrix_mult(shearing_matrix, m);
-	return (shearing_matrix);	
+	return (shearing_matrix);
 }
 
 /**
@@ -32,13 +32,14 @@ t_matrix	ft_matrix_shearing(t_matrix m, int axis, int over_axis, double val)
  * 
  * @return Matriz `m` con la inclinación aplicada.
  */
-t_matrix	ft_matrix_inverse_shearing(t_matrix m, int axis, int over_axis, double val)
+t_matrix	ft_matrix_inverse_shearing(t_matrix m, int axis, int over_axis, \
+	double val)
 {
 	t_matrix	shearing_matrix;
 
-	shearing_matrix = ft_identity_matrix(4,4);
+	shearing_matrix = ft_identity_matrix(4, 4);
 	shearing_matrix.val[axis][over_axis] = val;
-	shearing_matrix = ft_inverse_matrix(&shearing_matrix);;
+	shearing_matrix = ft_inverse_matrix(&shearing_matrix);
 	shearing_matrix = ft_matrix_mult(shearing_matrix, m);
 	return (shearing_matrix);
 }

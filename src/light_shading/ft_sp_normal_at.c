@@ -11,16 +11,17 @@
 t_tuple	ft_sp_normal_at(t_sphere sp, t_tuple surface_point)
 {
 	t_tuple	obj_point;
-	t_tuple obj_normal;
+	t_tuple	obj_normal;
 	t_tuple	world_normal;
-	
+
 	ft_sp_normal_at_check(surface_point.w);
 	obj_point = ft_matrix_to_tuple(ft_matrix_mult(\
 		ft_inverse_matrix(&(sp.transformations_matrix)), \
 		ft_tuple_to_matrix(surface_point)));
-	obj_normal = ft_build_tuple(obj_point.x, obj_point.y, obj_point.z, VECTOR); //Se le restaría el origen del circulo pro al ser el centro de las coordenadas del objeto todos los valores son cero.
-	world_normal = ft_matrix_to_tuple(ft_matrix_mult(ft_matrix_transpos( \
-		ft_inverse_matrix(&sp.transformations_matrix)), ft_tuple_to_matrix(obj_normal)));
+	obj_normal = ft_build_tuple(obj_point.x, obj_point.y, obj_point.z, VECTOR);
+	world_normal = ft_matrix_to_tuple(ft_matrix_mult(ft_matrix_transpos(\
+		ft_inverse_matrix(&sp.transformations_matrix)), \
+		ft_tuple_to_matrix(obj_normal)));
 	world_normal.w = 0;
 	return (ft_normalize(world_normal));
 }

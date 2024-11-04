@@ -16,10 +16,7 @@ int main(void)
 	int			y_world;
 	int			z_wall;
 
-	canvas.mlx_init = mlx_init();
-	canvas.mlx_win = mlx_new_window(canvas.mlx_init, WIDTH, HEIGHT, "miniRT");
-	canvas.img = mlx_new_image(canvas.mlx_init, WIDTH, HEIGHT);
-	canvas.img_addr = mlx_get_data_addr(canvas.img, &(canvas.bpp), &(canvas.line_bytes), &(canvas.endian));
+	ft_prepare_canvas(&canvas);
 	x = 0;
 	y = 0;
 	z_wall = 100;
@@ -60,23 +57,9 @@ int main(void)
 					direction2 = r.direction;
 					ft_scalar_mult(&direction2, ft_get_hit(i_list)->inter_point, VECTOR);
 					h_point = ft_add_tuples(r.origin, direction2);
-					printf("t: %f\n", ft_get_hit(i_list)->inter_point);
-					printf("R.ORIGIN - ");
-					ft_print_tuple(r.origin);
-					printf("DIRECTION - ");
-					ft_print_tuple(r.direction);
-					printf("DIRECTION2 - ");
-					ft_print_tuple(direction2);
-					printf("HIT_POINT - ");
-					ft_print_tuple(h_point);
 					normal = ft_sp_normal_at(*(t_sphere*)o_list->obj_struct, h_point);
-					printf("NORMAL - ");
-					ft_print_tuple(normal);
 					eye = ft_negate_tuple(ft_normalize(direction2));
-					printf("EYE - ");
-					ft_print_tuple(eye);
 					double l =  ft_lighting(o_list->material, light, h_point, eye, normal);
-					printf("LIGHTING: %f\n", l);
 					ft_mlx_pixel_put(&canvas, x, y, ft_create_trgb(0, ft_get_r(color) * l,ft_get_g(color)*l, ft_get_b(color)*l));
 				}
 				i_list = NULL;
@@ -89,9 +72,6 @@ int main(void)
 		x = 0;
 		y = 0;
 		k ++;
-		ft_putstr_fd("ESFERA", 2);
-		ft_putnbr_fd(k, 2);
-		ft_putchar_fd('\n', 2);
 	}
 	return (0);
 }

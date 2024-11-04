@@ -35,11 +35,6 @@ double	ft_lighting(t_material material, t_point_light light, t_tuple point, t_tu
 	ambient = efective_color;
 	ft_scalar_mult(&ambient,  material.ambient, COLOR);
 	light_dot_normal = ft_dot(lightv, normalv);
-	printf("LIGHTV - ");
-	ft_print_tuple(lightv);
-	printf("NORMALV - ");
-	ft_print_tuple(normalv);
-	printf("DOT_L - %f\n", light_dot_normal);
 	if (light_dot_normal < 0)
 	{
 		diffuse = ft_normalize_color(ft_create_trgb(0, 0, 0, 0)); //Black
@@ -50,10 +45,7 @@ double	ft_lighting(t_material material, t_point_light light, t_tuple point, t_tu
 		diffuse = efective_color;
 		ft_scalar_mult(&diffuse,  material.diffuse * light_dot_normal, COLOR);
 		reflectv = ft_reflection_vector(ft_negate_tuple(lightv), normalv);
-		printf("REFLECTV - ");
-		ft_print_tuple(reflectv);
 		reflect_dot_eye = ft_dot(reflectv, eyev);
-		printf("DOT_L - %f\n", light_dot_normal);
 		if (reflect_dot_eye <= 0)
 			specular = ft_normalize_color(ft_create_trgb(0, 0, 0, 0)); //Black
 		else
@@ -62,7 +54,6 @@ double	ft_lighting(t_material material, t_point_light light, t_tuple point, t_tu
 			specular = ft_build_tuple(light.brightness, light.brightness, light.brightness, COLOR);
 		}
 	}
-	printf("AMBIENT: %f	DIFFUSE: %f	SPECULAR: %f\n", ambient.x, diffuse.x, specular.x);
 	ambient = ft_add_tuples(ambient, diffuse);
 	ambient.w = COLOR;
 	ambient = ft_add_tuples(ambient, specular);

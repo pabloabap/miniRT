@@ -2,9 +2,9 @@
 
 #include "../../../include/mini_rt.h"
 
-static t_matrix ft_build_x_rot_matrix(double rot_deg);
-static t_matrix ft_build_y_rot_matrix(double rot_deg);
-static t_matrix ft_build_z_rot_matrix(double rot_deg);
+static t_matrix	ft_build_x_rot_matrix(double rot_deg);
+static t_matrix	ft_build_y_rot_matrix(double rot_deg);
+static t_matrix	ft_build_z_rot_matrix(double rot_deg);
 
 /**
  * Rota matrices en el espacio.
@@ -16,8 +16,8 @@ static t_matrix ft_build_z_rot_matrix(double rot_deg);
  */
 t_matrix	ft_matrix_rotation(t_matrix m, int axis, double rot_deg)
 {
-	t_matrix rotation_matrix;
-	
+	t_matrix	rotation_matrix;
+
 	if (X == axis)
 		rotation_matrix = ft_build_x_rot_matrix(rot_deg);
 	else if (Y == axis)
@@ -37,8 +37,8 @@ t_matrix	ft_matrix_rotation(t_matrix m, int axis, double rot_deg)
  */
 t_matrix	ft_matrix_inverse_rotation(t_matrix m, int axis, double rot_deg)
 {
-	t_matrix rotation_matrix;
-	
+	t_matrix	rotation_matrix;
+
 	if (X == axis)
 		rotation_matrix = ft_build_x_rot_matrix(rot_deg);
 	else if (Y == axis)
@@ -53,13 +53,13 @@ t_matrix	ft_matrix_inverse_rotation(t_matrix m, int axis, double rot_deg)
  * @param rot_deg Ángulo de rotación en grados.
  * @return Matriz de rotación sobre el eje X.
  */
-static t_matrix ft_build_x_rot_matrix(double rot_deg)
+static t_matrix	ft_build_x_rot_matrix(double rot_deg)
 {
 	double		rot_rad;
 	t_matrix	rot_matrix;
 
 	rot_rad = rot_deg / 180 * M_PI;
-	rot_matrix = ft_identity_matrix(4,4);
+	rot_matrix = ft_identity_matrix(4, 4);
 	rot_matrix.val[1][1] = cos(rot_rad);
 	rot_matrix.val[1][2] = -sin(rot_rad);
 	rot_matrix.val[2][1] = sin(rot_rad);
@@ -71,13 +71,13 @@ static t_matrix ft_build_x_rot_matrix(double rot_deg)
  * @param rot_deg Ángulo de rotación en grados.
  * @return Matriz de rotación sobre el eje Y.
  */
-static t_matrix ft_build_y_rot_matrix(double rot_deg)
+static t_matrix	ft_build_y_rot_matrix(double rot_deg)
 {
 	t_matrix	rot_matrix;
 	double		rot_rad;
 
 	rot_rad = rot_deg / 180 * M_PI;
-	rot_matrix = ft_identity_matrix(4,4);
+	rot_matrix = ft_identity_matrix(4, 4);
 	rot_matrix.val[0][0] = cos(rot_rad);
 	rot_matrix.val[0][2] = sin(rot_rad);
 	rot_matrix.val[2][0] = -sin(rot_rad);
@@ -89,13 +89,13 @@ static t_matrix ft_build_y_rot_matrix(double rot_deg)
  * @param rot_deg Ángulo de rotación en grados.
  * @return Matriz de rotación sobre el eje Z.
  */
-static t_matrix ft_build_z_rot_matrix(double rot_deg)
+static t_matrix	ft_build_z_rot_matrix(double rot_deg)
 {
 	t_matrix	rot_matrix;
 	double		rot_rad;
 
 	rot_rad = rot_deg / 180 * M_PI;
-	rot_matrix = ft_identity_matrix(4,4);
+	rot_matrix = ft_identity_matrix(4, 4);
 	rot_matrix.val[0][0] = cos(rot_rad);
 	rot_matrix.val[0][1] = -sin(rot_rad);
 	rot_matrix.val[1][0] = sin(rot_rad);

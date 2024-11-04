@@ -22,4 +22,3 @@ int	ft_get_hit_color(t_ray_inters *i_list, t_oitem *o_list)
 	}
 	return (0);
 }
-

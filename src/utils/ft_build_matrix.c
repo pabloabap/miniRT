@@ -9,21 +9,21 @@
 */
 t_matrix	ft_build_matrix(int rows, int cols)
 {
-  int i;
-  int j;
-  t_matrix matrix;
-  
-  i = 0;
-  j = 0;
-  matrix.rows = rows;
-  matrix.cols = cols;
-  matrix.det = 0;
-  while (i < 4)
-  {
-    while (j < 4)
-        matrix.val[i][j++] = 0;
-    j = 0;
-    i ++;
-  }
-  return (matrix);
+	int			i;
+	int			j;
+	t_matrix	matrix;
+
+	i = 0;
+	j = 0;
+	matrix.rows = rows;
+	matrix.cols = cols;
+	matrix.det = 0;
+	while (i < 4)
+	{
+		while (j < 4)
+			matrix.val[i][j++] = 0;
+		j = 0;
+		i ++;
+	}
+	return (matrix);
 }

@@ -24,5 +24,5 @@ t_tuple	ft_matrix_to_tuple(t_matrix m)
 		t.z = m.val[2][0];
 		t.w = m.val[3][0];
 	}
-	return (t);	
+	return (t);
 }

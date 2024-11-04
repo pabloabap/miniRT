@@ -4,11 +4,11 @@
  * Obtiene la magnitud del vector `v`.
  * @return Magnitud del vector `v`.
  */
-double ft_magnitude(t_tuple v)
+double	ft_magnitude(t_tuple v)
 {
 	ft_vectors_op_check(v, v);
-	return( \
-		sqrt( v.x * v.x \
+	return (\
+		sqrt(v.x * v.x \
 			+ v.y * v.y \
 			+ v.z * v.z \
 			+ v.w * v.w \
@@ -56,9 +56,9 @@ t_tuple	ft_cross(t_tuple v1, t_tuple v2)
 {
 	t_tuple	v_cross;
 
-	ft_vectors_op_check(v1, v2);	
+	ft_vectors_op_check(v1, v2);
 	v_cross.x = v1.y * v2.z - v2.y * v1.z;
 	v_cross.y = v1.x * v2.z - v2.x * v1.z;
 	v_cross.z = v1.x * v2.y - v2.x * v1.y;
-	return(v_cross);
+	return (v_cross);
 }

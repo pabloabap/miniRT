@@ -5,7 +5,7 @@
 /** Pendiente de completar. Son atributos de un objeto
  * para calcular como le afecta la luz.
  */
-t_material ft_default_material(int color)
+t_material	ft_default_material(int color)
 {
 	t_material	m;
 

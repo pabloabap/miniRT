@@ -12,6 +12,5 @@ t_tuple	ft_reflection_vector(t_tuple in, t_tuple normal)
 	ft_vectors_op_check(in, normal);
 	dot = ft_dot(in, normal);
 	ft_scalar_mult(&normal, dot * 2, VECTOR);
-	return(ft_sub_tuples(in, normal));
-
+	return (ft_sub_tuples(in, normal));
 }

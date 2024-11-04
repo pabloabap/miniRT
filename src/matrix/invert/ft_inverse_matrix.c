@@ -2,45 +2,49 @@
 
 #include "../../../include/mini_rt.h"
 
-/* Calculo de la matriz inversa de la matriz `m` recibida como parametro*/
-t_matrix ft_inverse_matrix(t_matrix *m)
+static t_matrix	ft_inverse_matrix_builder(t_matrix m);
+
+/* Calculo de la matriz inversa de la matriz `m` recibida como parametro,
+ * la matriz debe de der de 4x4.
+ */
+t_matrix	ft_inverse_matrix(t_matrix *m)
+{
+	t_matrix	inverse_matrix;
+
+	m->det = ft_matrix_det(*m, 0, 0);
+	if (m->det == 0)
+		return (ft_identity_matrix(4, 4));
+	inverse_matrix = ft_inverse_matrix_builder(ft_matrix_transpos(*m));
+	ft_scalar_mult(&inverse_matrix, 1 / m->det, MATRIX);
+	return (inverse_matrix);
+}
+
+/**
+ * Compone la matriz inversa de `m`.
+ * @param m Matriz de la que obtener la inversa.
+ * @return Matriz inversa de `m`.
+ */
+static t_matrix	ft_inverse_matrix_builder(t_matrix m)
 {
 	int			i;
 	int			j;
-	t_matrix	inverse_matrix;
 	t_matrix	tmp;
 	t_matrix	adj_matrix;
 
 	i = 0;
 	j = 0;
-	m->det = ft_matrix_det(*m, 0, 0);
-	if (m->det == 0)
+	tmp = m;
+	while (i < m.rows)
 	{
-		printf("MATRIZ DE TRANSFORMACION SIN DETERMINANTE, NO SE PUEDE APLICAR TRANSFORMACION\n");
-		return (ft_identity_matrix(4, 4));
-	}
-	inverse_matrix = ft_matrix_transpos(*m);
-	tmp = inverse_matrix;
-	// printf ("___TRASPUESTA___\n");
-	// ft_print_matrix(inverse_matrix);
-	while (i < inverse_matrix.rows)
-	{
-		while (j < inverse_matrix.cols)
+		while (j < m.cols)
 		{
 			adj_matrix = ft_submatrix(tmp, i, j);
-			// printf ("___ADJUNTA (%02d, %02d)\n", i, j);
-			// ft_print_matrix(adj_matrix);
-			inverse_matrix.val[i][j] = ft_matrix_det(adj_matrix, 0, 0) \
+			m.val[i][j] = ft_matrix_det(adj_matrix, 0, 0) \
 				* ft_cofactor(i, j);
 			j ++;
 		}
 		i ++;
 		j = 0;
 	}
-	// printf ("___MATRIZ RESULTANTE___\n");
-	// ft_print_matrix(inverse_matrix);
-	ft_scalar_mult(&inverse_matrix, 1/m->det, MATRIX);
-	// printf ("___MATRIZ * DETERMINANTE___\n");
-	// ft_print_matrix(inverse_matrix);
-	return (inverse_matrix);
+	return (m);
 }

@@ -2,7 +2,7 @@
 
 #include "../../../include/mini_rt.h"
 
-static t_matrix ft_build_trans_matrix(double x, double y, double z);
+static t_matrix	ft_build_trans_matrix(double x, double y, double z);
 
 /**
  * Traslada matrices en el espacio.
@@ -39,7 +39,8 @@ t_matrix	ft_matrix_translation(t_matrix m, double x, double y, double z)
  * 
  * @return Matriz `m` con la traslación inversa aplicada.
  */
-t_matrix	ft_matrix_inverse_translation(t_matrix m, double x, double y, double z)
+t_matrix	ft_matrix_inverse_translation(t_matrix m, double x, double y, \
+	double z)
 {
 	t_matrix	final_matrix;
 	t_matrix	trans_matrix;
@@ -56,11 +57,11 @@ t_matrix	ft_matrix_inverse_translation(t_matrix m, double x, double y, double z)
  * que queramos desplazar un punto en las tres primeras posiciones de la 
  * última columna de la matriz respectivamente.
  */
-static t_matrix ft_build_trans_matrix(double x, double y, double z)
+static t_matrix	ft_build_trans_matrix(double x, double y, double z)
 {
 	t_matrix	trans_matrix;
 
-	trans_matrix = ft_identity_matrix(4,4);
+	trans_matrix = ft_identity_matrix(4, 4);
 	trans_matrix.val[0][3] = x;
 	trans_matrix.val[1][3] = y;
 	trans_matrix.val[2][3] = z;

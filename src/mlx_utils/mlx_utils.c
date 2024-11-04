@@ -17,31 +17,19 @@ void	ft_mlx_pixel_put(t_canvas *img, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = img->img_addr + (y * img->line_bytes + x * (img->bpp/8));
-	*(unsigned int*)dst = color;
+	dst = img->img_addr + (y * img->line_bytes + x * (img->bpp / 8));
+	*(unsigned int *)dst = color;
 }
 
-int	ft_create_trgb(unsigned char t, unsigned char r, unsigned char g, unsigned char b)
+void	ft_prepare_canvas(t_canvas *canvas)
 {
-	return (*(int *)(unsigned char [4]){b, g, r, t});
-}
-
-unsigned char	ft_get_t(int trgb)
-{
-	return (((unsigned char *)&trgb)[3]);
-}
-
-unsigned char	ft_get_r(int trgb)
-{
-	return (((unsigned char *)&trgb)[2]);
-}
-
-unsigned char	ft_get_g(int trgb)
-{
-	return (((unsigned char *)&trgb)[1]);
-}
-
-unsigned char	ft_get_b(int trgb)
-{
-	return (((unsigned char *)&trgb)[0]);
+	canvas->mlx_init = mlx_init();
+	ft_mlx_failure_check(canvas->mlx_init);
+	canvas->mlx_win = mlx_new_window(canvas->mlx_init, WIDTH, HEIGHT, \
+		"miniRT");
+	ft_mlx_failure_check(canvas->mlx_win);
+	canvas->img = mlx_new_image(canvas->mlx_init, WIDTH, HEIGHT);
+	ft_mlx_failure_check(canvas->img);
+	canvas->img_addr = mlx_get_data_addr(canvas->img, &(canvas->bpp), \
+		&(canvas->line_bytes), &(canvas->endian));
 }

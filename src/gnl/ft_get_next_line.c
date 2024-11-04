@@ -4,6 +4,7 @@
 
 static void	ft_gnl_read_fd_buff(int fd, char **tmp);
 static void	ft_gnl_write_line(char **tmp, char **line, int fd);
+
 char	*get_next_line(int fd)
 {
 	static char	*tmp;
@@ -82,4 +83,3 @@ static void	ft_gnl_write_line(char **tmp, char **line, int fd)
 		*tmp = p;
 	}
 }
-

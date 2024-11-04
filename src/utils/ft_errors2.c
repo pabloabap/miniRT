@@ -1,15 +1,7 @@
 //CABECERA
 #include "../../include/mini_rt.h"
 
-void	ft_intersection_check(double *tan)
-{
-	if (isnan(tan[0]) && isnan(tan[1]))
-	{
-		ft_putendl_fd("Not ray-sphere intersection.", 2);
-		exit (1);
-	}
-};
-
+/** Comprueba si se está recibiendo un punto en la operación a realizar */
 void	ft_sp_normal_at_check(double w)
 {
 	if (VECTOR == w)
@@ -19,4 +11,17 @@ void	ft_sp_normal_at_check(double w)
 		ft_putendl_fd("su vector de normalización.", 2);
 		exit (1);
 	}
-};
+}
+
+/** Retorna mensaje de error si alguna llamada a la librería mlx falla */
+int	ft_mlx_failure_check(void *p)
+{
+	if (NULL == p)
+	{
+		ft_putstr_fd("ERROR - Fallo en la API de mlx al peparar ", 2);
+		ft_putendl_fd("la ventana y las imagenes.", 2);
+		exit (1);
+	}
+	else
+		return (EXIT_SUCCESS);
+}

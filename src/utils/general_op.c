@@ -47,7 +47,7 @@ t_tuple	ft_negate_tuple(t_tuple a)
  * con la mezcla. 
  * @return tupla resultante de la operación.
  */
-t_tuple ft_mult_tuples(t_tuple a, t_tuple b)
+t_tuple	ft_mult_tuples(t_tuple a, t_tuple b)
 {
 	a.x *= b.x;
 	a.y *= b.y;
@@ -62,10 +62,10 @@ t_tuple ft_mult_tuples(t_tuple a, t_tuple b)
  * elemento recibido para castearlo según corresponda.
  * `elem` se actualiza con el valor de la operación.
 */
-void ft_scalar_mult (void *e, double s, int e_type)
+void	ft_scalar_mult(void *e, double s, int e_type)
 {
 	int	i;
-	int j;
+	int	j;
 
 	i = 0;
 	j = 0;
@@ -80,7 +80,7 @@ void ft_scalar_mult (void *e, double s, int e_type)
 			}
 			i ++;
 			j = 0;
-		}	
+		}
 	}
 	else if (e_type == POINT || e_type == VECTOR || e_type == COLOR)
 	{

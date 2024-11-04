@@ -22,10 +22,11 @@ SRCS		=	$(MAIN) \
 				./debug/ft_fill_matrix.c \
 				./debug/ft_print_matrix.c \
 				./debug/ft_print_tuple.c \
+				./src/mlx_utils/ft_color_utils.c \
 				./src/mlx_utils/mlx_utils.c \
 				./src/gnl/ft_get_next_line_utils.c \
 				./src/gnl/ft_get_next_line.c \
-				src/light_shading/ft_lighting.c \
+				./src/light_shading/ft_lighting.c \
 				./src/light_shading/ft_refection_vector.c \
 				./src/light_shading/ft_sp_normal_at.c \
 				./src/matrix/ft_identity_matrix.c \

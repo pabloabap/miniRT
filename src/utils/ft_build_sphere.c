@@ -11,12 +11,12 @@
  * coordenadas objeto a globales.
  * @return Retorna la estructura `t_sphere`
  */
-t_sphere ft_build_sphere(t_tuple center, double radius)
+t_sphere	ft_build_sphere(t_tuple center, double radius)
 {
 	t_sphere	sphere;
 
 	sphere.origin = center;
 	sphere.radius = radius;
-	sphere.transformations_matrix = ft_identity_matrix(4,4);
+	sphere.transformations_matrix = ft_identity_matrix(4, 4);
 	return (sphere);
 }

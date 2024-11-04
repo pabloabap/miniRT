@@ -1,7 +1,7 @@
 //CABERECA
 #include "../../include/mini_rt.h"
 
-static void ft_mult(t_matrix m1, t_matrix m2, t_matrix *final_matrix);
+static void	ft_mult(t_matrix m1, t_matrix m2, t_matrix *final_matrix);
 
 /** 
  * Multiplica las dos matrices recibidas como parametro.
@@ -39,12 +39,12 @@ static void	ft_mult(t_matrix m1, t_matrix m2, t_matrix *final_matrix)
 			while (k < m2.rows)
 			{
 				(*final_matrix).val[j][i] += m1.val[j][k] * m2.val[k][i];
-				k ++;				
+				k ++;
 			}
-			k= 0;
+			k = 0;
 			j++;
 		}
 		j = 0;
 		i ++;
-	}	
+	}
 }

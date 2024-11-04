@@ -2,7 +2,7 @@
 
 #include "../../../include/mini_rt.h"
 
-static t_matrix ft_build_scal_matrix(double x, double y, double z);
+static t_matrix	ft_build_scal_matrix(double x, double y, double z);
 
 /**
  * Escala matrices en el espacio.
@@ -31,7 +31,8 @@ t_matrix	ft_matrix_scalation(t_matrix m, double x, double y, double z)
  * 
  * @return Matriz de escalación inversa de `m`.
  */
-t_matrix	ft_matrix_inverse_scalation(t_matrix m, double x, double y, double z)
+t_matrix	ft_matrix_inverse_scalation(t_matrix m, double x, double y, \
+	double z)
 {
 	t_matrix	scal_matrix;
 
@@ -45,11 +46,11 @@ t_matrix	ft_matrix_inverse_scalation(t_matrix m, double x, double y, double z)
  * Se obtiene cambiando los tres primeros elementos de la diagonal de la 
  * matriz identidad por  las unidades `x`, `y` y `z` que queramos escalar.
  */
-static t_matrix ft_build_scal_matrix(double x, double y, double z)
+static t_matrix	ft_build_scal_matrix(double x, double y, double z)
 {
 	t_matrix	trans_matrix;
 
-	trans_matrix = ft_identity_matrix(4,4);
+	trans_matrix = ft_identity_matrix(4, 4);
 	trans_matrix.val[0][0] = x;
 	trans_matrix.val[1][1] = y;
 	trans_matrix.val[2][2] = z;

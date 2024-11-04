@@ -3,6 +3,7 @@
 #include "../../../include/mini_rt.h"
 
 static double	ft_process_matrix(t_matrix m, int r, int *c);
+
 /**
  * Calcula el determinante de la matriz `m` por adjuntos. 
  * `r`y `c` se utilizan para descartar filas y columnas
@@ -11,7 +12,7 @@ static double	ft_process_matrix(t_matrix m, int r, int *c);
  */
 double	ft_matrix_det(t_matrix m, int r, int c)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	m.det = 0;
@@ -29,7 +30,7 @@ static double	ft_process_matrix(t_matrix m, int r, int *c)
 {
 	while (*c < m.cols)
 	{
-		m.det += m.val[r][*c]  * ft_cofactor(r, *c) \
+		m.det += m.val[r][*c] * ft_cofactor(r, *c) \
 			* ft_matrix_det(ft_submatrix(m, r, *c), r, *c);
 		*c += 1;
 	}
