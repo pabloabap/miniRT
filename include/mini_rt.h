@@ -1,4 +1,14 @@
-// CABECERA !!!
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mini_rt.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pabad-ap <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/06 10:32:23 by pabad-ap          #+#    #+#             */
+/*   Updated: 2024/11/06 10:32:27 by pabad-ap         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef MINI_RT_H
 # define MINI_RT_H
@@ -47,6 +57,14 @@ typedef enum e_light_types
 	DIFFUSE,
 	SPECULAR
 }	t_light_types;
+
+typedef enum e_intersection_vectors
+{
+	EYE_V,
+	LIGHT_V,
+	NORMAL_V,
+	REFLECTION_V
+}	t_inters_v;
 
 typedef struct s_canvas
 {
@@ -272,11 +290,12 @@ int				ft_add_inters_sorted(t_ray_inters **i_list, double inter_point, \
 int				ft_identify_hit(t_ray_inters *i_list);
 t_ray_inters	*ft_get_hit(t_ray_inters *i_list);
 int				ft_get_hit_color(t_ray_inters *i_list, t_oitem *o_list);
+// t_oitem			*ft_get_hitted_obj(t_ray_inters *i_list, t_oitem *o_list);
 
 //___LIGHT & SHADING
 
 int				ft_lighting(t_material material, t_point_light light, \
-					t_tuple point, t_tuple eyev, t_tuple normalv);
+					t_tuple point, t_tuple *inters_vecs);
 t_tuple			ft_sp_normal_at(t_sphere sp, t_tuple surface_point);
 t_tuple			ft_reflection_vector(t_tuple in, t_tuple normal);
 

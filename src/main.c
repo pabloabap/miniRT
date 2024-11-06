@@ -1,4 +1,14 @@
-// CABECERA
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pabad-ap <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/06 10:15:35 by pabad-ap          #+#    #+#             */
+/*   Updated: 2024/11/06 10:15:43 by pabad-ap         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../include/mini_rt.h"
 int main(void)
@@ -53,15 +63,14 @@ int main(void)
 				{
 					t_tuple h_point;
 					t_tuple direction2;
-					t_tuple eye;
-					t_tuple normal;
+					t_tuple inters_vecs[4];
 					direction2 = r.direction;
 					ft_scalar_mult(&direction2, ft_get_hit(i_list)->inter_point, VECTOR);
 					h_point = ft_add_tuples(r.origin, direction2);
-					normal = ft_sp_normal_at(*(t_sphere*)o_list->obj_struct, h_point);
-					eye = ft_negate_tuple(ft_normalize(direction2));
+					inters_vecs[NORMAL_V] = ft_sp_normal_at(*(t_sphere*)o_list->obj_struct, h_point);
+					inters_vecs[EYE_V] = ft_negate_tuple(ft_normalize(direction2));
 					ft_mlx_pixel_put(&canvas, x, y, \
-						ft_lighting(o_list->material, light, h_point, eye, normal));
+						ft_lighting(o_list->material, light, h_point, &(*inters_vecs)));
 				}
 				i_list = NULL;
 				x ++;

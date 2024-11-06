@@ -1,4 +1,14 @@
-//CABECERA
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lighting.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pabad-ap <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/06 10:16:25 by pabad-ap          #+#    #+#             */
+/*   Updated: 2024/11/06 10:16:30 by pabad-ap         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../include/mini_rt.h"
 
@@ -7,8 +17,8 @@ static int		ft_final_color(t_tuple ambt, t_tuple diff, t_tuple spec, \
 	double color);
 static void		ft_default_light_values(t_tuple *light_types, \
 	t_material material, t_point_light light);
-static void 	ft_specular_reflection(t_point_light light, \
-	t_tuple *specular_light, double	reflect_dot_eye, t_material material);
+static void		ft_specular_reflection(t_point_light light, \
+	t_tuple	*specular_light, double reflect_dot_eye, t_material material);
 
 /** 
  * Funcion de alumbrado del modelo de reflexión de Phong
@@ -25,36 +35,36 @@ static void 	ft_specular_reflection(t_point_light light, \
  *  de impacto.
  */
 int	ft_lighting(t_material material, t_point_light light, t_tuple point, \
-	t_tuple eyev, t_tuple normalv)
+	t_tuple *inters_vecs)
 {
-	t_tuple light_types[4];
-	t_tuple	lightv;
+	t_tuple	light_types[4];
 	double	light_dot_normal;
-	t_tuple reflectv;
 	double	reflect_dot_eye;
 
-	lightv = ft_normalize(ft_sub_tuples(light.position, point));
-	light_dot_normal = ft_dot(lightv, normalv);
+	inters_vecs[LIGHT_V] = ft_normalize(ft_sub_tuples(light.position, point));
+	light_dot_normal = ft_dot(inters_vecs[LIGHT_V], inters_vecs[NORMAL_V]);
 	ft_default_light_values(&(*light_types), material, light);
-	if(light_dot_normal >= 0)
+	if (light_dot_normal >= 0)
 	{
 		light_types[DIFFUSE] = light_types[EFECTIVE_COLOR];
 		ft_scalar_mult(&(light_types[DIFFUSE]), \
 			material.diffuse * light_dot_normal, COLOR);
-		reflectv = ft_reflection_vector(ft_negate_tuple(lightv), normalv);
-		reflect_dot_eye = ft_dot(reflectv, eyev);
-		ft_specular_reflection( light, &(light_types[SPECULAR]), \
+		inters_vecs[REFLECTION_V] = ft_reflection_vector(\
+			ft_negate_tuple(inters_vecs[LIGHT_V]), inters_vecs[NORMAL_V]);
+		reflect_dot_eye = ft_dot(inters_vecs[REFLECTION_V], \
+			inters_vecs[EYE_V]);
+		ft_specular_reflection(light, &(light_types[SPECULAR]), \
 			reflect_dot_eye, material);
 	}
-	return (ft_final_color(light_types[AMBIENT], light_types[DIFFUSE], 
+	return (ft_final_color(light_types[AMBIENT], light_types[DIFFUSE], \
 		light_types[SPECULAR], material.color));
 }
 
 /**
  * Calcular el valor del reflejo especular en caso de que exista.
  */
-static void ft_specular_reflection(t_point_light light, \
-	t_tuple *specular_light, double	reflect_dot_eye, t_material material)
+static void	ft_specular_reflection(t_point_light light, \
+	t_tuple *specular_light, double reflect_dot_eye, t_material material)
 {
 	if (reflect_dot_eye > 0)
 	{
