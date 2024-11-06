@@ -25,13 +25,16 @@ int main(void)
 	int k = 0;
 	model.sp = ft_build_sphere(ft_build_tuple(0,0,50,POINT), 40);
 	model.sp.transformations_matrix = ft_matrix_translation(model.sp.transformations_matrix, 0, 0, 20);
-	ft_add_obj(&o_list, model, SPHERE, ft_create_trgb(0,255,255*0.2,255));	
+	ft_add_obj(&o_list, model, SPHERE, ft_create_trgb(0,255,255*0.2,255*0.2));	
 	while (k < 20)
 	{
+		//o_list->material.ambient = 0.5;
+		//o_list->material.diffuse = 0.5;
+		//o_list->material.specular = 0.5;
 		o_list->material.ambient = k * 0.05;
 		o_list->material.diffuse = k * 0.05;
 		o_list->material.specular = k * 0.05;
-		//o_list->material.shininess -= 1;
+		o_list->material.shininess -= 1;
 		while (y < HEIGHT)
 		{
 			y_world = HEIGHT / 2 - y;
@@ -52,15 +55,13 @@ int main(void)
 					t_tuple direction2;
 					t_tuple eye;
 					t_tuple normal;
-					int color = ft_get_hit_color(i_list, o_list);
-
 					direction2 = r.direction;
 					ft_scalar_mult(&direction2, ft_get_hit(i_list)->inter_point, VECTOR);
 					h_point = ft_add_tuples(r.origin, direction2);
 					normal = ft_sp_normal_at(*(t_sphere*)o_list->obj_struct, h_point);
 					eye = ft_negate_tuple(ft_normalize(direction2));
-					double l =  ft_lighting(o_list->material, light, h_point, eye, normal);
-					ft_mlx_pixel_put(&canvas, x, y, ft_create_trgb(0, ft_get_r(color) * l,ft_get_g(color)*l, ft_get_b(color)*l));
+					ft_mlx_pixel_put(&canvas, x, y, \
+						ft_lighting(o_list->material, light, h_point, eye, normal));
 				}
 				i_list = NULL;
 				x ++;

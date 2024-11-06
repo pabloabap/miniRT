@@ -40,6 +40,14 @@ typedef enum e_elemet_type
 	COLOR
 }	t_element_type;
 
+typedef enum e_light_types
+{
+	EFECTIVE_COLOR,
+	AMBIENT,
+	DIFFUSE,
+	SPECULAR
+}	t_light_types;
+
 typedef struct s_canvas
 {
 	void			*mlx_init;
@@ -123,13 +131,13 @@ typedef struct s_sphere
 typedef struct s_plane
 {
 	t_tuple	origin;
-	t_tuple	nrm_vector;
+	t_tuple	nrm_vector; //Rango [-1, 1]
 }	t_plane;
 
 typedef struct s_cylinder
 {
 	t_tuple	origin;
-	t_tuple	nrm_vector;
+	t_tuple	nrm_vector;//Rango [-1, 1]
 	double	diameter;
 	double	height;
 }	t_cylinder;
@@ -168,6 +176,13 @@ typedef struct s_point_light
 	t_tuple	position;
 	double	brightness;
 }	t_point_light;
+
+typedef struct s_camera
+{
+	t_tuple	position_p;
+	t_tuple	orientation_v; //Rango[-1, 1]
+	int		fov; //[0, 180]
+}	t_camera;
 
 /** 
  * Estructura que contiene todos los elementos de la escena
@@ -260,7 +275,7 @@ int				ft_get_hit_color(t_ray_inters *i_list, t_oitem *o_list);
 
 //___LIGHT & SHADING
 
-double			ft_lighting(t_material material, t_point_light light, \
+int				ft_lighting(t_material material, t_point_light light, \
 					t_tuple point, t_tuple eyev, t_tuple normalv);
 t_tuple			ft_sp_normal_at(t_sphere sp, t_tuple surface_point);
 t_tuple			ft_reflection_vector(t_tuple in, t_tuple normal);

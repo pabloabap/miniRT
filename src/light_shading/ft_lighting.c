@@ -3,10 +3,16 @@
 #include "../../include/mini_rt.h"
 
 static t_tuple	ft_normalize_color(int color);
+static int		ft_final_color(t_tuple ambt, t_tuple diff, t_tuple spec, \
+	double color);
+static void		ft_default_light_values(t_tuple *light_types, \
+	t_material material, t_point_light light);
+static void 	ft_specular_reflection(t_point_light light, \
+	t_tuple *specular_light, double	reflect_dot_eye, t_material material);
 
 /** 
  * Funcion de alumbrado del modelo de reflexión de Phong
- * @param	material `atributo de las estructuras `t_oitem` con información de 
+ * @param	material atributo de las estructuras `t_oitem` con información de 
  * 	color y luminosidad del objeto
  * @param	light Estructura `t_point_light` con información de la ubicación y 
  * 	el ratio de brillo de de un punto de luz.
@@ -15,50 +21,48 @@ static t_tuple	ft_normalize_color(int color);
  * 	del punto de vista.
  * @param	normalv Vector normal, perpendicular al punto de impacto en el 
  * 	objeto.
- * @return Retornar el ratio de intensidad a aplicar al color base del punto
+ * @return Retornar el color con los ratios de intensidad aplicados del punto
  *  de impacto.
  */
-double	ft_lighting(t_material material, t_point_light light, t_tuple point, t_tuple eyev, t_tuple normalv)
+int	ft_lighting(t_material material, t_point_light light, t_tuple point, \
+	t_tuple eyev, t_tuple normalv)
 {
-	t_tuple	efective_color;
+	t_tuple light_types[4];
 	t_tuple	lightv;
-	t_tuple	ambient;
-	t_tuple	diffuse;
-	t_tuple	specular;
 	double	light_dot_normal;
 	t_tuple reflectv;
 	double	reflect_dot_eye;
 
-	efective_color = ft_normalize_color(material.color);
-	ft_scalar_mult(&efective_color, light.brightness, COLOR);
 	lightv = ft_normalize(ft_sub_tuples(light.position, point));
-	ambient = efective_color;
-	ft_scalar_mult(&ambient,  material.ambient, COLOR);
 	light_dot_normal = ft_dot(lightv, normalv);
-	if (light_dot_normal < 0)
+	ft_default_light_values(&(*light_types), material, light);
+	if(light_dot_normal >= 0)
 	{
-		diffuse = ft_normalize_color(ft_create_trgb(0, 0, 0, 0)); //Black
-		specular = ft_normalize_color(ft_create_trgb(0, 0, 0, 0)); //Black
-	}
-	else
-	{
-		diffuse = efective_color;
-		ft_scalar_mult(&diffuse,  material.diffuse * light_dot_normal, COLOR);
+		light_types[DIFFUSE] = light_types[EFECTIVE_COLOR];
+		ft_scalar_mult(&(light_types[DIFFUSE]), \
+			material.diffuse * light_dot_normal, COLOR);
 		reflectv = ft_reflection_vector(ft_negate_tuple(lightv), normalv);
 		reflect_dot_eye = ft_dot(reflectv, eyev);
-		if (reflect_dot_eye <= 0)
-			specular = ft_normalize_color(ft_create_trgb(0, 0, 0, 0)); //Black
-		else
-		{
-			light.brightness = light.brightness * material.specular * pow(reflect_dot_eye, material.shininess);
-			specular = ft_build_tuple(light.brightness, light.brightness, light.brightness, COLOR);
-		}
+		ft_specular_reflection( light, &(light_types[SPECULAR]), \
+			reflect_dot_eye, material);
 	}
-	ambient = ft_add_tuples(ambient, diffuse);
-	ambient.w = COLOR;
-	ambient = ft_add_tuples(ambient, specular);
-	ambient.w = COLOR;
-	return (ambient.x);
+	return (ft_final_color(light_types[AMBIENT], light_types[DIFFUSE], 
+		light_types[SPECULAR], material.color));
+}
+
+/**
+ * Calcular el valor del reflejo especular en caso de que exista.
+ */
+static void ft_specular_reflection(t_point_light light, \
+	t_tuple *specular_light, double	reflect_dot_eye, t_material material)
+{
+	if (reflect_dot_eye > 0)
+	{
+		light.brightness = light.brightness * material.specular \
+			* pow(reflect_dot_eye, material.shininess);
+		*specular_light = ft_build_tuple(light.brightness, \
+			light.brightness, light.brightness, COLOR);
+	}
 }
 
 /**
@@ -71,4 +75,33 @@ static t_tuple	ft_normalize_color(int color)
 {
 	return (ft_build_tuple(ft_get_r(color) / 255.0, ft_get_g(color) / 255.0, \
 		ft_get_b(color) / 255.0, COLOR));
+}
+
+static int	ft_final_color(t_tuple ambt, t_tuple diff, t_tuple spec, \
+	double color)
+{
+	t_tuple	light_ratio;
+
+	light_ratio = ft_add_tuples(ambt, diff);
+	light_ratio.w = COLOR;
+	light_ratio = ft_add_tuples(light_ratio, spec);
+	light_ratio.w = COLOR;
+	return (ft_create_trgb(0, ft_get_r(color) * light_ratio.x, \
+		ft_get_g(color) * light_ratio.y, ft_get_b(color) * light_ratio.z));
+}
+
+/**
+ * Normaliza los valores del color del objeto, para poder aplicar la 
+ * influencia de la luz en el color del objeto, y define los valores por 
+ * defecto de las distintasluces (ambiente, difusa y especular).
+ */
+static void	ft_default_light_values(t_tuple *light_types, \
+	t_material material, t_point_light light)
+{
+	light_types[EFECTIVE_COLOR] = ft_normalize_color(material.color);
+	ft_scalar_mult(&(light_types[EFECTIVE_COLOR]), light.brightness, COLOR);
+	light_types[AMBIENT] = light_types[EFECTIVE_COLOR];
+	ft_scalar_mult(&(light_types[AMBIENT]), material.ambient, COLOR);
+	light_types[DIFFUSE] = ft_normalize_color(ft_create_trgb(0, 0, 0, 0));
+	light_types[SPECULAR] = ft_normalize_color(ft_create_trgb(0, 0, 0, 0));
 }
