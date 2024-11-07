@@ -15,7 +15,7 @@
 
 # define WIDTH 500
 # define HEIGHT 500
-# define BUFFER_SIZE 100
+# define BUFFER_SIZE 25
 
 # include <sys/types.h>	//open
 # include <sys/stat.h>	//open
@@ -27,6 +27,7 @@
 # include <math.h>		//math
 # include "../lib/minilibx-linux/mlx.h"
 # include "../lib/libft/libft.h"
+
 
 typedef enum e_coor
 {
@@ -193,6 +194,7 @@ typedef struct s_point_light
 {
 	t_tuple	position;
 	double	brightness;
+	int		color;
 }	t_point_light;
 
 typedef struct s_camera
@@ -201,6 +203,12 @@ typedef struct s_camera
 	t_tuple	orientation_v; //Rango[-1, 1]
 	int		fov; //[0, 180]
 }	t_camera;
+
+typedef struct s_ambient
+{
+    double  ratio;
+    int     color;
+}   t_ambient;
 
 /** 
  * Estructura que contiene todos los elementos de la escena
@@ -214,9 +222,7 @@ typedef struct s_scene
 	t_canvas		*canvas;
 	int				z_wall; //Pared final donde se reflejaran los objetos
 	t_camera		camera;
-	/** Pendiente de confirmación
-	 * t_ambient_light	ambient_ligh;
-	 */
+	t_ambient		ambient_light;
 }	t_scene;
 
 // ___MLX___
@@ -332,4 +338,5 @@ void			ft_print_tuple(t_tuple t);
 void			ft_fill_matrix(t_matrix *m, char *arr);
 void			ft_print_i_list(t_ray_inters *i_list);
 
+# include "parsing.h"
 #endif

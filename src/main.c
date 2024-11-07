@@ -12,7 +12,37 @@
 
 #include "../include/mini_rt.h"
 
-int	main(void)
+t_scene	*scene_init(void)
+{
+	t_scene	*s;
+
+	s = malloc(sizeof(t_scene));
+	if (!s)
+		return (NULL);
+	//s->camera = NULL;
+	s->canvas = NULL;
+	//s->light = NULL;
+	s->objs_list = NULL;
+	s->rays_inter_list = NULL;
+	s->z_wall = 100;
+	return (s);
+}
+
+int main(void)
+{
+	t_scene	*scene;
+	char	*path = "./scenes/test.rt";
+
+	scene = scene_init();
+	if (!scene)
+		return (perror("Scene initialization: "), EXIT_FAILURE);
+	if (!read_scene(path, scene))
+		return (EXIT_FAILURE);
+	
+	return (0);
+}
+/* 
+ int	main(void)
 {
 	t_scene		*scene;
 	t_omodel	model;
@@ -33,4 +63,4 @@ int	main(void)
 		scene->canvas->mlx_win, scene->canvas->img, 0, 0);
 	sleep(10);
 	return (0);
-}
+}  */

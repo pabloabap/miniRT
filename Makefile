@@ -14,7 +14,8 @@ CFLAGS		= -Wall -Wextra -Werror
 MLXFLAGS	= -L$(DIR_MLX) -lmlx -lXext -lX11
 LIBFT		= -L$(DIR_LIBFT) -lft
 
-INCLUDE		= -Iinclude -I$(DIR_LIBFT) -I$(DIR_MLX)
+HEADER_DIR = ./include
+INCLUDE		= -I$(HEADER_DIR) -I$(DIR_LIBFT) -I$(DIR_MLX)
 
 MAIN		= ./src/main.c
 
@@ -64,7 +65,10 @@ SRCS		=	$(MAIN) \
 				./src/utils/ft_tuple_to_matrix.c \
 				./src/utils/ft_utils.c \
 				./src/utils/general_op.c \
-				./src/utils/vec_op.c
+				./src/utils/vec_op.c \
+				./src/parsing/parsing.c \
+				./src/parsing/parsing_objs.c \
+				./src/parsing/parsing_utils.c
 
 				
 #Object files
@@ -83,6 +87,7 @@ DIR_MATRIX_INVERT = ./src/matrix/invert/
 DIR_MATRIX_TRANSFORMATIONS = ./src/matrix/transformations/
 DIR_RAY_INTERSECTIONS = ./src/ray_intersections/
 DIR_UTILS = ./src/utils/
+DIR_PARSING = ./src/parsing/
 
 all: libft mlx $(NAME)
 
@@ -119,7 +124,9 @@ $(DIR_OBJS)%.o: $(DIR_LIGHT_SHADING)%.c $(HEADERS) Makefile | $(DIR_OBJS)
 	$(CC) -c $(CFLAGS) $(INCLUDE) $< -o $@
 
 $(DIR_OBJS)%.o: $(DIR_GNL)%.c $(HEADERS) Makefile | $(DIR_OBJS)
+	$(CC) -c $(CFLAGS) $(INCLUDE) $< -o $@
 
+$(DIR_OBJS)%.o: $(DIR_PARSING)%.c $(HEADERS) Makefile | $(DIR_OBJS)
 	$(CC) -c $(CFLAGS) $(INCLUDE) $< -o $@
 
 $(DIR_OBJS)%.o: $(MAIN) $(HEADERS) Makefile | $(DIR_OBJS)
@@ -137,7 +144,7 @@ clean:
 	make clean -C $(DIR_LIBFT)
 	
 fclean: clean
-	rm miniRT
+	rm -rf miniRT
 	make fclean -C $(DIR_LIBFT)
 
 re: fclean all

@@ -36,8 +36,7 @@ int	ft_add_obj(t_oitem **o_list, t_omodel o_to_add, int o_type, int color)
 	status = EXIT_SUCCESS;
 	tmp = *o_list;
 	new = (t_oitem *)malloc(sizeof (t_oitem));
-	if (NULL == new \
-		|| EXIT_FAILURE == ft_fill_new_obj(new, o_to_add, o_type, color))
+	if (!new || ft_fill_new_obj(new, o_to_add, o_type, color))
 		status = EXIT_FAILURE;
 	else if (NULL == *o_list)
 		*o_list = new;
@@ -74,6 +73,10 @@ static int	ft_fill_new_obj(t_oitem *new, t_omodel o_to_add, int o_type, \
 	new->next = NULL;
 	if (SPHERE == o_type)
 		status = ft_add_sphere(&(new->obj_struct), o_to_add.sp);
+	if (PLANE == o_type)
+		status = 1;
+	if (CYLINDER == o_type)
+		status = 1;
 	return (status);
 }
 
