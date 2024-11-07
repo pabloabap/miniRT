@@ -1,4 +1,14 @@
-//CABECERA
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_add_inters_sorted.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pabad-ap <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/06 10:20:03 by pabad-ap          #+#    #+#             */
+/*   Updated: 2024/11/07 15:34:21 by pabad-ap         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../include/mini_rt.h"
 
@@ -49,7 +59,7 @@ static int	ft_build_new_inters(t_ray_inters **new, double inter_point, \
 {
 	*new = (t_ray_inters *)malloc(sizeof(t_ray_inters));
 	if (NULL == new)
-		exit(100); //return (EXIT_FAILURE);
+		return (EXIT_FAILURE);
 	(*new)->inter_point = inter_point;
 	(*new)->obj_id = obj_id;
 	(*new)->hit = 0;

@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_material.c                                      :+:      :+:    :+:   */
+/*   ft_lst_inters_item.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pabad-ap <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/06 10:29:17 by pabad-ap          #+#    #+#             */
-/*   Updated: 2024/11/06 10:29:20 by pabad-ap         ###   ########.fr       */
+/*   Created: 2024/11/07 15:21:10 by pabad-ap          #+#    #+#             */
+/*   Updated: 2024/11/07 15:21:44 by pabad-ap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/mini_rt.h"
 
-/** Pendiente de completar. Son atributos de un objeto
- * para calcular como le afecta la luz.
+/** Recorre la lista de intersecciones y devuelve la 
+ * ultima.
+ * @param inter_head Puntero al primer elemento de la lista
+ * @return Puntero al ultimo elemento de la lista.
  */
-t_material	ft_default_material(int color)
+t_inters	*ft_lst_inters_item(t_inters *inter_head)
 {
-	t_material	m;
-
-	m.color = color;
-	m.ambient = 0.0;
-	m.diffuse = 0.0;
-	m.specular = 0.0;
-	m.shininess = 200.0;
-	return (m);
+	while (inter_head->next)
+		inter_head = inter_head->next;
+	return (inter_head);
 }
