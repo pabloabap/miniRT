@@ -48,7 +48,6 @@ SRCS		=	$(MAIN) \
 				./src/ray_intersections/ft_identify_hit.c \
 				./src/ray_intersections/ft_rc_position.c \
 				./src/ray_intersections/ft_sphere_inters.c \
-				./src/utils/ft_add_item_to_inters_list.c \
 				./src/utils/ft_add_object.c \
 				./src/utils/ft_build_light.c \
 				./src/utils/ft_build_matrix.c \
@@ -56,7 +55,7 @@ SRCS		=	$(MAIN) \
 				./src/utils/ft_build_tuple.c \
 				./src/utils/ft_errors.c \
 				./src/utils/ft_errors2.c \
-				./src/utils/ft_lst_inters_item.c \
+				./src/utils/ft_free_ray_inters_list.c \
 				./src/utils/ft_material.c \
 				./src/utils/ft_matrix_to_tuple.c \
 				./src/utils/ft_prepare_scene.c \

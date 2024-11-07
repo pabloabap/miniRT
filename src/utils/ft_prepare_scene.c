@@ -27,7 +27,6 @@ int	ft_prepare_scence(t_scene **scene)
 	*scene = initialized_scene;
 	(*scene)->light = ft_build_light(ft_build_tuple(30, 30, -10, POINT), 0.4);
 	(*scene)->objs_list = NULL;
-	(*scene)->rays_inter_list = NULL;
 	(*scene)->canvas = NULL;
 	ft_prepare_canvas(&((*scene)->canvas));
 	(*scene)->z_wall = 100;
