@@ -24,15 +24,11 @@ int	main(void)
 		ft_matrix_translation(model.sp.transformations_matrix, 0, 0, 20);
 	ft_add_obj(&(scene->objs_list), model, SPHERE, \
 		ft_create_trgb(0, 255, 255 * 0.2, 255));
-	model.sp = ft_build_sphere(ft_build_tuple(20, 20, 50, POINT), 40);
+	model.sp = ft_build_sphere(ft_build_tuple(0, 0, 10, POINT), 5);
 	model.sp.transformations_matrix = \
-		ft_matrix_translation(model.sp.transformations_matrix, 0, 0, 20);
+		ft_matrix_shearing(model.sp.transformations_matrix, X, Y, 0.9);
 	ft_add_obj(&(scene->objs_list), model, SPHERE, \
 		ft_create_trgb(0, 255, 255 * 0, 255 * 0));
-	scene->objs_list->material.ambient = 0.5;
-	scene->objs_list->material.diffuse = 0.5;
-	scene->objs_list->material.specular = 0.5;
-	scene->objs_list->material.shininess -= 1;
 	ft_render_scene(scene);
 	mlx_put_image_to_window(scene->canvas->mlx_init, \
 		scene->canvas->mlx_win, scene->canvas->img, 0, 0);

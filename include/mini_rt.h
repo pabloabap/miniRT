@@ -13,8 +13,12 @@
 #ifndef MINI_RT_H
 # define MINI_RT_H
 
-# define WIDTH 500
-# define HEIGHT 500
+# ifndef WIDTH
+#  define WIDTH 500
+# endif
+# ifndef HEIGHT
+#  define HEIGHT 500
+# endif
 # define BUFFER_SIZE 100
 
 # include <sys/types.h>	//open
