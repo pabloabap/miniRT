@@ -14,8 +14,12 @@ int		skip_vec(char *line);
 
 
 int read_scene(char *path, t_scene *scene);
+void    print_scene(t_scene *scene);
 
 int set_ambient(char *line, t_scene *scene);
+int set_camera(char *line, t_scene *scene);
+int set_light(char *line, t_scene *scene);
+
 
 int read_color(char *line);
 int set_rgb(int r, int g, int b);

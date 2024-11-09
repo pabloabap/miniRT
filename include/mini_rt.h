@@ -216,13 +216,13 @@ typedef struct s_ambient
  */
 typedef struct s_scene
 {
-	t_point_light	light;
+	t_point_light	*light;
 	t_oitem			*objs_list;
 	t_inters		*rays_inter_list;
 	t_canvas		*canvas;
 	int				z_wall; //Pared final donde se reflejaran los objetos
-	t_camera		camera;
-	t_ambient		ambient_light;
+	t_camera		*camera;
+	t_ambient		*ambient_light;
 }	t_scene;
 
 // ___MLX___
