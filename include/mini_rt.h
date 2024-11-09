@@ -240,10 +240,8 @@ t_tuple			ft_normalize(t_tuple v);
 double			ft_dot(t_tuple v1, t_tuple v2);
 t_tuple			ft_cross(t_tuple v1, t_tuple v2);
 
-//___TRANSFORMACIONES DE PUNTO Y VECTORES___
+//___MATRICES DE TRANSFORMACION___
 
-t_matrix		ft_tuple_to_matrix(t_tuple tuple);
-t_tuple			ft_matrix_to_tuple(t_matrix tuple);
 t_matrix		ft_matrix_translation(t_matrix m, double x, double y, double z);
 t_matrix		ft_matrix_inverse_translation(t_matrix m, double x, double y, \
 					double z);
@@ -257,6 +255,8 @@ t_matrix		ft_matrix_shearing(t_matrix m, int axis, int over_axis, \
 					double val);
 t_matrix		ft_matrix_inverse_shearing(t_matrix m, int axis, int over_axis, \
 					double val);
+t_matrix		ft_matrix_view_transform(t_tuple from_p, t_tuple to_p, \
+	t_tuple up_v);
 
 //___OPERACIONES CON MATRICES___
 
@@ -306,6 +306,8 @@ int				ft_add_obj(t_oitem **o_list, t_omodel o_to_add, int o_type, \
 t_material		ft_default_material(int color);
 int				ft_render_scene(t_scene *scene);
 int				ft_prepare_scence(t_scene **scene);
+t_matrix		ft_tuple_to_matrix(t_tuple tuple);
+t_tuple			ft_matrix_to_tuple(t_matrix tuple);
 
 //___GNL___
 

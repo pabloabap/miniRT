@@ -41,6 +41,7 @@ SRCS		=	$(MAIN) \
 				./src/matrix/transformations/ft_matrix_scalation.c \
 				./src/matrix/transformations/ft_matrix_shearing.c \
 				./src/matrix/transformations/ft_matrix_translations.c \
+				./src/matrix/transformations/ft_matrix_view_transform.c \
 				./src/ray_intersections/ft_add_inters_sorted.c \
 				./src/ray_intersections/ft_get_hit_color.c \
 				./src/ray_intersections/ft_get_hit.c \

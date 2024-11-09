@@ -25,7 +25,8 @@ int	ft_prepare_scence(t_scene **scene)
 	if (NULL == initialized_scene)
 		return (EXIT_FAILURE);
 	*scene = initialized_scene;
-	(*scene)->light = ft_build_light(ft_build_tuple(-100, 100, -10, POINT), 0.9);
+	(*scene)->light = \
+		ft_build_light(ft_build_tuple(-100, 100, -10, POINT), 0.9);
 	(*scene)->objs_list = NULL;
 	(*scene)->canvas = NULL;
 	ft_prepare_canvas(&((*scene)->canvas));

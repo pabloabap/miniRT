@@ -91,18 +91,20 @@ static int	ft_process_pixel(int *canvas_axis, int *world_axis, \
 static int	ft_detect_ray_inters(t_oitem *o_list, t_ray_inters **i_list, \
 	t_ray ray)
 {
-	int	status;
-	t_ray tmp;
+	int		status;
+	t_ray	tmp;
 
 	status = EXIT_SUCCESS;
 	while (EXIT_SUCCESS == status && o_list)
 	{
 		tmp = ray;
 		tmp.origin = ft_matrix_to_tuple(ft_matrix_mult(\
-				ft_inverse_matrix(&((t_sphere *)(o_list->obj_struct))->transformations_matrix), \
+				ft_inverse_matrix(\
+				&((t_sphere *)(o_list->obj_struct))->transformations_matrix), \
 				ft_tuple_to_matrix(ray.origin)));
 		tmp.direction = ft_matrix_to_tuple(ft_matrix_mult(\
-				ft_inverse_matrix(&((t_sphere *)(o_list->obj_struct))->transformations_matrix), \
+				ft_inverse_matrix(\
+				&((t_sphere *)(o_list->obj_struct))->transformations_matrix), \
 				ft_tuple_to_matrix(ray.direction)));
 		ft_sphere_inters(tmp, *(o_list), i_list);
 		o_list = o_list->next;

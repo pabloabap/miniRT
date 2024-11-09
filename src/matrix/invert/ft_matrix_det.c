@@ -17,7 +17,8 @@ static double	ft_process_matrix(t_matrix m, int r, int *c);
 /**
  * Calcula el determinante de la matriz `m` por adjuntos. 
  * `r`y `c` se utilizan para descartar filas y columnas
- * correspondientes en cada operación recursiva.
+ * correspondientes en cada operación recursiva. 
+ * Al llamar a la funcion desde el programa poner los argumentos `r` y `c` a 0.
  * @return Determinante de la matriz.
  */
 double	ft_matrix_det(t_matrix m, int r, int c)

@@ -12,6 +12,20 @@
 
 #include "../include/mini_rt.h"
 
+// Main de testings operaciones making scene
+int	main(void)
+{
+	ft_print_matrix(\
+		ft_matrix_view_transform(\
+			ft_build_tuple(1, 3, 2, POINT), \
+			ft_build_tuple(4, -2, 8, POINT), \
+			ft_build_tuple(1, 1, 0, VECTOR) \
+		));
+	return (0);
+}
+
+/*
+____MAIN UTILIZADO PARA EL PROGRAMA FINAL___
 int	main(void)
 {
 	t_scene		*scene;
@@ -34,4 +48,4 @@ int	main(void)
 		scene->canvas->mlx_win, scene->canvas->img, 0, 0);
 	sleep(10);
 	return (0);
-}
+}*/
