@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_material.c                                      :+:      :+:    :+:   */
+/*   ft_free_ray_inters_list.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pabad-ap <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/06 10:29:17 by pabad-ap          #+#    #+#             */
-/*   Updated: 2024/11/06 10:29:20 by pabad-ap         ###   ########.fr       */
+/*   Created: 2024/11/07 19:06:45 by pabad-ap          #+#    #+#             */
+/*   Updated: 2024/11/07 19:07:28 by pabad-ap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/mini_rt.h"
 
-/** Pendiente de completar. Son atributos de un objeto
- * para calcular como le afecta la luz.
+/** 
+ * Libera la memoria dinamica alojada para almacenar la lista de intersecciones
+ * de un rayo.
+ * @param list_head Lista de intersecciones de un rayo.
+ * @return Nada, libera la memoria a traves del puntero.
  */
-t_material	ft_default_material(int color)
+void	ft_free_ray_inters_list(t_ray_inters *list_head)
 {
-	t_material	m;
+	t_ray_inters	*tmp;
 
-	m.color = color;
-	m.ambient = 0.5;
-	m.diffuse = 0.9;
-	m.specular = 0.9;
-	m.shininess = 100.0;
-	return (m);
+	tmp = list_head;
+	while (tmp)
+	{
+		tmp = tmp->next;
+		free(list_head);
+		list_head = tmp;
+	}
 }

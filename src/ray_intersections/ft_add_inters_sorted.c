@@ -33,12 +33,12 @@ int	ft_add_inters_sorted(t_ray_inters **i_list, double inter_point, \
 	t_ray_inters	*tmp;
 	t_ray_inters	*new;
 
-	tmp = *i_list;
 	ft_build_new_inters(&new, inter_point, obj_id);
 	if (*i_list == NULL)
 		*i_list = new;
 	else
 	{
+		tmp = *i_list;
 		while (tmp->next && inter_point > tmp->inter_point)
 			tmp = tmp->next;
 		ft_i_list_update(i_list, tmp, new);

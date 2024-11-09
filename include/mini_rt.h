@@ -13,8 +13,12 @@
 #ifndef MINI_RT_H
 # define MINI_RT_H
 
-# define WIDTH 500
-# define HEIGHT 500
+# ifndef WIDTH
+#  define WIDTH 500
+# endif
+# ifndef HEIGHT
+#  define HEIGHT 500
+# endif
 # define BUFFER_SIZE 100
 
 # include <sys/types.h>	//open
@@ -179,16 +183,6 @@ typedef struct s_ray_inters
 	struct s_ray_inters	*next;
 }	t_ray_inters;
 
-/**
- * Estructura que apunta a las intersecciones de todos los rayos, para poder 
- * liberarlos al final del programa.
- */
-typedef struct s_inters
-{
-	t_ray_inters	*r_i;
-	struct s_inters	*next;
-}	t_inters;
-
 typedef struct s_point_light
 {
 	t_tuple	position;
@@ -210,7 +204,6 @@ typedef struct s_scene
 {
 	t_point_light	light;
 	t_oitem			*objs_list;
-	t_inters		*rays_inter_list;
 	t_canvas		*canvas;
 	int				z_wall; //Pared final donde se reflejaran los objetos
 	t_camera		camera;
@@ -311,8 +304,6 @@ int				ft_obj_id_assignment(void);
 int				ft_add_obj(t_oitem **o_list, t_omodel o_to_add, int o_type, \
 					int color);
 t_material		ft_default_material(int color);
-int				ft_add_item_to_inters_list(t_inters **inter_list);
-t_inters		*ft_lst_inters_item(t_inters *inter_head);
 int				ft_render_scene(t_scene *scene);
 int				ft_prepare_scence(t_scene **scene);
 
@@ -324,6 +315,7 @@ char			*ft_gnl_strjoin(char *s1, char *s2);
 char			*ft_gnl_strchr(const char *s, int c);
 char			*ft_gnl_substr(char const *s, unsigned int start, size_t len);
 char			*ft_gnl_strdup(char *s1);
+void			ft_free_ray_inters_list(t_ray_inters *list_head);
 
 // ___DEBUGING___
 
