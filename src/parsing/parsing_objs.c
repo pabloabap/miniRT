@@ -52,6 +52,29 @@ int set_light(char *line, t_scene *scene)
     return (EXIT_SUCCESS);
 }
 
+/*
+typedef struct s_oitem
+{
+	int				obj_id;
+	int				obj_type;
+	t_material		material;
+	void			*obj_struct;
+	struct s_oitem	*prev;
+	struct s_oitem	*next;
+}	t_oitem;
+
+typedef struct s_scene
+{
+	t_point_light	*light;
+	t_oitem			*objs_list;
+	t_inters		*rays_inter_list;
+	t_canvas		*canvas;
+	int				z_wall; //Pared final donde se reflejaran los objetos
+	t_camera		*camera;
+	t_ambient		*ambient_light;
+}	t_scene;
+*/
+
 int set_sphere(char *line, t_scene *scene)
 {
     t_sphere    *sphere;
@@ -68,6 +91,6 @@ int set_sphere(char *line, t_scene *scene)
     sphere->radius = ft_atod(&line[i]);
     i += skip_num(&line[i]);
     color = read_color(&line[i]);
-    ft_add_obj(&obj,)
+    //ft_add_obj(&obj,)
     return (EXIT_SUCCESS);
 }

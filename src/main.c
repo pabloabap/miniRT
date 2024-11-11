@@ -36,7 +36,7 @@ int main(void)
 	scene = scene_init();
 	if (!scene)
 		return (perror("Scene initialization: "), EXIT_FAILURE);
-	if (!read_scene(path, scene))
+	if (read_scene(path, scene))
 		return (EXIT_FAILURE);
 	
 	return (0);

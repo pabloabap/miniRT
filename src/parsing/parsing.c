@@ -66,11 +66,43 @@ int read_scene(char *path, t_scene *scene)
     return (EXIT_SUCCESS);
 }
 
+/* typedef struct s_oitem
+{
+	int				obj_id;
+	int				obj_type;
+	t_material		material;
+	void			*obj_struct;
+	struct s_oitem	*prev;
+	struct s_oitem	*next;
+}	t_oitem; */
+
+
+void    print_objs(t_oitem *o_lst)
+{
+    t_oitem     *tmp;
+    t_sphere    *sp;
+
+    tmp = o_lst;
+    while (tmp)
+    {
+        if (tmp->obj_type == SPHERE)
+        {
+            sp = (t_sphere *)tmp->obj_struct;
+            sp->
+            printf("sp:\tpos:[%f, %f, %f]\trad: %f\tcolor:[%d, %d, %d]\tobj_id: %d\n", )
+            
+        }
+
+        tmp = tmp->next;
+    }
+
+}
+
 void    print_scene(t_scene *scene)
 {
     if (scene->ambient_light)
     {
-        printf("AMBIENT:\tratio: %f\tcolor:[%d, %d, %d]\n", 
+        printf("A:\tratio: %f\tcolor:[%d, %d, %d]\n", 
                 scene->ambient_light->ratio, 
                 get_red(scene->ambient_light->color), 
                 get_green(scene->ambient_light->color), 
@@ -78,7 +110,7 @@ void    print_scene(t_scene *scene)
     }
     if (scene->camera)
     {
-        printf("CAMERA:\tposition [%f, %f, %f]\torientation:[%f, %f, %f]\tfov:%d\n",
+        printf("C:\tposition [%f, %f, %f]\torientation:[%f, %f, %f]\tfov:%d\n",
             scene->camera->position_p.x,
             scene->camera->position_p.y,
             scene->camera->position_p.z,
@@ -89,7 +121,7 @@ void    print_scene(t_scene *scene)
     }
     if (scene->light)
     {
-        printf("LIGHT:\tposition [%f, %f, %f]\tratio:%f\tcolor:[%d, %d, %d]\n",
+        printf("L:\tposition [%f, %f, %f]\tratio:%f\tcolor:[%d, %d, %d]\n",
             scene->light->position.x,
             scene->light->position.y,
             scene->light->position.z,
@@ -97,6 +129,10 @@ void    print_scene(t_scene *scene)
             get_red(scene->light->color),
             get_green(scene->light->color),
             get_blue(scene->light->color));
+    }
+    if (scene->objs_list)
+    {
+
     }
 
 }

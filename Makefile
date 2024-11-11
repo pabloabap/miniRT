@@ -106,6 +106,9 @@ fclean: clean
 
 re: fclean all
 
+do:
+	./miniRT
+
 .PHONY: all clean fclean re libft mlx
 
 OTHERS = ./debug/ft_fill_matrix.c \
