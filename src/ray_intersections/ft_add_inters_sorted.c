@@ -13,7 +13,7 @@
 #include "../../include/mini_rt.h"
 
 static int	ft_build_new_inters(t_ray_inters **new, double inter_point, \
-	int obj_id);
+	t_oitem *obj);
 static void	ft_i_list_update(t_ray_inters **i_list, t_ray_inters *tmp, \
 	t_ray_inters *new);
 
@@ -24,16 +24,16 @@ static void	ft_i_list_update(t_ray_inters **i_list, t_ray_inters *tmp, \
  * @param i_list Doble puntero al primer elemento de la lista para
  * 	recorrerla y actualizar el puntero en caso de necesitarlo.
  * @param inter_point Punto de intersección del rayo y el objeto.
- * @param obj_id ID del objeto que ha sido impactado.
+ * @param obj Puntero al objeto que ha sido impactado.
  * @return Entero con el resultado de salida de la función.
  */
 int	ft_add_inters_sorted(t_ray_inters **i_list, double inter_point, \
-	int obj_id)
+	t_oitem *obj)
 {
 	t_ray_inters	*tmp;
 	t_ray_inters	*new;
 
-	ft_build_new_inters(&new, inter_point, obj_id);
+	ft_build_new_inters(&new, inter_point, obj);
 	if (*i_list == NULL)
 		*i_list = new;
 	else
@@ -51,17 +51,17 @@ int	ft_add_inters_sorted(t_ray_inters **i_list, double inter_point, \
  * lista de intersecciones.
  * @param new Doble puntero a `t_ray_inters` para darle contenido.
  * @param inter_point Punto de intersección del rayo y el objeto.
- * @param obj_id ID del objeto que ha sido impactado.
+ * @param obj Puntero al objeto que ha sido impactado.
  * @return Entero con el resultado de salida de la función.
  */
 static int	ft_build_new_inters(t_ray_inters **new, double inter_point, \
-	int obj_id)
+	t_oitem *obj)
 {
 	*new = (t_ray_inters *)malloc(sizeof(t_ray_inters));
 	if (NULL == new)
 		return (EXIT_FAILURE);
 	(*new)->inter_point = inter_point;
-	(*new)->obj_id = obj_id;
+	(*new)->obj = obj;
 	(*new)->hit = 0;
 	(*new)->prev = NULL;
 	(*new)->next = NULL;

@@ -31,7 +31,6 @@ t_matrix	ft_matrix_view_transform(t_tuple from_p, t_tuple to_p, \
 	t_matrix	view_transform;
 
 	view_transform = ft_build_orientation_matrix(from_p, to_p, up_v);
-	ft_print_matrix(view_transform);
 	return (ft_matrix_mult(view_transform, \
 		ft_matrix_translation(ft_identity_matrix(4, 4), -from_p.x, -from_p.y, \
 		-from_p.z)));

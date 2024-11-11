@@ -12,12 +12,13 @@
 
 #include "../../include/mini_rt.h"
 
-static int	ft_process_pixel(int	*canvas_axis, int *world_axis, \
+static int			ft_process_pixel(int	*canvas_axis, int *world_axis, \
 	t_scene *scene, t_ray ray);
-static int	ft_detect_ray_inters(t_oitem *o_list, t_ray_inters **i_list, \
-	t_ray ray);
-static int	ft_scene_lighting(t_ray ray, t_ray_inters *ray_inters, \
+static int			ft_detect_ray_inters(t_oitem *o_list, \
+	t_ray_inters **i_list, t_ray ray);
+static int			ft_scene_lighting(t_ray ray, t_ray_inters *ray_inters, \
 	t_scene *scene, int *canvas_axis);
+static t_pre_comp	ft_prepare_computation(t_ray ray, t_ray_inters *inters);
 
 /**
  * Procesa los datos de los objetos para dibujar la imagen.
@@ -106,7 +107,7 @@ static int	ft_detect_ray_inters(t_oitem *o_list, t_ray_inters **i_list, \
 				ft_inverse_matrix(\
 				&((t_sphere *)(o_list->obj_struct))->transformations_matrix), \
 				ft_tuple_to_matrix(ray.direction)));
-		ft_sphere_inters(tmp, *(o_list), i_list);
+		ft_sphere_inters(tmp, o_list, i_list);
 		o_list = o_list->next;
 	}
 	return (status);
@@ -125,22 +126,49 @@ static int	ft_detect_ray_inters(t_oitem *o_list, t_ray_inters **i_list, \
 static int	ft_scene_lighting(t_ray ray, t_ray_inters *inters, \
 	t_scene *scene, int *canvas_axis)
 {
-	t_tuple			h_point;
-	t_tuple			inters_vecs[4];
-	t_oitem			*h_obj;
+	t_pre_comp		comps;
 
 	if (ft_identify_hit(inters))
 	{
-		h_obj = ft_get_hitted_obj(inters, scene->objs_list);
-		ft_scalar_mult(&(ray.direction), ft_get_hit(inters)->inter_point, \
-			VECTOR);
-		h_point = ft_add_tuples(ray.origin, ray.direction);
-		inters_vecs[NORMAL_V] = \
-			ft_sp_normal_at(*(t_sphere *)(h_obj->obj_struct), h_point);
-		inters_vecs[EYE_V] = ft_negate_tuple(ft_normalize(ray.direction));
+		comps = ft_prepare_computation(ray, inters);
 		ft_mlx_pixel_put(scene->canvas, canvas_axis[X], canvas_axis[Y], \
-			ft_lighting(h_obj->material, scene->light, h_point, \
-			&(*inters_vecs)));
+			ft_lighting(comps.obj->material, scene->light, comps.hit_point, \
+			&(*(comps.inters_vecs))));
 	}
 	return (EXIT_SUCCESS);
+}
+
+/**
+ * Rellena los datos de la estructura `t_pre_comp` para optimizar los tiempos
+ * de renderizado.
+ * @param ray Estructura con origen de la camara y dirección del rayo a 
+ * 	computar.
+ * @param inters Lista de intersecciones del rayo.
+ * @return Estructura `t_pre_comp`rellena con los datos necesarios para 
+ * 	optimizar tiempos de renderizado.
+ */
+static t_pre_comp	ft_prepare_computation(t_ray ray, t_ray_inters *inters)
+{
+	t_pre_comp		comps;
+	t_ray_inters	*hitted;
+
+	hitted = ft_get_hit(inters);
+	comps.inter_point = hitted->inter_point;
+	comps.obj = hitted->obj;
+	ft_scalar_mult(&(ray.direction), hitted->inter_point, \
+			VECTOR);
+	comps.hit_point = ft_add_tuples(ray.origin, ray.direction);
+	comps.inters_vecs[NORMAL_V] = \
+			ft_sp_normal_at(*(t_sphere *)(hitted->obj->obj_struct), \
+				comps.hit_point);
+	comps.inters_vecs[EYE_V] = ft_negate_tuple(ft_normalize(ray.direction));
+	if (0.0 > ft_dot(comps.inters_vecs[NORMAL_V], comps.inters_vecs[EYE_V]))
+	{
+		comps.inters_vecs[NORMAL_V] = \
+			ft_negate_tuple(comps.inters_vecs[NORMAL_V]);
+		comps.inside_flag = 1;
+	}
+	else
+		comps.inside_flag = 0;
+	return (comps);
 }

@@ -19,18 +19,18 @@ static void		ft_fill_v(t_ray ray, t_sphere sp, double *v);
  * Añade los puntos de intersección del rayo `ray` con la esfera `sphere`
  * en la lista `i_list`.
  */
-void	ft_sphere_inters(t_ray ray, t_oitem sphere, t_ray_inters **i_list)
+void	ft_sphere_inters(t_ray ray, t_oitem *sphere, t_ray_inters **i_list)
 {
 	double	v[3];
 	double	tan[2];
 
-	ft_fill_v(ray, *(t_sphere *)(sphere.obj_struct), &v[0]);
+	ft_fill_v(ray, *(t_sphere *)(sphere->obj_struct), &v[0]);
 	tan[0] = (-v[1] - sqrt(ft_discriminant(&v[0]))) / (2 * v[0]);
 	tan[1] = (-v[1] + sqrt(ft_discriminant(&v[0]))) / (2 * v[0]);
 	if (!isnan(tan[0]))
-		ft_add_inters_sorted(i_list, tan[0], sphere.obj_id);
+		ft_add_inters_sorted(i_list, tan[0], sphere);
 	if (!isnan(tan[1]))
-		ft_add_inters_sorted(i_list, tan[1], sphere.obj_id);
+		ft_add_inters_sorted(i_list, tan[1], sphere);
 }
 
 /**

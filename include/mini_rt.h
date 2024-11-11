@@ -177,12 +177,28 @@ typedef union u_model
 typedef struct s_ray_inters
 {
 	double				inter_point;
-	int					obj_id;
+	t_oitem				*obj;
 	int					hit;
 	struct s_ray_inters	*prev;
 	struct s_ray_inters	*next;
 }	t_ray_inters;
 
+/**
+ * Estructura para pre procesar puntos de impacto
+ * para mejorar rendimiento en tiempos de renderizado.
+ */
+typedef struct s_pre_comp
+{
+	double	inter_point;
+	t_oitem	*obj;
+	t_tuple	hit_point;
+	t_tuple	inters_vecs[4];
+	int		inside_flag;
+}	t_pre_comp;
+
+/**
+ * Estructura que contiene los atributos de un punto de luz.
+ */
 typedef struct s_point_light
 {
 	t_tuple	position;
@@ -271,14 +287,14 @@ t_matrix		ft_inverse_matrix(t_matrix *m);
 //___RAYTRACING___
 
 t_tuple			ft_rc_position(t_ray ray, double position);
-void			ft_sphere_inters(t_ray ray, t_oitem sphere, \
+void			ft_sphere_inters(t_ray ray, t_oitem *sphere, \
 					t_ray_inters **i_list);
 int				ft_add_inters_sorted(t_ray_inters **i_list, double inter_point, \
-					int obj_id);
+					t_oitem *obj);
 int				ft_identify_hit(t_ray_inters *i_list);
 t_ray_inters	*ft_get_hit(t_ray_inters *i_list);
-int				ft_get_hit_color(t_ray_inters *i_list, t_oitem *o_list);
-t_oitem			*ft_get_hitted_obj(t_ray_inters *i_list, t_oitem *o_list);
+int				ft_get_hit_color(t_ray_inters *i_list);
+t_oitem			*ft_get_hitted_obj(t_ray_inters *i_list);
 
 //___LIGHT & SHADING
 

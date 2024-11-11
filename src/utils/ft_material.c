@@ -23,6 +23,6 @@ t_material	ft_default_material(int color)
 	m.ambient = 0.5;
 	m.diffuse = 0.9;
 	m.specular = 0.9;
-	m.shininess = 100.0;
+	m.shininess = 1.0;
 	return (m);
 }

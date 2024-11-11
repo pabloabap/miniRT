@@ -7,8 +7,8 @@ void	ft_print_i_list(t_ray_inters *i_list)
 {
 	while (i_list)
 	{
-		printf("====\nHIT: %i, INTER_POINT: %f, OBJ_ID: %i, PREV: %p, NEXT: %p\n", \
-		i_list->hit, i_list->inter_point, i_list->obj_id, i_list->prev, i_list->next);
+		printf("====\nHIT: %i, INTER_POINT: %f, OBJ: %p, PREV: %p, NEXT: %p\n", \
+		i_list->hit, i_list->inter_point, i_list->obj, i_list->prev, i_list->next);
 		i_list = i_list->next;
 	}
 }

@@ -65,11 +65,11 @@ int main(void)
 			t_oitem *tmp = o_list;
 			while (tmp)
 			{
-				ft_sphere_inters(r, *(tmp), &i_list);
+				ft_sphere_inters(r, tmp, &i_list);
 				tmp = tmp->next;
 			}
 			if (1 == ft_identify_hit(i_list))
-				ft_mlx_pixel_put(&canvas, x, y, ft_get_hit_color(i_list, o_list));
+				ft_mlx_pixel_put(&canvas, x, y, ft_get_hit_color(i_list));
 			i_list = NULL;
 			x ++;
 		}

@@ -87,6 +87,17 @@ static t_tuple	ft_normalize_color(int color)
 		ft_get_b(color) / 255.0, COLOR));
 }
 
+/**
+ * Retorna el color final de un pixel tras aplicarle los ratios de luminosidad.
+ * Limitamos los valores de light_ratio a 1, que representa el 100% de 
+ * luminosidad de un color, ya que mlx si pasas un numero por encima de 255 
+ * comienza la diferencia desde cero. Por ejemplo 256 sería 0 257 1...
+ * @param ambt Ratios de luz ambiente a aplicar a cada color.
+ * @param diff Ratios de luz difusa a aplicar a cada color.
+ * @param spec Ratios de luz especular a aplicar a cada color.
+ * @param color Color original del pixel.
+ * @return `int` con el código de color final.
+ */
 static int	ft_final_color(t_tuple ambt, t_tuple diff, t_tuple spec, \
 	double color)
 {
@@ -96,6 +107,12 @@ static int	ft_final_color(t_tuple ambt, t_tuple diff, t_tuple spec, \
 	light_ratio.w = COLOR;
 	light_ratio = ft_add_tuples(light_ratio, spec);
 	light_ratio.w = COLOR;
+	if (light_ratio.x > 1)
+		light_ratio.x = 1;
+	if (light_ratio.y > 1)
+		light_ratio.y = 1;
+	if (light_ratio.z > 1)
+		light_ratio.z = 1;
 	return (ft_create_trgb(0, ft_get_r(color) * light_ratio.x, \
 		ft_get_g(color) * light_ratio.y, ft_get_b(color) * light_ratio.z));
 }
