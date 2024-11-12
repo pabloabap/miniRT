@@ -26,12 +26,12 @@ int	ft_prepare_scence(t_scene **scene)
 		return (EXIT_FAILURE);
 	*scene = initialized_scene;
 	(*scene)->light = \
-		ft_build_light(ft_build_tuple(-60, -60, 0, POINT), 0.6);
+		ft_build_light(ft_build_tuple(-60, 60, 0, POINT), 0.6);
 	(*scene)->objs_list = NULL;
 	(*scene)->canvas = NULL;
 	ft_prepare_canvas(&((*scene)->canvas));
 	(*scene)->z_wall = 100;
-	(*scene)->camera.position_p = ft_build_tuple(0, 0, 0, POINT);
+	(*scene)->camera = ft_build_camera(HEIGHT, WIDTH, 180);
 	return (EXIT_SUCCESS);
 }
 

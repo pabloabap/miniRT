@@ -36,3 +36,31 @@ int	ft_mlx_failure_check(void *p)
 	else
 		return (EXIT_SUCCESS);
 }
+
+/**
+ * Comprueba el tipo de los parametros pasados a la funcion 
+ * `ft_matrix_view_transform` y muestra error en caso de que:
+ * `from_p` o `to_p` no sean POINTS o `up_v` no sea VECTOR.
+ */
+void	ft_matrix_view_transform_check(t_tuple from_p, t_tuple to_p, \
+	t_tuple up_v)
+{
+	if (POINT != from_p.w)
+	{
+		ft_putstr_fd("ERROR - from_p argument of ft_matrix_view_transform", 2);
+		ft_putstr_fd(" function must be a POINT", 2);
+		exit (1);
+	}
+	if (POINT != to_p.w)
+	{
+		ft_putstr_fd("ERROR - to_p argument of ft_matrix_view_transform", 2);
+		ft_putstr_fd(" function must be a POINT", 2);
+		exit (1);
+	}
+	if (VECTOR != up_v.w)
+	{
+		ft_putstr_fd("ERROR - up_v argument of ft_matrix_view_transform", 2);
+		ft_putstr_fd(" function must be a VECTOR", 2);
+		exit (1);
+	}
+}

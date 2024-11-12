@@ -6,18 +6,15 @@
 /*   By: pabad-ap <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 15:16:38 by pabad-ap          #+#    #+#             */
-/*   Updated: 2024/11/07 19:07:16 by pabad-ap         ###   ########.fr       */
+/*   Updated: 2024/11/12 23:15:30 by pabad-ap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/mini_rt.h"
 
-static int			ft_process_pixel(int	*canvas_axis, int *world_axis, \
-	t_scene *scene, t_ray ray);
+static int			ft_color_at(t_ray ray, t_scene *scene, int *canvas_axis);
 static int			ft_detect_ray_inters(t_oitem *o_list, \
-	t_ray_inters **i_list, t_ray ray);
-static int			ft_scene_lighting(t_ray ray, t_ray_inters *ray_inters, \
-	t_scene *scene, int *canvas_axis);
+						t_ray_inters **i_list, t_ray ray);
 static t_pre_comp	ft_prepare_computation(t_ray ray, t_ray_inters *inters);
 
 /**
@@ -28,7 +25,6 @@ static t_pre_comp	ft_prepare_computation(t_ray ray, t_ray_inters *inters);
 int	ft_render_scene(t_scene *scene)
 {
 	int		canvas_axis[2];
-	int		world_axis[2];
 	t_ray	ray;
 
 	ray.origin = scene->camera.position_p;
@@ -36,10 +32,11 @@ int	ft_render_scene(t_scene *scene)
 	canvas_axis[Y] = 0;
 	while (canvas_axis[Y] < HEIGHT)
 	{
-		world_axis[Y] = HEIGHT / 2 - canvas_axis[Y];
 		while (canvas_axis[X] < WIDTH)
 		{
-			ft_process_pixel(&(*canvas_axis), &(*world_axis), scene, ray);
+			ray = ft_ray_for_pixel(scene->camera, canvas_axis[X], \
+					canvas_axis[Y]);
+			ft_color_at(ray, scene, &(*canvas_axis));
 			canvas_axis[X]++;
 		}
 		canvas_axis[X] = 0;
@@ -49,30 +46,28 @@ int	ft_render_scene(t_scene *scene)
 }
 
 /**
- * Realiza las operaciones de renderizado de un pixel.
+ * Aplica los porcentajes de luminosidad al color de un pixel de la escena.
+ * @param ray Rayo con origen en la posicion de la camara y direccion hacia un
+ * 		punto de la escena.
+ * @param scene Estructua con todos los atributos de la escena.
  * @param canvas_axis Array de dos enteros (posicion X e Y de un pixel)
  * 		en la ventana. Siendo el punto (0, 0) la esquina superior izquierda.
- * @param world_axis Array de dos enteros (posicion X e Y de un pixel)
- * 		en el mundo real. Siendo el punto (0, 0) el centro de la imagen.
- * @param	scene Estructua con todos los atributos de la escena.
- * @param	ray Estructura t_ray con informacion del origen y la direccion
- * 		del rayo que parte de la camara hasta un punto de la imagen.
  * @return Resultado de la ejecucion.
  */
-static int	ft_process_pixel(int *canvas_axis, int *world_axis, \
-	t_scene *scene, t_ray ray)
+static int	ft_color_at(t_ray ray, t_scene *scene, int *canvas_axis)
 {
-	t_tuple			wall_point;
+	t_pre_comp		comps;
 	t_ray_inters	*ray_inters;
 
-	world_axis[X] = -WIDTH / 2 + canvas_axis[X];
-	wall_point = ft_build_tuple(world_axis[X], world_axis[Y], scene->z_wall, \
-		POINT);
 	ray_inters = NULL;
-	ray.direction = ft_normalize(ft_sub_tuples(wall_point, ray.origin));
-	ft_detect_ray_inters(scene->objs_list, \
-		&(ray_inters), ray);
-	ft_scene_lighting(ray, ray_inters, scene, &(*canvas_axis));
+	ft_detect_ray_inters(scene->objs_list, &(ray_inters), ray);
+	if (ft_identify_hit(ray_inters))
+	{
+		comps = ft_prepare_computation(ray, ray_inters);
+		ft_mlx_pixel_put(scene->canvas, canvas_axis[X], canvas_axis[Y], \
+			ft_lighting(comps.obj->material, scene->light, comps.hit_point, \
+			&(*(comps.inters_vecs))));
+	}
 	ft_free_ray_inters_list(ray_inters);
 	return (EXIT_SUCCESS);
 }
@@ -111,31 +106,6 @@ static int	ft_detect_ray_inters(t_oitem *o_list, t_ray_inters **i_list, \
 		o_list = o_list->next;
 	}
 	return (status);
-}
-
-/**
- * Aplica los porcentajes de luminosidad al color de un pixel de la escena.
- * @param ray Rayo con origen en la posicion de la camara y direccion hacia un
- * 		punto de la escena.
- * @param inters Puntero a la lista de intersecciones de un rayo.
- * @param	scene Estructua con todos los atributos de la escena.
- * @param canvas_axis Array de dos enteros (posicion X e Y de un pixel)
- * 		en la ventana. Siendo el punto (0, 0) la esquina superior izquierda.
- * @return Resultado de la ejecucion.
- */
-static int	ft_scene_lighting(t_ray ray, t_ray_inters *inters, \
-	t_scene *scene, int *canvas_axis)
-{
-	t_pre_comp		comps;
-
-	if (ft_identify_hit(inters))
-	{
-		comps = ft_prepare_computation(ray, inters);
-		ft_mlx_pixel_put(scene->canvas, canvas_axis[X], canvas_axis[Y], \
-			ft_lighting(comps.obj->material, scene->light, comps.hit_point, \
-			&(*(comps.inters_vecs))));
-	}
-	return (EXIT_SUCCESS);
 }
 
 /**

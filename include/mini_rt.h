@@ -59,7 +59,8 @@ typedef enum e_light_types
 	EFECTIVE_COLOR,
 	AMBIENT,
 	DIFFUSE,
-	SPECULAR
+	SPECULAR,
+	SHININESS
 }	t_light_types;
 
 typedef enum e_intersection_vectors
@@ -207,9 +208,15 @@ typedef struct s_point_light
 
 typedef struct s_camera
 {
-	t_tuple	position_p;
-	t_tuple	orientation_v; //Rango[-1, 1]
-	int		fov; //[0, 180]
+	double		hsize;
+	double		vsize;
+	double		fov; //[0, 180]
+	t_matrix	transformations_matrix;
+	t_tuple		position_p;
+	t_tuple		orientation_v; //Rango[-1, 1]
+	double		half_width;
+	double		half_height;
+	double		pixel_size;
 }	t_camera;
 
 /** 
@@ -312,18 +319,24 @@ void			ft_matrix_mult_check(t_matrix m1, t_matrix m2);
 void			ft_matrix_to_tuple_check(t_matrix m);
 void			ft_sp_normal_at_check(double w);
 int				ft_mlx_failure_check(void *p);
+void			ft_matrix_view_transform_check(t_tuple from_p, t_tuple to_p, \
+					t_tuple up_v);
 
 //___UTILS___
 
+t_camera		ft_build_camera(int hsize, int vsize, int fov_deg);
 t_point_light	ft_build_light(t_tuple position, double brightness);
 int				ft_obj_id_assignment(void);
 int				ft_add_obj(t_oitem **o_list, t_omodel o_to_add, int o_type, \
 					int color);
 t_material		ft_default_material(int color);
+void			ft_modify_material_property(t_oitem *o_list, int obj_id, \
+					int property, double value);
 int				ft_render_scene(t_scene *scene);
 int				ft_prepare_scence(t_scene **scene);
 t_matrix		ft_tuple_to_matrix(t_tuple tuple);
 t_tuple			ft_matrix_to_tuple(t_matrix tuple);
+t_ray			ft_ray_for_pixel(t_camera camera, double px, double py);
 
 //___GNL___
 

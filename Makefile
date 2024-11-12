@@ -50,6 +50,7 @@ SRCS		=	$(MAIN) \
 				./src/ray_intersections/ft_rc_position.c \
 				./src/ray_intersections/ft_sphere_inters.c \
 				./src/utils/ft_add_object.c \
+				./src/utils/ft_build_camera.c \
 				./src/utils/ft_build_light.c \
 				./src/utils/ft_build_matrix.c \
 				./src/utils/ft_build_sphere.c \
@@ -60,6 +61,7 @@ SRCS		=	$(MAIN) \
 				./src/utils/ft_material.c \
 				./src/utils/ft_matrix_to_tuple.c \
 				./src/utils/ft_prepare_scene.c \
+				./src/utils/ft_ray_for_pixel.c \
 				./src/utils/ft_render_scene.c \
 				./src/utils/ft_tuple_to_matrix.c \
 				./src/utils/ft_utils.c \
