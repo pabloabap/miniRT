@@ -52,29 +52,6 @@ int set_light(char *line, t_scene *scene)
     return (EXIT_SUCCESS);
 }
 
-/*
-typedef struct s_oitem
-{
-	int				obj_id;
-	int				obj_type;
-	t_material		material;
-	void			*obj_struct;
-	struct s_oitem	*prev;
-	struct s_oitem	*next;
-}	t_oitem;
-
-typedef struct s_scene
-{
-	t_point_light	*light;
-	t_oitem			*objs_list;
-	t_inters		*rays_inter_list;
-	t_canvas		*canvas;
-	int				z_wall; //Pared final donde se reflejaran los objetos
-	t_camera		*camera;
-	t_ambient		*ambient_light;
-}	t_scene;
-*/
-
 int set_sphere(char *line, t_scene *scene)
 {
     t_sphere    *sphere;
@@ -97,16 +74,6 @@ int set_sphere(char *line, t_scene *scene)
     return (EXIT_SUCCESS);
 }
 
-
-/*
-typedef struct s_cylinder
-{
-	t_tuple	origin;
-	t_tuple	nrm_vector;//Rango [-1, 1]
-	double	diameter;
-	double	height;
-}	t_cylinder;*/
-
 int set_cylinder(char *line, t_scene *scene)
 {
     t_cylinder  *cylinder;
@@ -126,10 +93,11 @@ int set_cylinder(char *line, t_scene *scene)
     cylinder->height = ft_atod(&line[i]);
     i += skip_num(&line[i]);
     color = read_color(&line[i]);
+    cylinder->transformations_matrix = ft_matrix_translation(ft_identity_matrix(4, 4),
+        cylinder->origin.x, cylinder->origin.x, cylinder->origin.x);
     ft_add_obj(&scene->objs_list, CYLINDER, cylinder, color);
     return (EXIT_SUCCESS);
 }
-
 
 int set_plane(char *line, t_scene *scene)
 {
@@ -146,6 +114,8 @@ int set_plane(char *line, t_scene *scene)
     plane->nrm_vector = read_vec(&line[i]);
     i += skip_vec(&line[i]);
     color = read_color(&line[i]);
+    plane->transformations_matrix = ft_matrix_translation(ft_identity_matrix(4, 4),
+        plane->origin.x, plane->origin.x, plane->origin.x);
     ft_add_obj(&scene->objs_list, PLANE, plane, color);
     return (EXIT_SUCCESS);
 }

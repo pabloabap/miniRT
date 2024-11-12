@@ -29,7 +29,7 @@ int	ft_render_scene(t_scene *scene)
 	int		world_axis[2];
 	t_ray	ray;
 
-	ray.origin = scene->camera.position_p;
+	ray.origin = scene->camera->position_p;
 	canvas_axis[X] = 0;
 	canvas_axis[Y] = 0;
 	while (canvas_axis[Y] < HEIGHT)
@@ -123,7 +123,7 @@ static int	ft_scene_lighting(t_ray ray, t_scene *scene, int *canvas_axis)
 			ft_sp_normal_at(*(t_sphere *)(h_obj->obj_struct), h_point);
 		inters_vecs[EYE_V] = ft_negate_tuple(ft_normalize(ray.direction));
 		ft_mlx_pixel_put(scene->canvas, canvas_axis[X], canvas_axis[Y], \
-			ft_lighting(h_obj->material, scene->light, h_point, \
+			ft_lighting(h_obj->material, *scene->light, h_point, \
 			&(*inters_vecs)));
 	}
 	return (EXIT_SUCCESS);

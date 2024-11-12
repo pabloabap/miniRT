@@ -67,9 +67,9 @@ SRCS		=	$(MAIN)\
 				./src/utils/general_op.c \
 				./src/utils/vec_op.c \
 				./src/parsing/parsing.c \
-				./src/parsing/parsing_objs.c \
+				./src/parsing/parse_obj.c \
 				./src/parsing/parsing_utils.c \
-				./src/parsing/parse_sp.c \
+				./src/parsing/set_objs.c \
 				./src/parsing/print_scene.c \
 
 

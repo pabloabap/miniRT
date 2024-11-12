@@ -1,7 +1,6 @@
 
 #include "mini_rt.h"
 
-
 int read_obj(char *line)
 {
     int i;
@@ -45,6 +44,7 @@ int add_object(char *line, t_scene *scene)
         return (set_cylinder(&line[2], scene));
     return (EXIT_SUCCESS);
 }
+
 
 int read_scene(char *path, t_scene *scene)
 {

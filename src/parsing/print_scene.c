@@ -13,7 +13,7 @@ void    print_objs(t_oitem *o_lst)
         if (tmp->obj_type == SPHERE)
         {
             sp = (t_sphere *)tmp->obj_struct;
-            printf("sp:\tpos:[%f, %f, %f]\trad: %f\tcolor:[%d, %d, %d]\tobj_id: %d\n",
+            printf("sp:\t\npos:\t[%f, %f, %f]\nrad:\t%f\ncolor:\t[%d, %d, %d]\nobj_id:\t%d\n\n",
                     sp->origin.x, sp->origin.y, sp->origin.z,
                     sp->radius,
                     get_red(tmp->material.color), get_green(tmp->material.color), get_blue(tmp->material.color),
@@ -22,9 +22,7 @@ void    print_objs(t_oitem *o_lst)
         if (tmp->obj_type == CYLINDER)
         {
             cy = (t_cylinder *)tmp->obj_struct;
-            printf("cy:\tpos:[%f, %f, %f]\tn:[%f, %f, %f]\t\
-                    diam: %f\theight:%f\t\
-                    color:[%d, %d, %d]\tobj_id: %d\n",
+            printf("cy:\t\npos:\t[%f, %f, %f]\nn:\t[%f, %f, %f]\ndiam:\t%f\nheight:\t%f\ncolor:\t[%d, %d, %d]\nobj_id:\t%d\n\n",
                     cy->origin.x, cy->origin.y, cy->origin.z,
                     cy->nrm_vector.x, cy->nrm_vector.y, cy->nrm_vector.z,
                     cy->diameter, cy->height,
@@ -34,8 +32,7 @@ void    print_objs(t_oitem *o_lst)
         if (tmp->obj_type == PLANE)
         {
             pl = (t_plane *)tmp->obj_struct;
-            printf("pl:\tpos:[%f, %f, %f]\tn:[%f, %f, %f]\t\
-                    color:[%d, %d, %d]\tobj_id: %d\n",
+            printf("pl:\t\npos:\t[%f, %f, %f]\nn:\t[%f, %f, %f]\ncolor:\t[%d, %d, %d]\nobj_id:\t%d\n\n",
                     pl->origin.x, pl->origin.y, pl->origin.z,
                     pl->nrm_vector.x, pl->nrm_vector.y, pl->nrm_vector.z,
                     get_red(tmp->material.color), get_green(tmp->material.color), get_blue(tmp->material.color),
@@ -49,7 +46,7 @@ void    print_scene(t_scene *scene)
 {
     if (scene->ambient_light)
     {
-        printf("A:\tratio: %f\tcolor:[%d, %d, %d]\n", 
+        printf("A:\t\nratio:\t%f\ncolor:\t[%d, %d, %d]\n\n", 
                 scene->ambient_light->ratio, 
                 get_red(scene->ambient_light->color), 
                 get_green(scene->ambient_light->color), 
@@ -57,7 +54,7 @@ void    print_scene(t_scene *scene)
     }
     if (scene->camera)
     {
-        printf("C:\tpos[%f, %f, %f]\torientation:[%f, %f, %f]\tfov:%d\n",
+        printf("C:\t\npos:\t[%f, %f, %f]\nn:\t[%f, %f, %f]\nfov:\t%d\n\n",
             scene->camera->position_p.x,
             scene->camera->position_p.y,
             scene->camera->position_p.z,
@@ -68,7 +65,7 @@ void    print_scene(t_scene *scene)
     }
     if (scene->light)
     {
-        printf("L:\tpos [%f, %f, %f]\tratio:%f\tcolor:[%d, %d, %d]\n",
+        printf("L:\t\npos:\t[%f, %f, %f]\nratio:\t%f\ncolor:\t[%d, %d, %d]\n\n",
             scene->light->position.x,
             scene->light->position.y,
             scene->light->position.z,
@@ -81,5 +78,4 @@ void    print_scene(t_scene *scene)
     {
         print_objs(scene->objs_list);
     }
-
 }

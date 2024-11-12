@@ -28,6 +28,38 @@ t_scene	*scene_init(void)
 	return (s);
 }
 
+void	free_obj_lst(t_oitem *o_lst)
+{
+	t_oitem	*tmp;
+
+	tmp = o_lst;
+	if (!o_lst)
+		return ;
+	while (tmp)
+	{
+		o_lst = o_lst->next;
+		free(tmp->obj_struct);
+		free(tmp);
+		tmp = o_lst;
+	}
+	return ;
+}
+
+void	free_scene(t_scene *scene)
+{
+	if (!scene)
+		return ;
+	if (scene->ambient_light)
+		free(scene->ambient_light);
+	if (scene->light)
+		free(scene->light);
+	if (scene->camera)
+		free(scene->camera);
+	if (scene->objs_list)
+		free_obj_lst(scene->objs_list);
+	free(scene);
+}
+
 int main(void)
 {
 	t_scene	*scene;
@@ -37,9 +69,14 @@ int main(void)
 	if (!scene)
 		return (perror("Scene initialization: "), EXIT_FAILURE);
 	if (read_scene(path, scene))
+	{
+		free_scene(scene);
 		return (EXIT_FAILURE);
+	}
+	free_scene(scene);
 	return (0);
 }
+
 /* 
  int	main(void)
 {
