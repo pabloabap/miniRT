@@ -31,7 +31,7 @@ int	ft_render_scene(t_scene *scene)
 	int		world_axis[2];
 	t_ray	ray;
 
-	ray.origin = scene->camera.position_p;
+	ray.origin = scene->camera->position_p;
 	canvas_axis[X] = 0;
 	canvas_axis[Y] = 0;
 	while (canvas_axis[Y] < HEIGHT)
@@ -132,7 +132,7 @@ static int	ft_scene_lighting(t_ray ray, t_ray_inters *inters, \
 	{
 		comps = ft_prepare_computation(ray, inters);
 		ft_mlx_pixel_put(scene->canvas, canvas_axis[X], canvas_axis[Y], \
-			ft_lighting(comps.obj->material, scene->light, comps.hit_point, \
+			ft_lighting(comps.obj->material, *scene->light, comps.hit_point, \
 			&(*(comps.inters_vecs))));
 	}
 	return (EXIT_SUCCESS);

@@ -32,6 +32,7 @@
 # include "../lib/minilibx-linux/mlx.h"
 # include "../lib/libft/libft.h"
 
+
 typedef enum e_coor
 {
 	X,
@@ -154,6 +155,7 @@ typedef struct s_plane
 {
 	t_tuple	origin;
 	t_tuple	nrm_vector; //Rango [-1, 1]
+	t_matrix	transformations_matrix;
 }	t_plane;
 
 typedef struct s_cylinder
@@ -162,6 +164,7 @@ typedef struct s_cylinder
 	t_tuple	nrm_vector;//Rango [-1, 1]
 	double	diameter;
 	double	height;
+	t_matrix	transformations_matrix;
 }	t_cylinder;
 
 typedef union u_model
@@ -203,6 +206,7 @@ typedef struct s_point_light
 {
 	t_tuple	position;
 	double	brightness;
+	int		color;
 }	t_point_light;
 
 typedef struct s_camera
@@ -212,20 +216,24 @@ typedef struct s_camera
 	int		fov; //[0, 180]
 }	t_camera;
 
+typedef struct s_ambient
+{
+    double  ratio;
+    int     color;
+}   t_ambient;
+
 /** 
  * Estructura que contiene todos los elementos de la escena
  * para poder gestionarlos y liberar memoría de manera centralizada.
  */
 typedef struct s_scene
 {
-	t_point_light	light;
+	t_point_light	*light;
 	t_oitem			*objs_list;
 	t_canvas		*canvas;
 	int				z_wall; //Pared final donde se reflejaran los objetos
-	t_camera		camera;
-	/** Pendiente de confirmación
-	 * t_ambient_light	ambient_ligh;
-	 */
+	t_camera		*camera;
+	t_ambient		*ambient_light;
 }	t_scene;
 
 // ___MLX___
@@ -317,8 +325,7 @@ int				ft_mlx_failure_check(void *p);
 
 t_point_light	ft_build_light(t_tuple position, double brightness);
 int				ft_obj_id_assignment(void);
-int				ft_add_obj(t_oitem **o_list, t_omodel o_to_add, int o_type, \
-					int color);
+int				ft_add_obj(t_oitem **o_list, int o_type, void *obj, int color);
 t_material		ft_default_material(int color);
 int				ft_render_scene(t_scene *scene);
 int				ft_prepare_scence(t_scene **scene);
@@ -342,4 +349,5 @@ void			ft_print_tuple(t_tuple t);
 void			ft_fill_matrix(t_matrix *m, char *arr);
 void			ft_print_i_list(t_ray_inters *i_list);
 
+# include "parsing.h"
 #endif

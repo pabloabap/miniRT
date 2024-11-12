@@ -12,7 +12,93 @@
 
 #include "../include/mini_rt.h"
 
+t_scene	*scene_init(void)
+{
+	t_scene	*s;
+
+	s = malloc(sizeof(t_scene));
+	if (!s)
+		return (NULL);
+	s->camera = NULL;
+	s->canvas = NULL;
+	s->light = NULL;
+	s->objs_list = NULL;
+	s->z_wall = 100;
+	return (s);
+}
+
+void	free_obj_lst(t_oitem *o_lst)
+{
+	t_oitem	*tmp;
+
+	tmp = o_lst;
+	if (!o_lst)
+		return ;
+	while (tmp)
+	{
+		o_lst = o_lst->next;
+		free(tmp->obj_struct);
+		free(tmp);
+		tmp = o_lst;
+	}
+	return ;
+}
+
+void	free_scene(t_scene *scene)
+{
+	if (!scene)
+		return ;
+	if (scene->ambient_light)
+		free(scene->ambient_light);
+	if (scene->light)
+		free(scene->light);
+	if (scene->camera)
+		free(scene->camera);
+	if (scene->objs_list)
+		free_obj_lst(scene->objs_list);
+	free(scene);
+}
+
+int main2(void)
+{
+	t_scene	*scene;
+	char	*path = "./scenes/test.rt";
+
+	scene = scene_init();
+	if (!scene)
+		return (perror("Scene initialization: "), EXIT_FAILURE);
+	if (read_scene(path, scene))
+	{
+		free_scene(scene);
+		return (EXIT_FAILURE);
+	}
+	free_scene(scene);
+	return (0);
+}
+
 int	main(void)
+{
+	t_scene	*scene;
+	char	*path = "./scenes/sphere.rt";
+
+	scene = scene_init();
+	if (!scene)
+		return (perror("Scene initialization: "), EXIT_FAILURE);
+	if (read_scene(path, scene))
+	{
+		free_scene(scene);
+		return (EXIT_FAILURE);
+	}
+	ft_render_scene(scene);
+	mlx_put_image_to_window(scene->canvas->mlx_init, \
+		scene->canvas->mlx_win, scene->canvas->img, 0, 0);
+	sleep(10);
+	return (0);
+}
+
+
+/*
+int	main3(void)
 {
 	t_scene		*scene;
 	t_omodel	model;
@@ -39,3 +125,4 @@ int	main(void)
 	sleep(10);
 	return (0);
 }
+*/
