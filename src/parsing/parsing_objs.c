@@ -78,12 +78,11 @@ typedef struct s_scene
 int set_sphere(char *line, t_scene *scene)
 {
     t_sphere    *sphere;
-    t_oitem     *obj;
     int         i;
     int         color;
 
+    i = 0;
     sphere = malloc(sizeof(t_sphere));
-    obj = malloc(sizeof(t_oitem));
     while (is_space(line[i]))
         i++;
     sphere->origin = read_vec(&line[i]);
@@ -91,6 +90,62 @@ int set_sphere(char *line, t_scene *scene)
     sphere->radius = ft_atod(&line[i]);
     i += skip_num(&line[i]);
     color = read_color(&line[i]);
-    //ft_add_obj(&obj,)
+    sphere->transformations_matrix = ft_matrix_translation(ft_identity_matrix(4, 4),
+        sphere->origin.x, sphere->origin.x, sphere->origin.x);
+
+    ft_add_obj(&scene->objs_list, SPHERE, sphere, color);
+    return (EXIT_SUCCESS);
+}
+
+
+/*
+typedef struct s_cylinder
+{
+	t_tuple	origin;
+	t_tuple	nrm_vector;//Rango [-1, 1]
+	double	diameter;
+	double	height;
+}	t_cylinder;*/
+
+int set_cylinder(char *line, t_scene *scene)
+{
+    t_cylinder  *cylinder;
+    int         i;
+    int         color;
+
+    i = 0;
+    cylinder = malloc(sizeof(t_cylinder));
+    while (is_space(line[i]))
+        i++;
+    cylinder->origin = read_vec(&line[i]);
+    i += skip_vec(&line[i]);
+    cylinder->nrm_vector = read_vec(&line[i]);
+    i += skip_vec(&line[i]);
+    cylinder->diameter = ft_atod(&line[i]);
+    i += skip_num(&line[i]);
+    cylinder->height = ft_atod(&line[i]);
+    i += skip_num(&line[i]);
+    color = read_color(&line[i]);
+    ft_add_obj(&scene->objs_list, CYLINDER, cylinder, color);
+    return (EXIT_SUCCESS);
+}
+
+
+int set_plane(char *line, t_scene *scene)
+{
+    t_plane    *plane;
+    int         i;
+    int         color;
+
+    i = 0;
+    plane = malloc(sizeof(t_plane));
+    while (is_space(line[i]))
+        i++;
+    plane->origin = read_vec(&line[i]);
+    i += skip_vec(&line[i]);
+    plane->nrm_vector = read_vec(&line[i]);
+    i += skip_vec(&line[i]);
+    color = read_color(&line[i]);
+    ft_add_obj(&scene->objs_list, PLANE, plane, color);
     return (EXIT_SUCCESS);
 }

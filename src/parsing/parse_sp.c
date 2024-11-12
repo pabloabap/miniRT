@@ -1,8 +1,7 @@
 #include "mini_rt.h"
 
-static int	ft_fill_new_obj(t_oitem *new, t_omodel o_to_add, int o_type, \
-	int color);
-static int	ft_add_sphere(void **o_struct, t_sphere sp);
+static int	ft_fill_new_obj(t_oitem *new, int o_type, void *obj, int color);
+//static int	ft_add_sphere(void **o_struct, t_sphere sp);
 
 
 int	ft_add_obj(t_oitem **o_list, int o_type, void *obj, int color)
@@ -30,8 +29,6 @@ int	ft_add_obj(t_oitem **o_list, int o_type, void *obj, int color)
 
 static int	ft_fill_new_obj(t_oitem *new, int o_type, void *obj, int color)
 {
-	int	status;
-
 	new->obj_id = ft_obj_id_assignment();
 	new->obj_type = o_type;
 	new->material = ft_default_material(color);
@@ -44,14 +41,22 @@ static int	ft_fill_new_obj(t_oitem *new, int o_type, void *obj, int color)
         return (EXIT_SUCCESS);
     }
     if (PLANE == o_type)
-		status = 1;
+	{
+		obj = (t_plane *)obj;
+		new->obj_struct = obj;
+        return (EXIT_SUCCESS);
+	}
 	if (CYLINDER == o_type)
-		status = 1;
-	return (status);
+	{
+		obj = (t_cylinder *)obj;
+		new->obj_struct = obj;
+        return (EXIT_SUCCESS);
+	}
+	return (EXIT_FAILURE);
 }
 
 
-int set_sphere(char *line, t_scene *scene)
+/* int set_sphere(char *line, t_scene *scene)
 {
     t_sphere    *sphere;
     int         i;
@@ -67,4 +72,4 @@ int set_sphere(char *line, t_scene *scene)
     color = read_color(&line[i]);
     ft_add_obj(&scene->objs_list, SPHERE, sphere, color);
     return (EXIT_SUCCESS);
-}
+} */

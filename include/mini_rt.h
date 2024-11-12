@@ -151,6 +151,7 @@ typedef struct s_plane
 {
 	t_tuple	origin;
 	t_tuple	nrm_vector; //Rango [-1, 1]
+	t_matrix	transformations_matrix;
 }	t_plane;
 
 typedef struct s_cylinder
@@ -159,6 +160,7 @@ typedef struct s_cylinder
 	t_tuple	nrm_vector;//Rango [-1, 1]
 	double	diameter;
 	double	height;
+	t_matrix	transformations_matrix;
 }	t_cylinder;
 
 typedef union u_model
@@ -314,8 +316,7 @@ int				ft_mlx_failure_check(void *p);
 
 t_point_light	ft_build_light(t_tuple position, double brightness);
 int				ft_obj_id_assignment(void);
-int				ft_add_obj(t_oitem **o_list, t_omodel o_to_add, int o_type, \
-					int color);
+int				ft_add_obj(t_oitem **o_list, int o_type, void *obj, int color);
 t_material		ft_default_material(int color);
 int				ft_add_item_to_inters_list(t_inters **inter_list);
 t_inters		*ft_lst_inters_item(t_inters *inter_head);

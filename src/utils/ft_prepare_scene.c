@@ -12,12 +12,12 @@
 
 #include "../../include/mini_rt.h"
 
-static void	ft_prepare_canvas(t_canvas **canvas);
+//static void	ft_prepare_canvas(t_canvas **canvas);
 
 /**
  * Funcion para preparar los valores iniciales de la escena.
  */
-int	ft_prepare_scence(t_scene **scene)
+/* int	ft_prepare_scence(t_scene **scene)
 {
 	t_scene	*initialized_scene;
 
@@ -33,12 +33,12 @@ int	ft_prepare_scence(t_scene **scene)
 	(*scene)->z_wall = 100;
 	(*scene)->camera.position_p = ft_build_tuple(0, 0, 0, POINT);
 	return (EXIT_SUCCESS);
-}
+} */
 
 /**
  * Inicializa ventana, imagenes y atributos de las mismas.
  */
-static void	ft_prepare_canvas(t_canvas **canvas)
+/* static void	ft_prepare_canvas(t_canvas **canvas)
 {
 	t_canvas	*initialized_canvas;
 
@@ -54,3 +54,4 @@ static void	ft_prepare_canvas(t_canvas **canvas)
 	(*canvas)->img_addr = mlx_get_data_addr((*canvas)->img, &((*canvas)->bpp), \
 		&((*canvas)->line_bytes), &((*canvas)->endian));
 }
+ */

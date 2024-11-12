@@ -38,7 +38,6 @@ int main(void)
 		return (perror("Scene initialization: "), EXIT_FAILURE);
 	if (read_scene(path, scene))
 		return (EXIT_FAILURE);
-	
 	return (0);
 }
 /* 
