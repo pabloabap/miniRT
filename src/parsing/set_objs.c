@@ -25,7 +25,7 @@ int set_camera(char *line, t_scene *scene)
     cam = malloc(sizeof(t_camera));
     while (is_space(line[i]))
         i++;
-    cam->position_p = read_vec(&line[i]);
+    cam->position_p = read_point(&line[i]);
     i += skip_vec(&line[i]);
     cam->orientation_v = read_vec(&line[i]);
     i += skip_vec(&line[i]);
@@ -43,7 +43,7 @@ int set_light(char *line, t_scene *scene)
     i = 0;
     while (is_space(line[i]))
         i++;
-    light->position = read_vec(&line[i]);
+    light->position = read_point(&line[i]);
     i += skip_vec(&line[i]);
     light->brightness = ft_atod(&line[i]);
     i += skip_num(&line[i]);
@@ -62,7 +62,7 @@ int set_sphere(char *line, t_scene *scene)
     sphere = malloc(sizeof(t_sphere));
     while (is_space(line[i]))
         i++;
-    sphere->origin = read_vec(&line[i]);
+    sphere->origin = read_point(&line[i]);
     i += skip_vec(&line[i]);
     sphere->radius = ft_atod(&line[i]);
     i += skip_num(&line[i]);

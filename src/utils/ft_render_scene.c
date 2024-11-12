@@ -25,6 +25,7 @@ static t_pre_comp	ft_prepare_computation(t_ray ray, t_ray_inters *inters);
  * @param	scene Estructua con todos los atributos de la escena.
  * @return	Entero con el resultado de la ejecucion.
  */
+
 int	ft_render_scene(t_scene *scene)
 {
 	int		canvas_axis[2];
@@ -41,6 +42,7 @@ int	ft_render_scene(t_scene *scene)
 		{
 			ft_process_pixel(&(*canvas_axis), &(*world_axis), scene, ray);
 			canvas_axis[X]++;
+			//printf("x: %d\ty:%d\n", canvas_axis[X], canvas_axis[Y]);
 		}
 		canvas_axis[X] = 0;
 		canvas_axis[Y]++;

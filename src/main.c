@@ -89,10 +89,11 @@ int	main(void)
 		free_scene(scene);
 		return (EXIT_FAILURE);
 	}
+	ft_prepare_canvas(&scene->canvas);
 	ft_render_scene(scene);
 	mlx_put_image_to_window(scene->canvas->mlx_init, \
 		scene->canvas->mlx_win, scene->canvas->img, 0, 0);
-	sleep(10);
+	sleep(1000);
 	return (0);
 }
 

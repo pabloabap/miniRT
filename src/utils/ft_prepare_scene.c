@@ -38,7 +38,8 @@
 /**
  * Inicializa ventana, imagenes y atributos de las mismas.
  */
-/* static void	ft_prepare_canvas(t_canvas **canvas)
+
+ void	ft_prepare_canvas(t_canvas **canvas)
 {
 	t_canvas	*initialized_canvas;
 
@@ -54,4 +55,3 @@
 	(*canvas)->img_addr = mlx_get_data_addr((*canvas)->img, &((*canvas)->bpp), \
 		&((*canvas)->line_bytes), &((*canvas)->endian));
 }
- */

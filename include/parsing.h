@@ -29,5 +29,7 @@ int set_rgb(int r, int g, int b);
 int get_red(int c);
 int get_green(int c);
 int get_blue(int c);
+
+ void	ft_prepare_canvas(t_canvas **canvas);
 #endif
 
