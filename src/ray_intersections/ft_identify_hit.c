@@ -12,8 +12,11 @@
 
 #include "../../include/mini_rt.h"
 
-/** Retorna 1 si encuentra un punto de interseccion de un rayo
- *  en una lista de impactos, o 0 si no.
+/** 
+ * Retorna 1 si encuentra un punto de interseccion positivo de un rayo
+ * en una lista de impactos, o 0 si no y actualiza el valor del atributo hit
+ * a 1 del primer impacto positivo más cercano a cero.
+ * 
  */
 int	ft_identify_hit(t_ray_inters *i_list)
 {

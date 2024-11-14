@@ -12,23 +12,84 @@
 
 #include "../include/mini_rt.h"
 
+t_scene	*scene_init(void)
+{
+	t_scene	*s;
+
+	s = malloc(sizeof(t_scene));
+	if (!s)
+		return (NULL);
+	s->camera = NULL;
+	s->canvas = NULL;
+	s->light = NULL;
+	s->objs_list = NULL;
+	s->z_wall = 100;
+	return (s);
+}
+
+void	free_obj_lst(t_oitem *o_lst)
+{
+	t_oitem	*tmp;
+
+	tmp = o_lst;
+	if (!o_lst)
+		return ;
+	while (tmp)
+	{
+		o_lst = o_lst->next;
+		free(tmp->obj_struct);
+		free(tmp);
+		tmp = o_lst;
+	}
+	return ;
+}
+
+void	free_scene(t_scene *scene)
+{
+	if (!scene)
+		return ;
+	if (scene->ambient_light)
+		free(scene->ambient_light);
+	if (scene->light)
+		free(scene->light);
+	if (scene->camera)
+		free(scene->camera);
+	if (scene->objs_list)
+		free_obj_lst(scene->objs_list);
+	free(scene);
+}
+
+int	main2(void)
+{
+	t_scene	*scene;
+	char	*path = "./scenes/test.rt";
+
+	scene = scene_init();
+	if (!scene)
+		return (perror("Scene initialization: "), EXIT_FAILURE);
+	if (read_scene(path, scene))
+	{
+		free_scene(scene);
+		return (EXIT_FAILURE);
+	}
+	free_scene(scene);
+	return (0);
+}
+
 int	main(void)
 {
-	t_scene		*scene;
-	t_omodel	model;
+	t_scene	*scene;
+	char	*path = "./scenes/sphere.rt";
 
-	scene = NULL;
-	ft_prepare_scence(&scene);
-	model.sp = ft_build_sphere(ft_build_tuple(0, 0, 50, POINT), 40);
-	model.sp.transformations_matrix = \
-		ft_matrix_translation(model.sp.transformations_matrix, 0, 0, 20);
-	ft_add_obj(&(scene->objs_list), model, SPHERE, \
-		ft_create_trgb(0, 255, 255 * 0.2, 255));
-	model.sp = ft_build_sphere(ft_build_tuple(0, 0, 10, POINT), 5);
-	model.sp.transformations_matrix = \
-		ft_matrix_shearing(model.sp.transformations_matrix, X, Y, 0.9);
-	ft_add_obj(&(scene->objs_list), model, SPHERE, \
-		ft_create_trgb(0, 255, 255 * 0, 255 * 0));
+	scene = scene_init();
+	if (!scene)
+		return (perror("Scene initialization: "), EXIT_FAILURE);
+	if (read_scene(path, scene))
+	{
+		free_scene(scene);
+		return (EXIT_FAILURE);
+	}
+	ft_prepare_canvas(&scene->canvas);
 	ft_render_scene(scene);
 	mlx_put_image_to_window(scene->canvas->mlx_init, \
 		scene->canvas->mlx_win, scene->canvas->img, 0, 0);

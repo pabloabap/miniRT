@@ -59,7 +59,8 @@ typedef enum e_light_types
 	EFECTIVE_COLOR,
 	AMBIENT,
 	DIFFUSE,
-	SPECULAR
+	SPECULAR,
+	SHININESS
 }	t_light_types;
 
 typedef enum e_intersection_vectors
@@ -152,16 +153,18 @@ typedef struct s_sphere
 
 typedef struct s_plane
 {
-	t_tuple	origin;
-	t_tuple	nrm_vector; //Rango [-1, 1]
+	t_tuple		origin;
+	t_tuple		nrm_vector; //Rango [-1, 1]
+	t_matrix	transformations_matrix;
 }	t_plane;
 
 typedef struct s_cylinder
 {
-	t_tuple	origin;
-	t_tuple	nrm_vector;//Rango [-1, 1]
-	double	diameter;
-	double	height;
+	t_tuple		origin;
+	t_tuple		nrm_vector;//Rango [-1, 1]
+	double		diameter;
+	double		height;
+	t_matrix	transformations_matrix;
 }	t_cylinder;
 
 typedef union u_model
@@ -177,24 +180,53 @@ typedef union u_model
 typedef struct s_ray_inters
 {
 	double				inter_point;
-	int					obj_id;
+	t_oitem				*obj;
 	int					hit;
 	struct s_ray_inters	*prev;
 	struct s_ray_inters	*next;
 }	t_ray_inters;
 
+/**
+ * Estructura para pre procesar puntos de impacto
+ * para mejorar rendimiento en tiempos de renderizado.
+ */
+typedef struct s_pre_comp
+{
+	double	inter_point;
+	t_oitem	*obj;
+	t_tuple	hit_point;
+	t_tuple	inters_vecs[4];
+	int		inside_flag;
+}	t_pre_comp;
+
+/**
+ * Estructura que contiene los atributos de un punto de luz.
+ */
 typedef struct s_point_light
 {
 	t_tuple	position;
 	double	brightness;
+	int		color;
 }	t_point_light;
 
 typedef struct s_camera
 {
-	t_tuple	position_p;
-	t_tuple	orientation_v; //Rango[-1, 1]
-	int		fov; //[0, 180]
+	double		hsize;
+	double		vsize;
+	double		fov; //[0, 180]
+	t_matrix	transformations_matrix;
+	t_tuple		position_p;
+	t_tuple		orientation_v; //Rango[-1, 1]
+	double		half_width;
+	double		half_height;
+	double		pixel_size;
 }	t_camera;
+
+typedef struct s_ambient
+{
+	double	ratio;
+	int		color;
+}	t_ambient;
 
 /** 
  * Estructura que contiene todos los elementos de la escena
@@ -202,14 +234,12 @@ typedef struct s_camera
  */
 typedef struct s_scene
 {
-	t_point_light	light;
+	t_point_light	*light;
 	t_oitem			*objs_list;
 	t_canvas		*canvas;
 	int				z_wall; //Pared final donde se reflejaran los objetos
-	t_camera		camera;
-	/** Pendiente de confirmación
-	 * t_ambient_light	ambient_ligh;
-	 */
+	t_camera		*camera;
+	t_ambient		*ambient_light;
 }	t_scene;
 
 // ___MLX___
@@ -240,10 +270,8 @@ t_tuple			ft_normalize(t_tuple v);
 double			ft_dot(t_tuple v1, t_tuple v2);
 t_tuple			ft_cross(t_tuple v1, t_tuple v2);
 
-//___TRANSFORMACIONES DE PUNTO Y VECTORES___
+//___MATRICES DE TRANSFORMACION___
 
-t_matrix		ft_tuple_to_matrix(t_tuple tuple);
-t_tuple			ft_matrix_to_tuple(t_matrix tuple);
 t_matrix		ft_matrix_translation(t_matrix m, double x, double y, double z);
 t_matrix		ft_matrix_inverse_translation(t_matrix m, double x, double y, \
 					double z);
@@ -257,6 +285,8 @@ t_matrix		ft_matrix_shearing(t_matrix m, int axis, int over_axis, \
 					double val);
 t_matrix		ft_matrix_inverse_shearing(t_matrix m, int axis, int over_axis, \
 					double val);
+t_matrix		ft_matrix_view_transform(t_tuple from_p, t_tuple to_p, \
+	t_tuple up_v);
 
 //___OPERACIONES CON MATRICES___
 
@@ -271,14 +301,14 @@ t_matrix		ft_inverse_matrix(t_matrix *m);
 //___RAYTRACING___
 
 t_tuple			ft_rc_position(t_ray ray, double position);
-void			ft_sphere_inters(t_ray ray, t_oitem sphere, \
+void			ft_sphere_inters(t_ray ray, t_oitem *sphere, \
 					t_ray_inters **i_list);
 int				ft_add_inters_sorted(t_ray_inters **i_list, double inter_point, \
-					int obj_id);
+					t_oitem *obj);
 int				ft_identify_hit(t_ray_inters *i_list);
 t_ray_inters	*ft_get_hit(t_ray_inters *i_list);
-int				ft_get_hit_color(t_ray_inters *i_list, t_oitem *o_list);
-t_oitem			*ft_get_hitted_obj(t_ray_inters *i_list, t_oitem *o_list);
+int				ft_get_hit_color(t_ray_inters *i_list);
+t_oitem			*ft_get_hitted_obj(t_ray_inters *i_list);
 
 //___LIGHT & SHADING
 
@@ -296,16 +326,23 @@ void			ft_matrix_mult_check(t_matrix m1, t_matrix m2);
 void			ft_matrix_to_tuple_check(t_matrix m);
 void			ft_sp_normal_at_check(double w);
 int				ft_mlx_failure_check(void *p);
+void			ft_matrix_view_transform_check(t_tuple from_p, t_tuple to_p, \
+					t_tuple up_v);
 
 //___UTILS___
 
+t_camera		ft_build_camera(int hsize, int vsize, int fov_deg);
 t_point_light	ft_build_light(t_tuple position, double brightness);
 int				ft_obj_id_assignment(void);
-int				ft_add_obj(t_oitem **o_list, t_omodel o_to_add, int o_type, \
-					int color);
+int				ft_add_obj(t_oitem **o_list, int o_type, void *obj, int color);
 t_material		ft_default_material(int color);
+void			ft_modify_material_property(t_oitem *o_list, int obj_id, \
+					int property, double value);
 int				ft_render_scene(t_scene *scene);
-int				ft_prepare_scence(t_scene **scene);
+void			ft_prepare_canvas(t_canvas **canvas);
+t_matrix		ft_tuple_to_matrix(t_tuple tuple);
+t_tuple			ft_matrix_to_tuple(t_matrix tuple);
+t_ray			ft_ray_for_pixel(t_camera camera, double px, double py);
 
 //___GNL___
 
@@ -324,4 +361,5 @@ void			ft_print_tuple(t_tuple t);
 void			ft_fill_matrix(t_matrix *m, char *arr);
 void			ft_print_i_list(t_ray_inters *i_list);
 
+# include "parsing.h"
 #endif
