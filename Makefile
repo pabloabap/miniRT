@@ -52,6 +52,7 @@ SRCS		=	$(MAIN)\
 				./src/ray_intersections/ft_sphere_inters.c \
 				./src/utils/ft_add_object.c \
 				./src/utils/ft_build_camera.c \
+				./src/utils/ft_build_camera.c \
 				./src/utils/ft_build_light.c \
 				./src/utils/ft_build_matrix.c \
 				./src/utils/ft_build_sphere.c \

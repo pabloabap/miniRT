@@ -7,13 +7,16 @@
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 15:16:38 by pabad-ap          #+#    #+#             */
 /*   Updated: 2024/11/12 23:15:30 by pabad-ap         ###   ########.fr       */
+/*   Updated: 2024/11/12 23:15:30 by pabad-ap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/mini_rt.h"
 
 static int			ft_color_at(t_ray ray, t_scene *scene, int *canvas_axis);
+static int			ft_color_at(t_ray ray, t_scene *scene, int *canvas_axis);
 static int			ft_detect_ray_inters(t_oitem *o_list, \
+						t_ray_inters **i_list, t_ray ray);
 						t_ray_inters **i_list, t_ray ray);
 static t_pre_comp	ft_prepare_computation(t_ray ray, t_ray_inters *inters);
 
@@ -51,12 +54,18 @@ int	ft_render_scene(t_scene *scene)
  * @param ray Rayo con origen en la posicion de la camara y direccion hacia un
  * 		punto de la escena.
  * @param scene Estructua con todos los atributos de la escena.
+ * Aplica los porcentajes de luminosidad al color de un pixel de la escena.
+ * @param ray Rayo con origen en la posicion de la camara y direccion hacia un
+ * 		punto de la escena.
+ * @param scene Estructua con todos los atributos de la escena.
  * @param canvas_axis Array de dos enteros (posicion X e Y de un pixel)
  * 		en la ventana. Siendo el punto (0, 0) la esquina superior izquierda.
  * @return Resultado de la ejecucion.
  */
 static int	ft_color_at(t_ray ray, t_scene *scene, int *canvas_axis)
+static int	ft_color_at(t_ray ray, t_scene *scene, int *canvas_axis)
 {
+	t_pre_comp		comps;
 	t_pre_comp		comps;
 	t_ray_inters	*ray_inters;
 
