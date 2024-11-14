@@ -54,7 +54,7 @@ void    print_scene(t_scene *scene)
     }
     if (scene->camera)
     {
-        printf("C:\t\npos:\t[%f, %f, %f]\nn:\t[%f, %f, %f]\nfov:\t%d\n\n",
+        printf("C:\t\npos:\t[%f, %f, %f]\nn:\t[%f, %f, %f]\nfov:\t%f\n\n",
             scene->camera->position_p.x,
             scene->camera->position_p.y,
             scene->camera->position_p.z,

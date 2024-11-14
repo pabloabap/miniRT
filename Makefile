@@ -14,7 +14,7 @@ CFLAGS		= -g -Wall -Wextra -Werror
 MLXFLAGS	= -L$(DIR_MLX) -lmlx -lXext -lX11
 LIBFT		= -L$(DIR_LIBFT) -lft
 
-HEADER_DIR = ./include
+HEADER_DIR = ./include/
 INCLUDE		= -I$(HEADER_DIR) -I$(DIR_LIBFT) -I$(DIR_MLX)
 
 MAIN		= ./src/main.c
@@ -51,6 +51,7 @@ SRCS		=	$(MAIN)\
 				./src/ray_intersections/ft_rc_position.c \
 				./src/ray_intersections/ft_sphere_inters.c \
 				./src/utils/ft_add_object.c \
+				./src/utils/ft_build_camera.c \
 				./src/utils/ft_build_light.c \
 				./src/utils/ft_build_matrix.c \
 				./src/utils/ft_build_sphere.c \
@@ -60,7 +61,8 @@ SRCS		=	$(MAIN)\
 				./src/utils/ft_free_ray_inters_list.c \
 				./src/utils/ft_material.c \
 				./src/utils/ft_matrix_to_tuple.c \
-				./src/utils/ft_prepare_scene.c \
+				./src/utils/ft_prepare_canvas.c \
+				./src/utils/ft_ray_for_pixel.c \
 				./src/utils/ft_render_scene.c \
 				./src/utils/ft_tuple_to_matrix.c \
 				./src/utils/ft_utils.c \
@@ -70,10 +72,7 @@ SRCS		=	$(MAIN)\
 				./src/parsing/parse_obj.c \
 				./src/parsing/parsing_utils.c \
 				./src/parsing/set_objs.c \
-				./src/parsing/print_scene.c \
-
-
-				
+				./src/parsing/print_scene.c		
 
 				
 #Object files
@@ -137,6 +136,10 @@ $(DIR_OBJS)%.o: $(DIR_PARSING)%.c $(HEADERS) Makefile | $(DIR_OBJS)
 $(DIR_OBJS)%.o: $(MAIN) $(HEADERS) Makefile | $(DIR_OBJS)
 	$(CC) -c $(CFLAGS) $(INCLUDE) $< -o $@
 
+-include $(DEPS)
+
+dependencies.d: $(SRCS)
+	$(CC) -MM $^ -MF $@ -MP
 
 libft:
 	make -C $(DIR_LIBFT)

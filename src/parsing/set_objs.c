@@ -18,19 +18,24 @@ int set_ambient(char *line, t_scene *scene)
 
 int set_camera(char *line, t_scene *scene)
 {
-    t_camera    *cam;
+    t_camera    cam;
     int         i;
+    t_tuple     origin_p;
+    t_tuple     to_p;
+    double      fov_deg;
 
     i = 0;
-    cam = malloc(sizeof(t_camera));
+    scene->camera = malloc(sizeof(t_camera));
     while (is_space(line[i]))
         i++;
-    cam->position_p = read_point(&line[i]);
+    origin_p = read_point(&line[i]);
     i += skip_vec(&line[i]);
-    cam->orientation_v = read_vec(&line[i]);
+    to_p = ft_sub_tuples(origin_p, ft_negate_tuple(read_vec(&line[i])));
     i += skip_vec(&line[i]);
-    cam->fov = ft_atod(&line[i]);
-    scene->camera = cam;
+    fov_deg = ft_atod(&line[i]);
+    cam = ft_build_camera(HEIGHT, WIDTH, fov_deg);
+    cam.transformations_matrix = ft_matrix_view_transform(origin_p, to_p, ft_build_tuple(0, 1, 0, VECTOR));
+    *(scene->camera) = cam;
     return (EXIT_SUCCESS);
 }
 
@@ -57,19 +62,20 @@ int set_sphere(char *line, t_scene *scene)
     t_sphere    *sphere;
     int         i;
     int         color;
+    t_tuple     sp_world_origin;
 
     i = 0;
     sphere = malloc(sizeof(t_sphere));
     while (is_space(line[i]))
         i++;
-    sphere->origin = read_point(&line[i]);
+    sphere->origin = ft_build_tuple(0, 0, 0,POINT);
+    sp_world_origin = read_point(&line[i]);
     i += skip_vec(&line[i]);
     sphere->radius = ft_atod(&line[i]);
     i += skip_num(&line[i]);
     color = read_color(&line[i]);
     sphere->transformations_matrix = ft_matrix_translation(ft_identity_matrix(4, 4),
-        sphere->origin.x, sphere->origin.x, sphere->origin.x);
-
+        sp_world_origin.x, sp_world_origin.y, sp_world_origin.z);
     ft_add_obj(&scene->objs_list, SPHERE, sphere, color);
     return (EXIT_SUCCESS);
 }
@@ -79,12 +85,14 @@ int set_cylinder(char *line, t_scene *scene)
     t_cylinder  *cylinder;
     int         i;
     int         color;
+    t_tuple     cy_world_origin;
 
     i = 0;
     cylinder = malloc(sizeof(t_cylinder));
     while (is_space(line[i]))
         i++;
-    cylinder->origin = read_vec(&line[i]);
+    cylinder->origin = ft_build_tuple(0, 0, 0,POINT);
+    cy_world_origin = read_vec(&line[i]);
     i += skip_vec(&line[i]);
     cylinder->nrm_vector = read_vec(&line[i]);
     i += skip_vec(&line[i]);
@@ -94,7 +102,7 @@ int set_cylinder(char *line, t_scene *scene)
     i += skip_num(&line[i]);
     color = read_color(&line[i]);
     cylinder->transformations_matrix = ft_matrix_translation(ft_identity_matrix(4, 4),
-        cylinder->origin.x, cylinder->origin.x, cylinder->origin.x);
+        cy_world_origin.x, cy_world_origin.y, cy_world_origin.z);
     ft_add_obj(&scene->objs_list, CYLINDER, cylinder, color);
     return (EXIT_SUCCESS);
 }
@@ -104,18 +112,20 @@ int set_plane(char *line, t_scene *scene)
     t_plane    *plane;
     int         i;
     int         color;
+    t_tuple     pl_world_origin;
 
     i = 0;
     plane = malloc(sizeof(t_plane));
     while (is_space(line[i]))
         i++;
-    plane->origin = read_vec(&line[i]);
+    plane->origin = ft_build_tuple(0, 0, 0,POINT);
+    pl_world_origin = read_vec(&line[i]);
     i += skip_vec(&line[i]);
     plane->nrm_vector = read_vec(&line[i]);
     i += skip_vec(&line[i]);
     color = read_color(&line[i]);
     plane->transformations_matrix = ft_matrix_translation(ft_identity_matrix(4, 4),
-        plane->origin.x, plane->origin.x, plane->origin.x);
+        pl_world_origin.x, pl_world_origin.y, pl_world_origin.z);
     ft_add_obj(&scene->objs_list, PLANE, plane, color);
     return (EXIT_SUCCESS);
 }
