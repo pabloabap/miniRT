@@ -14,9 +14,7 @@
 #include "../../include/mini_rt.h"
 
 static int			ft_color_at(t_ray ray, t_scene *scene, int *canvas_axis);
-static int			ft_color_at(t_ray ray, t_scene *scene, int *canvas_axis);
 static int			ft_detect_ray_inters(t_oitem *o_list, \
-						t_ray_inters **i_list, t_ray ray);
 						t_ray_inters **i_list, t_ray ray);
 static t_pre_comp	ft_prepare_computation(t_ray ray, t_ray_inters *inters);
 
@@ -63,9 +61,7 @@ int	ft_render_scene(t_scene *scene)
  * @return Resultado de la ejecucion.
  */
 static int	ft_color_at(t_ray ray, t_scene *scene, int *canvas_axis)
-static int	ft_color_at(t_ray ray, t_scene *scene, int *canvas_axis)
 {
-	t_pre_comp		comps;
 	t_pre_comp		comps;
 	t_ray_inters	*ray_inters;
 
