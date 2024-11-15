@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/mini_rt.h"
+#include "mini_rt.h"
 
 /**
  * Suma de elementos tipo tupla (punto o vector). 
@@ -67,10 +67,12 @@ t_tuple	ft_mult_tuples(t_tuple a, t_tuple b)
 }
 
 /**
- * Escalar `e` (punto, vector, color o matriz) por `s`. Como la operacion es la
- * misma para todos los elementos geométricos `elem_type` informa del 
- * elemento recibido para castearlo según corresponda.
- * `elem` se actualiza con el valor de la operación.
+ * Escalar puntos, vectores, colores o matrices.
+ * @param e Puntero al elemento a escalar.
+ * @param s Valor de escalación.
+ * @param elem_type `t_element_type` value que informa del elemento recibido
+ * para castearlo según corresponda.
+ * @return Nada, el valor de `e` se actualiza a través de punteros.
 */
 void	ft_scalar_mult(void *e, double s, int e_type)
 {

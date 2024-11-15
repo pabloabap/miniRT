@@ -195,6 +195,7 @@ typedef struct s_pre_comp
 	double	inter_point;
 	t_oitem	*obj;
 	t_tuple	hit_point;
+	t_tuple	over_point;
 	t_tuple	inters_vecs[4];
 	int		inside_flag;
 }	t_pre_comp;
@@ -237,7 +238,6 @@ typedef struct s_scene
 	t_point_light	*light;
 	t_oitem			*objs_list;
 	t_canvas		*canvas;
-	int				z_wall; //Pared final donde se reflejaran los objetos
 	t_camera		*camera;
 	t_ambient		*ambient_light;
 }	t_scene;
@@ -254,9 +254,6 @@ unsigned char	ft_get_b(int trgb);
 
 //___OPERACIONES GENERALES___
 
-t_tuple			ft_build_tuple(double x, double y, double z, int w);
-t_matrix		ft_build_matrix(int rows, int cols);
-t_sphere		ft_build_sphere(t_tuple center, double radius);
 t_tuple			ft_add_tuples(t_tuple a, t_tuple b);
 t_tuple			ft_sub_tuples(t_tuple a, t_tuple b);
 t_tuple			ft_negate_tuple(t_tuple a);
@@ -310,12 +307,15 @@ t_ray_inters	*ft_get_hit(t_ray_inters *i_list);
 int				ft_get_hit_color(t_ray_inters *i_list);
 t_oitem			*ft_get_hitted_obj(t_ray_inters *i_list);
 
-//___LIGHT & SHADING
+//___LIGHT & SHADING___
 
-int				ft_lighting(t_material material, t_point_light light, \
-					t_tuple point, t_tuple *inters_vecs);
+int				ft_lighting(t_pre_comp comps, t_point_light light, \
+					t_tuple *inters_vecs, int is_shadowed);
 t_tuple			ft_sp_normal_at(t_sphere sp, t_tuple surface_point);
 t_tuple			ft_reflection_vector(t_tuple in, t_tuple normal);
+
+//___SHADOWS
+int				ft_is_shadowed(t_scene scene, t_tuple point);
 
 //___GESTION DE ERRORES___
 
@@ -331,10 +331,15 @@ void			ft_matrix_view_transform_check(t_tuple from_p, t_tuple to_p, \
 
 //___UTILS___
 
+int				ft_add_obj(t_oitem **o_list, int o_type, void *obj, int color);
 t_camera		ft_build_camera(int hsize, int vsize, int fov_deg);
 t_point_light	ft_build_light(t_tuple position, double brightness);
+t_matrix		ft_build_matrix(int rows, int cols);
+t_sphere		ft_build_sphere(t_tuple center, double radius);
+t_tuple			ft_build_tuple(double x, double y, double z, int w);
+int				ft_detect_ray_inters(t_oitem *o_list, t_ray_inters **i_list, \
+					t_ray ray);
 int				ft_obj_id_assignment(void);
-int				ft_add_obj(t_oitem **o_list, int o_type, void *obj, int color);
 t_material		ft_default_material(int color);
 void			ft_modify_material_property(t_oitem *o_list, int obj_id, \
 					int property, double value);
