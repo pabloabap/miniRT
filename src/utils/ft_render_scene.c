@@ -68,7 +68,8 @@ static int	ft_color_at(t_ray ray, t_scene *scene, int *canvas_axis)
 	{
 		comps = ft_prepare_computation(ray, ray_inters);
 		ft_mlx_pixel_put(scene->canvas, canvas_axis[X], canvas_axis[Y], \
-			ft_lighting(comps, *(scene->light), &(*(comps.inters_vecs)), 0));
+			ft_lighting(comps, *(scene->light), &(*(comps.inters_vecs)), \
+				ft_is_shadowed(*scene, comps.over_point)));
 	}
 	ft_free_ray_inters_list(ray_inters);
 	return (EXIT_SUCCESS);
@@ -107,7 +108,7 @@ static t_pre_comp	ft_prepare_computation(t_ray ray, t_ray_inters *inters)
 	else
 		comps.inside_flag = 0;
 	comps.over_point = comps.inters_vecs[NORMAL_V];
-	ft_scalar_mult(&(comps.over_point), __DBL_EPSILON__, POINT);
+	ft_scalar_mult(&(comps.over_point), __FLT_EPSILON__, POINT);
 	comps.over_point = ft_add_tuples(comps.hit_point, comps.over_point);
 	return (comps);
 }

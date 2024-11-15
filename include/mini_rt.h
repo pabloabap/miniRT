@@ -309,8 +309,8 @@ t_oitem			*ft_get_hitted_obj(t_ray_inters *i_list);
 
 //___LIGHT & SHADING___
 
-int				ft_lighting(t_pre_comp comps, t_point_light light, t_tuple *inters_vecs, \
-					int is_shadowed);
+int				ft_lighting(t_pre_comp comps, t_point_light light, \
+					t_tuple *inters_vecs, int is_shadowed);
 t_tuple			ft_sp_normal_at(t_sphere sp, t_tuple surface_point);
 t_tuple			ft_reflection_vector(t_tuple in, t_tuple normal);
 

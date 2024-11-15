@@ -89,9 +89,10 @@ int	main(void)
 		return (EXIT_FAILURE);
 	}
 	ft_prepare_canvas(&scene->canvas);
-/* 	// floor
+ 	// floor
 	((t_sphere *)((*scene).objs_list->obj_struct))->transformations_matrix = \
 		ft_matrix_scalation(ft_identity_matrix(4, 4), 10, 0.01, 10);
+	scene->objs_list->material.specular = 0;
 	// left_wall
 	((t_sphere *)((*scene).objs_list->next->obj_struct))->transformations_matrix = \
 			ft_matrix_translation(\
@@ -101,6 +102,7 @@ int	main(void)
 						, X, 90)\
 					, Y, -45), \
 				0, 0, 5);
+	scene->objs_list->next->material.specular = 0;
 	// right_wall
 	((t_sphere *)((*scene).objs_list->next->next->obj_struct))->transformations_matrix = \
 					ft_matrix_translation(\
@@ -110,14 +112,14 @@ int	main(void)
 						, X, 90)\
 					, Y, 45), \
 				0, 0, 5);
+	scene->objs_list->next->next->material.specular = 0;
 	// Camera
 	*(scene->camera) = ft_build_camera(HEIGHT, WIDTH, 60);
 	scene->camera->transformations_matrix = ft_matrix_view_transform(\
-		ft_build_tuple(0, 1.5, -5, POINT), ft_build_tuple(0, 1, 0, POINT), ft_build_tuple(0, 1, 0, VECTOR)); */
+		ft_build_tuple(0, 1.5, -5, POINT), ft_build_tuple(0, 1, 0, POINT), ft_build_tuple(0, 1, 0, VECTOR));
 	ft_render_scene(scene);
 	mlx_put_image_to_window(scene->canvas->mlx_init, \
 		scene->canvas->mlx_win, scene->canvas->img, 0, 0);
-	printf("LLEGA\n");
 	sleep(10);
 	return (0);
 }
