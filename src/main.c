@@ -61,7 +61,7 @@ void	free_scene(t_scene *scene)
 int	main2(void)
 {
 	t_scene	*scene;
-	char	*path = "./scenes/test.rt";
+	char	*path = "./scenes/sphere.rt";
 
 	scene = scene_init();
 	if (!scene)
@@ -71,9 +71,9 @@ int	main2(void)
 		free_scene(scene);
 		return (EXIT_FAILURE);
 	}
-	free_scene(scene);
 	return (0);
 }
+
 
 int	main(void)
 {
@@ -120,6 +120,6 @@ int	main(void)
 	ft_render_scene(scene);
 	mlx_put_image_to_window(scene->canvas->mlx_init, \
 		scene->canvas->mlx_win, scene->canvas->img, 0, 0);
-	sleep(10);
+	sleep(10000000);
 	return (0);
 }

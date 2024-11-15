@@ -1,6 +1,10 @@
 
 #include "mini_rt.h"
 
+/*
+check formato vector (caracteres, negativos, decimales)
+check que no hayan parametros extra
+*/
 int read_obj(char *line)
 {
     int i;
