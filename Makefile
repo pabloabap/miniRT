@@ -50,12 +50,14 @@ SRCS		=	$(MAIN)\
 				./src/ray_intersections/ft_identify_hit.c \
 				./src/ray_intersections/ft_rc_position.c \
 				./src/ray_intersections/ft_sphere_inters.c \
+				./src/shadows/ft_is_shadowed.c \
 				./src/utils/ft_add_object.c \
 				./src/utils/ft_build_camera.c \
 				./src/utils/ft_build_light.c \
 				./src/utils/ft_build_matrix.c \
 				./src/utils/ft_build_sphere.c \
 				./src/utils/ft_build_tuple.c \
+				./src/utils/ft_detect_ray_inters.c \
 				./src/utils/ft_errors.c \
 				./src/utils/ft_errors2.c \
 				./src/utils/ft_free_ray_inters_list.c \
@@ -90,6 +92,7 @@ DIR_MATRIX = ./src/matrix/
 DIR_MATRIX_INVERT = ./src/matrix/invert/
 DIR_MATRIX_TRANSFORMATIONS = ./src/matrix/transformations/
 DIR_RAY_INTERSECTIONS = ./src/ray_intersections/
+DIR_SHADOWS = ./src/shadows/
 DIR_UTILS = ./src/utils/
 DIR_PARSING = ./src/parsing/
 
@@ -122,6 +125,9 @@ $(DIR_OBJS)%.o: $(DIR_MATRIX_TRANSFORMATIONS)%.c $(HEADERS) Makefile | $(DIR_OBJ
 	$(CC) -c $(CFLAGS) $(INCLUDE) $< -o $@
 
 $(DIR_OBJS)%.o: $(DIR_RAY_INTERSECTIONS)%.c $(HEADERS) Makefile | $(DIR_OBJS)
+	$(CC) -c $(CFLAGS) $(INCLUDE) $< -o $@
+
+$(DIR_OBJS)%.o: $(DIR_SHADOWS)%.c $(HEADERS) Makefile | $(DIR_OBJS)
 	$(CC) -c $(CFLAGS) $(INCLUDE) $< -o $@
 
 $(DIR_OBJS)%.o: $(DIR_LIGHT_SHADING)%.c $(HEADERS) Makefile | $(DIR_OBJS)

@@ -34,17 +34,22 @@ static void		ft_specular_reflection(t_point_light light, \
  * @return Retornar el color con los ratios de intensidad aplicados del punto
  *  de impacto.
  */
-int	ft_lighting(t_material material, t_point_light light, t_tuple point, \
-	t_tuple *inters_vecs)
+int	ft_lighting(t_pre_comp comps, t_point_light light, t_tuple *inters_vecs, \
+	int is_shadowed)
 {
 	t_tuple	light_types[4];
 	double	light_dot_normal;
 	double	reflect_dot_eye;
+	t_material material;
+	t_tuple point;
 
+
+	material = comps.obj->material;
+	point = comps.hit_point;
 	inters_vecs[LIGHT_V] = ft_normalize(ft_sub_tuples(light.position, point));
 	light_dot_normal = ft_dot(inters_vecs[LIGHT_V], inters_vecs[NORMAL_V]);
 	ft_default_light_values(&(*light_types), material, light);
-	if (light_dot_normal >= 0)
+	if (light_dot_normal >= 0 && !is_shadowed)
 	{
 		light_types[DIFFUSE] = light_types[EFECTIVE_COLOR];
 		ft_scalar_mult(&(light_types[DIFFUSE]), \

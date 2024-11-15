@@ -20,7 +20,7 @@ t_material	ft_default_material(int color)
 	t_material	m;
 
 	m.color = color;
-	m.ambient = 0.5;
+	m.ambient = 0.9;
 	m.diffuse = 0.7;
 	m.specular = 0.3;
 	m.shininess = 1.0;

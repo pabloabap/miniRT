@@ -1,7 +1,0 @@
-./src/gnl
-./src/light_shading
-./src/main.c
-./src/matrix
-./src/mlx_utils
-./src/ray_intersections
-./src/utils
