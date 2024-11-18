@@ -104,6 +104,11 @@ t_tuple read_point(char *line)
     double  z;
     t_tuple point;
 
+    if (is_vector(line))
+    {
+        printf("point format error\n");
+        exit(1);
+    }
     x = ft_atod(line);
     line += skip_num(line) + 1;
     y = ft_atod(line);

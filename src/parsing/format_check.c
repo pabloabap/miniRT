@@ -15,6 +15,10 @@ int skip_num2(char *line)
     int i;
 
     i = 0;
+    if (line[i] == '-')
+        i++;
+    while (line[i] == '+')
+        i++;
     while ((line[i] >= '0' && line[i] <= '9'))
         i++;
     return (i);
@@ -55,10 +59,10 @@ int is_vector(char *line)
     i = 0;
     if (is_num(&line[i], 0) == -1)
         return (EXIT_FAILURE);
-    i += skip_num2(&line[i]) + 1;
+    i += is_num(&line[i], 0) + 1;
     if (is_num(&line[i], 0) == -1)
         return (EXIT_FAILURE);
-    i += skip_num2(&line[i]) + 1;
+    i += is_num(&line[i], 0) + 1;
     if (is_num(&line[i], 1) == -1)
         return (EXIT_FAILURE);
     return (EXIT_SUCCESS);
