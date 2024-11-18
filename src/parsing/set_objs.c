@@ -23,7 +23,6 @@ int set_camera(char *line, t_scene *scene)
     t_tuple     origin_p;
     t_tuple     to_p;
     double      fov_deg;
-
     i = 0;
     scene->camera = malloc(sizeof(t_camera));
     while (is_space(line[i]))

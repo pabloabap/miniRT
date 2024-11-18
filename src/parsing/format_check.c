@@ -33,9 +33,10 @@ int is_num(char *line, int end)
     i += skip_num2(&line[i]);
     if (line[i] == '.')
         i += skip_num2(&line[i + 1]) + 1;
-    i += skip_space(&line[i]);
+    //i += skip_space(&line[i]);
     if (!end)
     {
+        i += skip_space(&line[i]);
         if (line[i] != ',')
             return (-1);
     }
