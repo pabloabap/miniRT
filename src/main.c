@@ -58,7 +58,7 @@ void	free_scene(t_scene *scene)
 	free(scene);
 }
 
-int	main2(void)
+int	main(void)
 {
 	t_scene	*scene;
 	char	*path = "./scenes/sphere.rt";
@@ -75,7 +75,7 @@ int	main2(void)
 }
 
 
-int	main(void)
+int	main2(void)
 {
 	t_scene	*scene;
 	char	*path = "./scenes/sphere.rt";

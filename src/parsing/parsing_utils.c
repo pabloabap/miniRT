@@ -2,7 +2,7 @@
 
 int is_space(char c)
 {
-    return (c == ' ' || c == '\t' || c == '\n' || 
+    return (c == ' ' || c == '\t' || 
             c == '\r' || c == '\f' || c == '\v');
 }
 
@@ -83,6 +83,11 @@ t_tuple read_vec(char *line)
     double  z;
     t_tuple vec;
 
+    if (is_vector(line))
+    {
+        printf("vector format error\n");
+        exit(1);
+    }
     x = ft_atod(line);
     line += skip_num(line) + 1;
     y = ft_atod(line);
@@ -115,6 +120,11 @@ int read_color(char *line)
     int  g;
     int  b;
 
+    if (is_vector(line))
+    {
+        printf("color format error\n");
+        exit(1);
+    }
     r = ft_atoi(line);
     line += skip_num(line) + 1;
     g = ft_atoi(line);

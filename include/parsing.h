@@ -24,6 +24,11 @@ int set_sphere(char *line, t_scene *scene);
 int set_cylinder(char *line, t_scene *scene);
 int set_plane(char *line, t_scene *scene);
 
+int skip_space(char *line);
+int skip_num2(char *line);
+int is_num(char *line, int end);
+int is_vector(char *line);
+
 int read_color(char *line);
 int set_rgb(int r, int g, int b);
 int get_red(int c);

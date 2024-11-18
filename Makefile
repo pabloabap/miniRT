@@ -74,7 +74,8 @@ SRCS		=	$(MAIN)\
 				./src/parsing/parse_obj.c \
 				./src/parsing/parsing_utils.c \
 				./src/parsing/set_objs.c \
-				./src/parsing/print_scene.c		
+				./src/parsing/print_scene.c	\
+				./src/parsing/format_check.c	
 
 				
 #Object files
