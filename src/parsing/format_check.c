@@ -1,5 +1,39 @@
 #include "mini_rt.h"
 
+int check_line_end(char *line)
+{
+    int i;
+    
+    i = 0;
+    while (line[i])
+    {
+        if (!is_space(line[i]) && line[i] != '\n')
+            return (EXIT_FAILURE);
+        i++;
+    }
+    return (EXIT_SUCCESS);
+}
+
+int valid_char(char c)
+{
+    return  (c == ',' || c == '.' || (c >= '0' && c <= '9') \
+            || c == '+' || c == '-' || is_space(c) || c == '\n');
+}
+
+int check_line(char *line)
+{
+    int i;
+
+    i = 0;
+    while (line[i])
+    {
+        if (!valid_char(line[i]))
+            return (EXIT_FAILURE);
+        i++;
+    }
+    return (EXIT_SUCCESS);
+}
+
 int skip_space(char *line)
 {
     int i;

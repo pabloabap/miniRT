@@ -12,17 +12,17 @@ int read_obj(char *line)
     i = 0;
     while (is_space(line[i]))
         i++;
-    if (line[i] == 'A' && is_space(line[i + 1]))
+    if (line[i] == 'A' && is_space(line[i + 1]) && !check_line(&line[i + 1]))
         return (AMBIENT);
-    if (line[i] == 'C' && is_space(line[i + 1]))
+    if (line[i] == 'C' && is_space(line[i + 1]) && !check_line(&line[i + 1]))
         return (CAMERA);
-    if (line[i] == 'L' && is_space(line[i + 1]))
+    if (line[i] == 'L' && is_space(line[i + 1]) && !check_line(&line[i + 1]))
         return (LIGHT);
-    if (line[i] == 's' && line[i + 1] == 'p' && is_space(line[i + 2]))
+    if (line[i] == 's' && line[i + 1] == 'p' && is_space(line[i + 2]) && !check_line(&line[i + 2]))
         return (SPHERE);
-    if (line[i] == 'p' && line[i + 1] == 'l' && is_space(line[i + 2]))
+    if (line[i] == 'p' && line[i + 1] == 'l' && is_space(line[i + 2]) && !check_line(&line[i + 2]))
         return (PLANE);
-    if (line[i] == 'c' && line[i + 1] == 'y' && is_space(line[i + 2]))
+    if (line[i] == 'c' && line[i + 1] == 'y' && is_space(line[i + 2]) && !check_line(&line[i + 2]))
         return (CYLINDER);
     return (-1);
 }
@@ -33,7 +33,7 @@ int add_object(char *line, t_scene *scene)
 
     obj = read_obj(line);
     if (obj < 0)
-        return (printf("Error (invalid identifier)\n"));
+        exit(printf("Unrecognized characters\n"));
     if (obj == AMBIENT)
         return(set_ambient(&line[1], scene));
    if (obj == CAMERA)

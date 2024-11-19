@@ -61,7 +61,7 @@ void    print_scene(t_scene *scene)
             scene->camera->orientation_v.x,
             scene->camera->orientation_v.y,
             scene->camera->orientation_v.z,
-            scene->camera->fov);
+            (scene->camera->fov * 180)/ M_PI);
     }
     if (scene->light)
     {

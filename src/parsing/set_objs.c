@@ -12,6 +12,9 @@ int set_ambient(char *line, t_scene *scene)
     amb->ratio = ft_atod(line);
     i += skip_num(&line[i]);
     amb->color = read_color(&line[i]);
+    i += skip_vec(&line[i]);
+    if (check_line_end(&line[i]))
+        exit (printf("Unrecognized parameters (ambient)\n"));
     scene->ambient_light = amb;
     return (EXIT_SUCCESS);
 }
@@ -32,6 +35,9 @@ int set_camera(char *line, t_scene *scene)
     to_p = ft_sub_tuples(origin_p, ft_negate_tuple(read_vec(&line[i])));
     i += skip_vec(&line[i]);
     fov_deg = ft_atod(&line[i]);
+    i += skip_num(&line[i]);
+    if (check_line_end(&line [i]))
+        exit (printf("Unrecognized parameters (camera)\n"));
     cam = ft_build_camera(HEIGHT, WIDTH, fov_deg);
     cam.transformations_matrix = ft_matrix_view_transform(origin_p, to_p, ft_build_tuple(0, 1, 0, VECTOR));
     *(scene->camera) = cam;
@@ -52,6 +58,9 @@ int set_light(char *line, t_scene *scene)
     light->brightness = ft_atod(&line[i]);
     i += skip_num(&line[i]);
     light->color = read_color(&line[i]);
+    i += skip_vec(&line[i]);
+    if (check_line_end(&line [i]))
+        exit (printf("Unrecognized parameters (light)\n"));
     scene->light = light;
     return (EXIT_SUCCESS);
 }
@@ -73,6 +82,9 @@ int set_sphere(char *line, t_scene *scene)
     sphere->radius = ft_atod(&line[i]);
     i += skip_num(&line[i]);
     color = read_color(&line[i]);
+    i += skip_vec(&line[i]);
+    if (check_line_end(&line [i]))
+        exit (printf("Unrecognized parameters (sphere)\n"));
     sphere->transformations_matrix = ft_matrix_translation(ft_identity_matrix(4, 4),
         sp_world_origin.x, sp_world_origin.y, sp_world_origin.z);
     ft_add_obj(&scene->objs_list, SPHERE, sphere, color);
@@ -100,6 +112,9 @@ int set_cylinder(char *line, t_scene *scene)
     cylinder->height = ft_atod(&line[i]);
     i += skip_num(&line[i]);
     color = read_color(&line[i]);
+    i += skip_vec(&line[i]);
+    if (check_line_end(&line [i]))
+        exit (printf("Unrecognized parameters (cylinder)\n"));
     cylinder->transformations_matrix = ft_matrix_translation(ft_identity_matrix(4, 4),
         cy_world_origin.x, cy_world_origin.y, cy_world_origin.z);
     ft_add_obj(&scene->objs_list, CYLINDER, cylinder, color);
@@ -123,6 +138,9 @@ int set_plane(char *line, t_scene *scene)
     plane->nrm_vector = read_vec(&line[i]);
     i += skip_vec(&line[i]);
     color = read_color(&line[i]);
+    i += skip_vec(&line[i]);
+    if (check_line_end(&line [i]))
+        exit (printf("Unrecognized parameters (plane)\n"));
     plane->transformations_matrix = ft_matrix_translation(ft_identity_matrix(4, 4),
         pl_world_origin.x, pl_world_origin.y, pl_world_origin.z);
     ft_add_obj(&scene->objs_list, PLANE, plane, color);

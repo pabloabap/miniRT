@@ -22,7 +22,7 @@ int skip_num(char *line)
 int skip_vec(char *line)
 {
     int i = 0;
-    while (!is_space(line[i]))
+    while (line[i] && !is_space(line[i]) && line[i] != '\n')
         i++;
     while (is_space(line[i]))
         i++;
