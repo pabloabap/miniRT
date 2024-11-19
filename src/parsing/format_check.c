@@ -58,6 +58,28 @@ int skip_num2(char *line)
     return (i);
 }
 
+int is_val(char *line)
+{
+    int i;
+
+    i = 0;
+    i += skip_space(line);
+    if (line[i] == '-')
+        i++;
+    while (line[i] == '+')
+        i++;
+    i += skip_num2(&line[i]);
+    if (line[i] == '.')
+    {
+        if (!ft_isdigit(line[i + 1]))
+            return (-1); 
+        i += skip_num2(&line[i + 1]) + 1;
+    }
+    if (!is_space(line[i]) && line[i] != '\n')
+        return (-1);
+    return (i);
+}
+
 int is_num(char *line, int end)
 {
     int i;
@@ -70,19 +92,19 @@ int is_num(char *line, int end)
         i++;
     i += skip_num2(&line[i]);
     if (line[i] == '.')
+    {
+        if (!ft_isdigit(line[i + 1]))
+            return (-1); 
         i += skip_num2(&line[i + 1]) + 1;
-    //i += skip_space(&line[i]);
+    }
     if (!end)
     {
         i += skip_space(&line[i]);
         if (line[i] != ',')
             return (-1);
     }
-    else
-    {
-        if (line[i] && !is_space(line[i]) && line[i] != '\n')
+    else if (line[i] && !is_space(line[i]) && line[i] != '\n')
             return (-1);
-    }
     return (i);
 }
 

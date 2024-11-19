@@ -9,7 +9,7 @@ int set_ambient(char *line, t_scene *scene)
     i = 0;
     while (is_space(line[i]))
         i++;
-    amb->ratio = ft_atod(line);
+    amb->ratio = ft_atod_val(line);
     i += skip_num(&line[i]);
     amb->color = read_color(&line[i]);
     i += skip_vec(&line[i]);
@@ -34,7 +34,7 @@ int set_camera(char *line, t_scene *scene)
     i += skip_vec(&line[i]);
     to_p = ft_sub_tuples(origin_p, ft_negate_tuple(read_vec(&line[i])));
     i += skip_vec(&line[i]);
-    fov_deg = ft_atod(&line[i]);
+    fov_deg = ft_atod_val(&line[i]);
     i += skip_num(&line[i]);
     if (check_line_end(&line [i]))
         exit (printf("Unrecognized parameters (camera)\n"));
@@ -79,7 +79,7 @@ int set_sphere(char *line, t_scene *scene)
     sphere->origin = ft_build_tuple(0, 0, 0,POINT);
     sp_world_origin = read_point(&line[i]);
     i += skip_vec(&line[i]);
-    sphere->radius = ft_atod(&line[i]);
+    sphere->radius = ft_atod_val(&line[i]);
     i += skip_num(&line[i]);
     color = read_color(&line[i]);
     i += skip_vec(&line[i]);
@@ -107,9 +107,9 @@ int set_cylinder(char *line, t_scene *scene)
     i += skip_vec(&line[i]);
     cylinder->nrm_vector = read_vec(&line[i]);
     i += skip_vec(&line[i]);
-    cylinder->diameter = ft_atod(&line[i]);
+    cylinder->diameter = ft_atod_val(&line[i]);
     i += skip_num(&line[i]);
-    cylinder->height = ft_atod(&line[i]);
+    cylinder->height = ft_atod_val(&line[i]);
     i += skip_num(&line[i]);
     color = read_color(&line[i]);
     i += skip_vec(&line[i]);
