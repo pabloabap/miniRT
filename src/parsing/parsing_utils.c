@@ -55,8 +55,6 @@ double  ft_atod(char *line)
     i = 0;
     neg = 1;
 
-    /* if (is_num(line, 1) == -1)
-        exit(printf("value format error\n")); */
     while (is_space(line[i]))
         i++;
     if (line[i] == '-')

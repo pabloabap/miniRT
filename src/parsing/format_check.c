@@ -68,6 +68,8 @@ int is_val(char *line)
         i++;
     while (line[i] == '+')
         i++;
+    if (!ft_isdigit(line[i]))
+        return (-1);
     i += skip_num2(&line[i]);
     if (line[i] == '.')
     {
@@ -90,6 +92,8 @@ int is_num(char *line, int end)
         i++;
     while (line[i] == '+')
         i++;
+    if (!ft_isdigit(line[i]))
+        return (-1);
     i += skip_num2(&line[i]);
     if (line[i] == '.')
     {
