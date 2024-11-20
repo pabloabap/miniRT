@@ -30,7 +30,7 @@ int add_object(char *line, t_scene *scene)
     obj = read_obj(line);
     i = skip_space(line);
     if (obj < 0)
-        exit(printf("Unrecognized characters\n"));
+        return (EXIT_FAILURE);
     if (obj == AMBIENT)
         return (set_ambient(&line[i + 1], scene));
     if (obj == CAMERA)
@@ -58,7 +58,11 @@ int read_scene(char *path, t_scene *scene)
     line = get_next_line(fd);
     while (line)
     {
-        add_object(line, scene);
+        if (add_object(line, scene))
+        {
+            printf("Unrecognized parameters\n");
+            exit(1);
+        }
         free(line);
         line = get_next_line(fd);
     }
