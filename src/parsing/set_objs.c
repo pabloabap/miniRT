@@ -6,9 +6,7 @@ int set_ambient(char *line, t_scene *scene)
     t_ambient   *amb;
 
     amb = malloc(sizeof(t_ambient));
-    i = 0;
-    while (is_space(line[i]))
-        i++;
+    i = skip_space(line);
     amb->ratio = ft_atod_val(&line[i]);
     i += skip_num(&line[i]);
     amb->color = read_color(&line[i]);
@@ -26,10 +24,9 @@ int set_camera(char *line, t_scene *scene)
     t_tuple     origin_p;
     t_tuple     to_p;
     double      fov_deg;
-    i = 0;
+    
+    i = skip_space(line);
     scene->camera = malloc(sizeof(t_camera));
-    while (is_space(line[i]))
-        i++;
     origin_p = read_point(&line[i]);
     i += skip_vec(&line[i]);
     to_p = ft_sub_tuples(origin_p, ft_negate_tuple(read_vec(&line[i])));
@@ -50,9 +47,7 @@ int set_light(char *line, t_scene *scene)
     int     i;
 
     light = malloc(sizeof(t_point_light));
-    i = 0;
-    while (is_space(line[i]))
-        i++;
+    i = skip_space(line);
     light->position = read_point(&line[i]);
     i += skip_vec(&line[i]);
     light->brightness = ft_atod(&line[i]);
@@ -72,10 +67,8 @@ int set_sphere(char *line, t_scene *scene)
     int         color;
     t_tuple     sp_world_origin;
 
-    i = 0;
+    i = skip_space(line);
     sphere = malloc(sizeof(t_sphere));
-    while (is_space(line[i]))
-        i++;
     sphere->origin = ft_build_tuple(0, 0, 0,POINT);
     sp_world_origin = read_point(&line[i]);
     i += skip_vec(&line[i]);
@@ -98,10 +91,8 @@ int set_cylinder(char *line, t_scene *scene)
     int         color;
     t_tuple     cy_world_origin;
 
-    i = 0;
+    i = skip_space(line);
     cylinder = malloc(sizeof(t_cylinder));
-    while (is_space(line[i]))
-        i++;
     cylinder->origin = ft_build_tuple(0, 0, 0,POINT);
     cy_world_origin = read_vec(&line[i]);
     i += skip_vec(&line[i]);
@@ -128,10 +119,8 @@ int set_plane(char *line, t_scene *scene)
     int         color;
     t_tuple     pl_world_origin;
 
-    i = 0;
+    i = skip_space(line);
     plane = malloc(sizeof(t_plane));
-    while (is_space(line[i]))
-        i++;
     plane->origin = ft_build_tuple(0, 0, 0,POINT);
     pl_world_origin = read_vec(&line[i]);
     i += skip_vec(&line[i]);
