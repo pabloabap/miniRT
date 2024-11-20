@@ -4,6 +4,15 @@
 
 # include "./mini_rt.h"
 
+typedef enum e_error
+{
+    FD_ERROR,
+	VAL_ERROR,
+    VEC_ERROR,
+    COL_ERROR,
+    LINE_ERROR
+}	t_error;
+
 int is_space(char c);
 double	add_decimal(float n, char *line);
 double	ft_atod(char *line);
@@ -25,7 +34,7 @@ int set_sphere(char *line, t_scene *scene);
 int set_cylinder(char *line, t_scene *scene);
 int set_plane(char *line, t_scene *scene);
 
-int check_line(char *line);
+int check_line(char *line, int obj);
 int check_line_end(char *line);
 
 int skip_space(char *line);

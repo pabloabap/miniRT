@@ -1,31 +1,26 @@
 
 #include "mini_rt.h"
 
-/*
-check formato vector (caracteres, negativos, decimales)
-check que no hayan parametros extra
-*/
 int read_obj(char *line)
 {
     int i;
 
-    i = 0;
-    while (is_space(line[i]))
-        i++;
-    if (line[i] == 'A' && is_space(line[i + 1]) && !check_line(&line[i + 1]))
-        return (AMBIENT);
-    if (line[i] == 'C' && is_space(line[i + 1]) && !check_line(&line[i + 1]))
-        return (CAMERA);
-    if (line[i] == 'L' && is_space(line[i + 1]) && !check_line(&line[i + 1]))
-        return (LIGHT);
-    if (line[i] == 's' && line[i + 1] == 'p' && is_space(line[i + 2]) && !check_line(&line[i + 2]))
-        return (SPHERE);
-    if (line[i] == 'p' && line[i + 1] == 'l' && is_space(line[i + 2]) && !check_line(&line[i + 2]))
-        return (PLANE);
-    if (line[i] == 'c' && line[i + 1] == 'y' && is_space(line[i + 2]) && !check_line(&line[i + 2]))
-        return (CYLINDER);
+    i = skip_space(line);
+    if (line[i] == 'A' && is_space(line[i + 1]))
+        return (check_line(&line[i + 1], AMBIENT));
+    if (line[i] == 'C' && is_space(line[i + 1]))
+        return (check_line(&line[i + 1], CAMERA));
+    if (line[i] == 'L' && is_space(line[i + 1]))
+        return (check_line(&line[i + 1], LIGHT));
+    if (line[i] == 's' && line[i + 1] == 'p' && is_space(line[i + 2]))
+        return (check_line(&line[i + 2], SPHERE));
+    if (line[i] == 'p' && line[i + 1] == 'l' && is_space(line[i + 2]))
+        return (check_line(&line[i + 2], PLANE));
+    if (line[i] == 'c' && line[i + 1] == 'y' && is_space(line[i + 2]))
+        return (check_line(&line[i + 1], CYLINDER));
     return (-1);
 }
+
 
 int add_object(char *line, t_scene *scene)
 {
@@ -35,9 +30,9 @@ int add_object(char *line, t_scene *scene)
     if (obj < 0)
         exit(printf("Unrecognized characters\n"));
     if (obj == AMBIENT)
-        return(set_ambient(&line[1], scene));
+        return (set_ambient(&line[1], scene));
    if (obj == CAMERA)
-        return(set_camera(&line[1], scene));
+        return (set_camera(&line[1], scene));
     if (obj == LIGHT)
         return (set_light(&line[1], scene));
     if (obj == SPHERE) 

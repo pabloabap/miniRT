@@ -71,6 +71,7 @@ int	main(void)
 		free_scene(scene);
 		return (EXIT_FAILURE);
 	}
+	free_scene(scene);
 	return (0);
 }
 

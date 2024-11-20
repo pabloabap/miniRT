@@ -20,7 +20,7 @@ int valid_char(char c)
             || c == '+' || c == '-' || is_space(c) || c == '\n');
 }
 
-int check_line(char *line)
+int check_line(char *line, int obj)
 {
     int i;
 
@@ -28,10 +28,10 @@ int check_line(char *line)
     while (line[i])
     {
         if (!valid_char(line[i]))
-            return (EXIT_FAILURE);
+            return (-1);
         i++;
     }
-    return (EXIT_SUCCESS);
+    return (obj);
 }
 
 int skip_space(char *line)
