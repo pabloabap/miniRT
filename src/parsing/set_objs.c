@@ -9,7 +9,7 @@ int set_ambient(char *line, t_scene *scene)
     i = 0;
     while (is_space(line[i]))
         i++;
-    amb->ratio = ft_atod_val(line);
+    amb->ratio = ft_atod_val(&line[i]);
     i += skip_num(&line[i]);
     amb->color = read_color(&line[i]);
     i += skip_vec(&line[i]);

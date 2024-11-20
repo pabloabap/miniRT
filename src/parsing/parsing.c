@@ -25,22 +25,24 @@ int read_obj(char *line)
 int add_object(char *line, t_scene *scene)
 {
     int obj;
+    int i;
 
     obj = read_obj(line);
+    i = skip_space(line);
     if (obj < 0)
         exit(printf("Unrecognized characters\n"));
     if (obj == AMBIENT)
-        return (set_ambient(&line[1], scene));
-   if (obj == CAMERA)
-        return (set_camera(&line[1], scene));
+        return (set_ambient(&line[i + 1], scene));
+    if (obj == CAMERA)
+        return (set_camera(&line[i + 1], scene));
     if (obj == LIGHT)
-        return (set_light(&line[1], scene));
+        return (set_light(&line[i + 1], scene));
     if (obj == SPHERE) 
-        return (set_sphere(&line[2], scene));
+        return (set_sphere(&line[i + 2], scene));
     if (obj == PLANE)
-        return (set_plane(&line[2], scene));
+        return (set_plane(&line[i + 2], scene));
     if (obj == CYLINDER)
-        return (set_cylinder(&line[2], scene));
+        return (set_cylinder(&line[i + 2], scene));
     return (EXIT_SUCCESS);
 }
 
