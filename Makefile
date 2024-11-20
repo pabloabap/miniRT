@@ -75,7 +75,9 @@ SRCS		=	$(MAIN)\
 				./src/parsing/parsing_utils.c \
 				./src/parsing/set_objs.c \
 				./src/parsing/print_scene.c	\
-				./src/parsing/format_check.c	
+				./src/parsing/format_check.c \
+				./src/parsing/ft_atod.c \
+				./src/parsing/parse_color.c
 
 				
 #Object files
