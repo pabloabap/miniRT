@@ -68,9 +68,11 @@ int set_sphere(char *line, t_scene *scene)
 	i += skip_num(&line[i]);
 	color = read_color(&line[i]);
 	i += skip_vec(&line[i]);
-	sphere->transformations_matrix = ft_matrix_translation(ft_identity_matrix(4, 4),
-		sp_world_origin.x, sp_world_origin.y, sp_world_origin.z);
 	ft_add_obj(&scene->objs_list, SPHERE, sphere, color);
+	while (scene->objs_list->next)
+		scene->objs_list = scene->objs_list->next;
+	scene->objs_list->transformations_matrix = ft_matrix_translation(ft_identity_matrix(4, 4),
+		sp_world_origin.x, sp_world_origin.y, sp_world_origin.z);
 	return (check_line_end(&line[i]));
 }
 
@@ -116,8 +118,10 @@ int set_plane(char *line, t_scene *scene)
 	i += skip_vec(&line[i]);
 	color = read_color(&line[i]);
 	i += skip_vec(&line[i]);
-	plane->transformations_matrix = ft_matrix_translation(ft_identity_matrix(4, 4),
-		pl_world_origin.x, pl_world_origin.y, pl_world_origin.z);
 	ft_add_obj(&scene->objs_list, PLANE, plane, color);
+	while (scene->objs_list->next)
+		scene->objs_list = scene->objs_list->next;
+	scene->objs_list->transformations_matrix = ft_matrix_translation(ft_identity_matrix(4, 4),
+		pl_world_origin.x, pl_world_origin.y, pl_world_origin.z);
 	return (check_line_end(&line[i]));
 }

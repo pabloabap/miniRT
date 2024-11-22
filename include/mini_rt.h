@@ -138,6 +138,7 @@ typedef struct s_oitem
 	int				obj_id;
 	int				obj_type;
 	t_material		material;
+	t_matrix	transformations_matrix;
 	void			*obj_struct;
 	struct s_oitem	*prev;
 	struct s_oitem	*next;
