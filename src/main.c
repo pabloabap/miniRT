@@ -91,11 +91,11 @@ int	main(void)
 	}
 	ft_prepare_canvas(&scene->canvas);
  	// floor
-	((t_sphere *)((*scene).objs_list->obj_struct))->transformations_matrix = \
+	scene->objs_list->transformations_matrix = \
 		ft_matrix_scalation(ft_identity_matrix(4, 4), 10, 0.01, 10);
 	scene->objs_list->material.specular = 0;
 	// left_wall
-	((t_sphere *)((*scene).objs_list->next->obj_struct))->transformations_matrix = \
+	scene->objs_list->next->transformations_matrix = \
 			ft_matrix_translation(\
 				ft_matrix_rotation(\
 					ft_matrix_rotation(\
@@ -105,7 +105,7 @@ int	main(void)
 				0, 0, 5);
 	scene->objs_list->next->material.specular = 0;
 	// right_wall
-	((t_sphere *)((*scene).objs_list->next->next->obj_struct))->transformations_matrix = \
+	scene->objs_list->next->next->transformations_matrix = \
 					ft_matrix_translation(\
 				ft_matrix_rotation(\
 					ft_matrix_rotation(\
@@ -121,6 +121,6 @@ int	main(void)
 	ft_render_scene(scene);
 	mlx_put_image_to_window(scene->canvas->mlx_init, \
 		scene->canvas->mlx_win, scene->canvas->img, 0, 0);
-	sleep(5);
+	sleep(500);
 	return (0);
 }

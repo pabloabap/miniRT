@@ -149,14 +149,12 @@ typedef struct s_sphere
 {
 	t_tuple		origin;		//Centro de la circunferencia (punto)
 	double		radius;		//Radio de la circunferencia
-	t_matrix	transformations_matrix;
 }	t_sphere;
 
 typedef struct s_plane
 {
 	t_tuple		origin;
 	t_tuple		nrm_vector; //Rango [-1, 1]
-	t_matrix	transformations_matrix;
 }	t_plane;
 
 typedef struct s_cylinder
@@ -165,7 +163,6 @@ typedef struct s_cylinder
 	t_tuple		nrm_vector;//Rango [-1, 1]
 	double		diameter;
 	double		height;
-	t_matrix	transformations_matrix;
 }	t_cylinder;
 
 typedef union u_model
@@ -312,7 +309,7 @@ t_oitem			*ft_get_hitted_obj(t_ray_inters *i_list);
 
 int				ft_lighting(t_pre_comp comps, t_point_light light, \
 					t_tuple *inters_vecs, int is_shadowed);
-t_tuple			ft_sp_normal_at(t_sphere sp, t_tuple surface_point);
+t_tuple			ft_sp_normal_at(t_oitem obj, t_tuple surface_point);
 t_tuple			ft_reflection_vector(t_tuple in, t_tuple normal);
 
 //___SHADOWS
@@ -336,7 +333,6 @@ int				ft_add_obj(t_oitem **o_list, int o_type, void *obj, int color);
 t_camera		ft_build_camera(int hsize, int vsize, int fov_deg);
 t_point_light	ft_build_light(t_tuple position, double brightness);
 t_matrix		ft_build_matrix(int rows, int cols);
-t_sphere		ft_build_sphere(t_tuple center, double radius);
 t_tuple			ft_build_tuple(double x, double y, double z, int w);
 int				ft_detect_ray_inters(t_oitem *o_list, t_ray_inters **i_list, \
 					t_ray ray);
@@ -345,6 +341,8 @@ t_material		ft_default_material(int color);
 void			ft_modify_material_property(t_oitem *o_list, int obj_id, \
 					int property, double value);
 int				ft_render_scene(t_scene *scene);
+void			ft_set_transformation_matrix(t_oitem *objs_list, \
+					t_tuple obj_world_origin);
 void			ft_prepare_canvas(t_canvas **canvas);
 t_matrix		ft_tuple_to_matrix(t_tuple tuple);
 t_tuple			ft_matrix_to_tuple(t_matrix tuple);

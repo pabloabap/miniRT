@@ -51,11 +51,9 @@ SRCS		=	$(MAIN)\
 				./src/ray_intersections/ft_rc_position.c \
 				./src/ray_intersections/ft_sphere_inters.c \
 				./src/shadows/ft_is_shadowed.c \
-				./src/utils/ft_add_object.c \
 				./src/utils/ft_build_camera.c \
 				./src/utils/ft_build_light.c \
 				./src/utils/ft_build_matrix.c \
-				./src/utils/ft_build_sphere.c \
 				./src/utils/ft_build_tuple.c \
 				./src/utils/ft_detect_ray_inters.c \
 				./src/utils/ft_errors.c \
@@ -66,6 +64,7 @@ SRCS		=	$(MAIN)\
 				./src/utils/ft_prepare_canvas.c \
 				./src/utils/ft_ray_for_pixel.c \
 				./src/utils/ft_render_scene.c \
+				./src/utils/ft_set_transformation_matrix.c \
 				./src/utils/ft_tuple_to_matrix.c \
 				./src/utils/ft_utils.c \
 				./src/utils/general_op.c \
@@ -176,50 +175,3 @@ valg:
 	valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all ./miniRT scenes/test.rt 
 
 .PHONY: all clean fclean re libft mlx
-
-OTHERS = ./debug/ft_fill_matrix.c \
-				./debug/ft_print_i_list.c \
-				./debug/ft_print_matrix.c \
-				./debug/ft_print_tuple.c \
-				./src/mlx_utils/ft_color_utils.c \
-				./src/mlx_utils/mlx_utils.c \
-				./src/gnl/ft_get_next_line_utils.c \
-				./src/gnl/ft_get_next_line.c \
-				./src/light_shading/ft_lighting.c \
-				./src/light_shading/ft_refection_vector.c \
-				./src/light_shading/ft_sp_normal_at.c \
-				./src/matrix/ft_identity_matrix.c \
-				./src/matrix/ft_matrix_mult.c \
-				./src/matrix/ft_matrix_transpos.c \
-				./src/matrix/invert/ft_cofactor.c \
-				./src/matrix/invert/ft_inverse_matrix.c \
-				./src/matrix/invert/ft_matrix_det.c \
-				./src/matrix/invert/ft_submatrix.c \
-				./src/matrix/transformations/ft_matrix_rotation.c \
-				./src/matrix/transformations/ft_matrix_scalation.c \
-				./src/matrix/transformations/ft_matrix_shearing.c \
-				./src/matrix/transformations/ft_matrix_translations.c \
-				./src/ray_intersections/ft_add_inters_sorted.c \
-				./src/ray_intersections/ft_get_hit_color.c \
-				./src/ray_intersections/ft_get_hit.c \
-				./src/ray_intersections/ft_get_hitted_obj.c \
-				./src/ray_intersections/ft_identify_hit.c \
-				./src/ray_intersections/ft_rc_position.c \
-				./src/ray_intersections/ft_sphere_inters.c \
-				./src/utils/ft_add_item_to_inters_list.c \
-				./src/utils/ft_add_object.c \
-				./src/utils/ft_build_light.c \
-				./src/utils/ft_build_matrix.c \
-				./src/utils/ft_build_sphere.c \
-				./src/utils/ft_build_tuple.c \
-				./src/utils/ft_errors.c \
-				./src/utils/ft_errors2.c \
-				./src/utils/ft_lst_inters_item.c \
-				./src/utils/ft_material.c \
-				./src/utils/ft_matrix_to_tuple.c \
-				./src/utils/ft_prepare_scene.c \
-				./src/utils/ft_render_scene.c \
-				./src/utils/ft_tuple_to_matrix.c \
-				./src/utils/ft_utils.c \
-				./src/utils/general_op.c \
-				./src/utils/vec_op.c \

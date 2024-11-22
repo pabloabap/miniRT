@@ -35,11 +35,11 @@ int	ft_detect_ray_inters(t_oitem *o_list, t_ray_inters **i_list, t_ray ray)
 		tmp = ray;
 		tmp.origin = ft_matrix_to_tuple(ft_matrix_mult(\
 				ft_inverse_matrix(\
-				&((t_sphere *)(o_list->obj_struct))->transformations_matrix), \
+				&(o_list->transformations_matrix)), \
 				ft_tuple_to_matrix(ray.origin)));
 		tmp.direction = ft_matrix_to_tuple(ft_matrix_mult(\
 				ft_inverse_matrix(\
-				&((t_sphere *)(o_list->obj_struct))->transformations_matrix), \
+				&(o_list->transformations_matrix)), \
 				ft_tuple_to_matrix(ray.direction)));
 		ft_sphere_inters(tmp, o_list, i_list);
 		o_list = o_list->next;
