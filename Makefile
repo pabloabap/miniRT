@@ -10,7 +10,7 @@ DIR_MLX		= ./lib/minilibx-linux/
 MLX_AR		= ./lib/minilibx-linux/libmlx.a
 
 CC			= gcc
-CFLAGS		= -g -Wall -Wextra -Werror
+CFLAGS		= -g -Wall -Wextra -Werror 
 MLXFLAGS	= -L$(DIR_MLX) -lmlx -lXext -lX11
 LIBFT		= -L$(DIR_LIBFT) -lft
 
@@ -74,7 +74,10 @@ SRCS		=	$(MAIN)\
 				./src/parsing/parse_obj.c \
 				./src/parsing/parsing_utils.c \
 				./src/parsing/set_objs.c \
-				./src/parsing/print_scene.c		
+				./src/parsing/print_scene.c	\
+				./src/parsing/format_check.c \
+				./src/parsing/ft_atod.c \
+				./src/parsing/parse_color.c
 
 				
 #Object files
@@ -165,6 +168,9 @@ re: fclean all
 
 do:
 	./miniRT
+
+chrono:
+
 
 valg:
 	valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all ./miniRT scenes/test.rt 

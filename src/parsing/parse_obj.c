@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_obj.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ilorenzo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/20 18:02:01 by ilorenzo          #+#    #+#             */
+/*   Updated: 2024/11/20 18:02:03 by ilorenzo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "mini_rt.h"
 
 static int	ft_fill_new_obj(t_oitem *new, int o_type, void *obj, int color)
@@ -8,22 +20,22 @@ static int	ft_fill_new_obj(t_oitem *new, int o_type, void *obj, int color)
 	new->prev = NULL;
 	new->next = NULL;
 	if (SPHERE == o_type)
-    {
-        obj = (t_sphere *)obj;
+	{
+		obj = (t_sphere *)obj;
 		new->obj_struct = obj;
-        return (EXIT_SUCCESS);
-    }
-    if (PLANE == o_type)
+		return (EXIT_SUCCESS);
+	}
+	if (PLANE == o_type)
 	{
 		obj = (t_plane *)obj;
 		new->obj_struct = obj;
-        return (EXIT_SUCCESS);
+		return (EXIT_SUCCESS);
 	}
 	if (CYLINDER == o_type)
 	{
 		obj = (t_cylinder *)obj;
 		new->obj_struct = obj;
-        return (EXIT_SUCCESS);
+		return (EXIT_SUCCESS);
 	}
 	return (EXIT_FAILURE);
 }
