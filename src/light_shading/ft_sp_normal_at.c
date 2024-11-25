@@ -33,6 +33,8 @@ t_tuple	ft_sp_normal_at(t_oitem obj, t_tuple surface_point)
 	world_normal = ft_matrix_to_tuple(ft_matrix_mult(ft_matrix_transpos(\
 		ft_inverse_matrix(&obj.transformations_matrix)), \
 		ft_tuple_to_matrix(obj_normal)));
+	if (obj.obj_type == PLANE)
+		world_normal = ((t_plane *)(obj.obj_struct))->nrm_vector;
 	world_normal.w = 0;
 	return (ft_normalize(world_normal));
 }

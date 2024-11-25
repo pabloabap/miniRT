@@ -24,7 +24,6 @@ SRCS		=	$(MAIN)\
 				./debug/ft_print_i_list.c \
 				./debug/ft_print_matrix.c \
 				./debug/ft_print_tuple.c \
-				./src/mlx_utils/ft_color_utils.c \
 				./src/mlx_utils/mlx_utils.c \
 				./src/gnl/ft_get_next_line_utils.c \
 				./src/gnl/ft_get_next_line.c \
@@ -55,6 +54,8 @@ SRCS		=	$(MAIN)\
 				./src/utils/ft_build_light.c \
 				./src/utils/ft_build_matrix.c \
 				./src/utils/ft_build_tuple.c \
+				./src/utils/ft_color_utils.c \
+				./src/utils/ft_color_utils_2.c \
 				./src/utils/ft_detect_ray_inters.c \
 				./src/utils/ft_errors.c \
 				./src/utils/ft_errors2.c \
@@ -64,7 +65,7 @@ SRCS		=	$(MAIN)\
 				./src/utils/ft_prepare_canvas.c \
 				./src/utils/ft_ray_for_pixel.c \
 				./src/utils/ft_render_scene.c \
-				./src/utils/ft_set_transformation_matrix.c \
+				./src/utils/ft_set_transformations_matrix.c \
 				./src/utils/ft_tuple_to_matrix.c \
 				./src/utils/ft_utils.c \
 				./src/utils/general_op.c \

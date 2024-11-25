@@ -12,44 +12,41 @@
 
 #include "../../include/mini_rt.h"
 
+static int	ft_final_material_color(int mat_color, int ambt_color);
+
 /** Pendiente de completar. Son atributos de un objeto
  * para calcular como le afecta la luz.
  */
-t_material	ft_default_material(int color)
+t_material	ft_default_material(int color, t_ambient *ambt)
 {
 	t_material	m;
 
-	m.color = color;
-	m.ambient = 0.5;
+	m.color = ft_final_material_color(color, ambt->color);
+	m.ambient = ambt->ratio;
 	m.diffuse = 0.7;
 	m.specular = 0.3;
 	m.shininess = 200.0;
 	return (m);
 }
 
-/** Modifica las propiedades de la propiedad `material` de una
- * estructure `t_oitem` a traves de punteros.
- * @param o_list Puntero al primer elemento de una lista de objetos.
- * @param obj_id ID del objeto al que modificar la propiedad.
- * @param property Elemento de la enum `t_light_types` que se quiere modificar.
- * @param value Valor que se quiere dar a la propedad.
+/**
+ * Calcula el color final de un objeto, obtenido de la combinación del
+ * color original del objeto y el color de la luz ambiente. Primero se 
+ * normalizan para operarlos y luego se escalan al rango 0-255 para conseguir
+ * el color final.
+ * @param mat_color Entero con el código de color original del material.
+ * @param ambt_color Entero con el código de color de la luz ambiente.
+ * @return Entero con el color final del material. 
  */
-void	ft_modify_material_property(t_oitem *o_list, int obj_id, \
-	int property, double value)
+static int	ft_final_material_color(int mat_color, int ambt_color)
 {
-	while (o_list && o_list->obj_id != obj_id)
-		o_list = o_list->next;
-	if (o_list)
-	{
-		if (EFECTIVE_COLOR == property)
-			o_list->material.color = (int)value;
-		if (AMBIENT == property)
-			o_list->material.ambient = value;
-		if (DIFFUSE == property)
-			o_list->material.diffuse = value;
-		if (SPECULAR == property)
-			o_list->material.specular = value;
-		if (SHININESS == property)
-			o_list->material.shininess = value;
-	}
+	t_tuple	mat_color_t;
+	t_tuple	ambt_color_t;
+	t_tuple	final_color_t;
+
+	mat_color_t = ft_normalize_color(mat_color);
+	ambt_color_t = ft_normalize_color(ambt_color);
+	final_color_t = ft_mult_tuples(mat_color_t, ambt_color_t);
+	return (ft_create_trgb(0, final_color_t.x * 255, final_color_t.y * 255, \
+		final_color_t.z * 255));
 }

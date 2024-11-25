@@ -58,24 +58,6 @@ void	free_scene(t_scene *scene)
 	free(scene);
 }
 
-int	main2(void)
-{
-	t_scene	*scene;
-	char	*path = "./scenes/sphere.rt";
-
-	scene = scene_init();
-	if (!scene)
-		return (perror("Scene initialization: "), EXIT_FAILURE);
-	if (read_scene(path, scene))
-	{
-		free_scene(scene);
-		return (EXIT_FAILURE);
-	}
-	free_scene(scene);
-	return (0);
-}
-
-
 int	main(void)
 {
 	t_scene	*scene;
@@ -90,37 +72,10 @@ int	main(void)
 		return (EXIT_FAILURE);
 	}
 	ft_prepare_canvas(&scene->canvas);
- 	// floor
-	scene->objs_list->transformations_matrix = \
-		ft_matrix_scalation(ft_identity_matrix(4, 4), 10, 0.01, 10);
-	scene->objs_list->material.specular = 0;
-	// left_wall
-	scene->objs_list->next->transformations_matrix = \
-			ft_matrix_translation(\
-				ft_matrix_rotation(\
-					ft_matrix_rotation(\
-						ft_matrix_scalation(ft_identity_matrix(4, 4), 10, 0.01, 10)\
-						, X, 90)\
-					, Y, -45), \
-				0, 0, 5);
-	scene->objs_list->next->material.specular = 0;
-	// right_wall
-	scene->objs_list->next->next->transformations_matrix = \
-					ft_matrix_translation(\
-				ft_matrix_rotation(\
-					ft_matrix_rotation(\
-						ft_matrix_scalation(ft_identity_matrix(4, 4), 10, 0.01, 10)\
-						, X, 90)\
-					, Y, 45), \
-				0, 0, 5);
-	scene->objs_list->next->next->material.specular = 0;
-	// Camera
-	*(scene->camera) = ft_build_camera(HEIGHT, WIDTH, 60);
-	scene->camera->transformations_matrix = ft_matrix_view_transform(\
-		ft_build_tuple(0, 1.5, -5, POINT), ft_build_tuple(0, 1, 0, POINT), ft_build_tuple(0, 1, 0, VECTOR));
 	ft_render_scene(scene);
 	mlx_put_image_to_window(scene->canvas->mlx_init, \
 		scene->canvas->mlx_win, scene->canvas->img, 0, 0);
-	sleep(500);
+	ft_putendl_fd("TEMRINADO", 1);
+	sleep(50);
 	return (0);
 }
