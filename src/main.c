@@ -105,7 +105,7 @@ int	main(int ag, char **av)
 		return (EXIT_FAILURE);
 	}
 	ft_prepare_canvas(&scene->canvas);
- 	// floor
+ 	/* // floor
 	((t_sphere *)((*scene).objs_list->obj_struct))->transformations_matrix = \
 		ft_matrix_scalation(ft_identity_matrix(4, 4), 10, 0.01, 10);
 	((t_sphere *)((*scene).objs_list->obj_struct))->inv_transform = ft_inverse_matrix( \
@@ -134,7 +134,7 @@ int	main(int ag, char **av)
 				0, 0, 5);
 	((t_sphere *)((*scene).objs_list->next->next->obj_struct))->inv_transform = ft_inverse_matrix( \
 	&((t_sphere *)((*scene).objs_list->next->next->obj_struct))->transformations_matrix); 
-	scene->objs_list->next->next->material.specular = 0;
+	scene->objs_list->next->next->material.specular = 0; */
 	// Camera
 	*(scene->camera) = ft_build_camera(HEIGHT, WIDTH, 60);
 	scene->camera->transformations_matrix = ft_matrix_view_transform(\

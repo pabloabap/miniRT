@@ -10,7 +10,7 @@ DIR_MLX		= ./lib/minilibx-linux/
 MLX_AR		= ./lib/minilibx-linux/libmlx.a
 
 CC			= gcc
-CFLAGS		= -g -Wall -Wextra  -O3
+CFLAGS		= -g -Wall -Wextra -O3
 MLXFLAGS	= -L$(DIR_MLX) -lmlx -lXext -lX11
 LIBFT		= -L$(DIR_LIBFT) -lft
 

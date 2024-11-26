@@ -28,7 +28,7 @@ int	read_obj(char *line)
 	if (line[i] == 'p' && line[i + 1] == 'l' && is_space(line[i + 2]))
 		return (check_line(&line[i + 2], PLANE));
 	if (line[i] == 'c' && line[i + 1] == 'y' && is_space(line[i + 2]))
-		return (check_line(&line[i + 1], CYLINDER));
+		return (check_line(&line[i + 2], CYLINDER));
 	return (-1);
 }
 
@@ -67,10 +67,13 @@ int	read_scene(char *path, t_scene *scene)
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (add_object(line, scene))
+		if (line[0] != '\n')
 		{
-			printf("Unrecognized parameters\n");
-			exit(1);
+			if (add_object(line, scene))
+			{
+				printf("Unrecognized parameters\n");
+				exit(1);
+			}
 		}
 		free(line);
 		line = get_next_line(fd);
