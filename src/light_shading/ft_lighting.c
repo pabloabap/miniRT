@@ -12,7 +12,6 @@
 
 #include "../../include/mini_rt.h"
 
-static t_tuple	ft_normalize_color(int color);
 static int		ft_final_color(t_tuple ambt, t_tuple diff, t_tuple spec, \
 	double color);
 static void		ft_default_light_values(t_tuple *light_types, \
@@ -77,18 +76,6 @@ static void	ft_specular_reflection(t_point_light light, \
 		*specular_light = ft_build_tuple(light.brightness, \
 			light.brightness, light.brightness, COLOR);
 	}
-}
-
-/**
- * Función que normaliza el color de la escala 0.0 - 255.0 a 0.0 - 1.0
- * para calcular los ratios de luminosidad.
- * @param color Entero con el codigo de color a normalizar.
- * @return `t_tuple` de tipo COLOR con los colores RGB normalizados.
- */
-static t_tuple	ft_normalize_color(int color)
-{
-	return (ft_build_tuple(ft_get_r(color) / 255.0, ft_get_g(color) / 255.0, \
-		ft_get_b(color) / 255.0, COLOR));
 }
 
 /**

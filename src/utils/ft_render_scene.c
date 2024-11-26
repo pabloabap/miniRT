@@ -96,7 +96,7 @@ static t_pre_comp	ft_prepare_computation(t_ray ray, t_ray_inters *inters)
 			VECTOR);
 	comps.hit_point = ft_add_tuples(ray.origin, ray.direction);
 	comps.inters_vecs[NORMAL_V] = \
-			ft_sp_normal_at(*(t_sphere *)(hitted->obj->obj_struct), \
+			ft_sp_normal_at(*(hitted->obj), \
 				comps.hit_point);
 	comps.inters_vecs[EYE_V] = ft_negate_tuple(ft_normalize(ray.direction));
 	if (0.0 > ft_dot(comps.inters_vecs[NORMAL_V], comps.inters_vecs[EYE_V]))

@@ -12,6 +12,8 @@
 
 #include "mini_rt.h"
 
+static void	ft_plane_inters(t_ray ray, t_oitem *plane, t_ray_inters **i_list);
+
 /**
  * Detecta los puntos de interseccion de los rayos con origen en la camara y 
  * los objetos de la escena.
@@ -35,14 +37,38 @@ int	ft_detect_ray_inters(t_oitem *o_list, t_ray_inters **i_list, t_ray ray)
 		tmp = ray;
 		tmp.origin = ft_matrix_to_tuple(ft_matrix_mult(\
 				ft_inverse_matrix(\
-				&((t_sphere *)(o_list->obj_struct))->transformations_matrix), \
+				&(o_list->transformations_matrix)), \
 				ft_tuple_to_matrix(ray.origin)));
 		tmp.direction = ft_matrix_to_tuple(ft_matrix_mult(\
 				ft_inverse_matrix(\
-				&((t_sphere *)(o_list->obj_struct))->transformations_matrix), \
+				&(o_list->transformations_matrix)), \
 				ft_tuple_to_matrix(ray.direction)));
-		ft_sphere_inters(tmp, o_list, i_list);
+		if (SPHERE == o_list->obj_type)
+			ft_sphere_inters(tmp, o_list, i_list);
+		else if (PLANE == o_list->obj_type)
+			ft_plane_inters(tmp, o_list, i_list);
 		o_list = o_list->next;
 	}
 	return (status);
+}
+
+/**
+ * Añade datos de intersección de un rayo con un objeto de tipo plano a la
+ * lista de intersecciones del rayo.
+ * @param ray Rayo que intersecta.
+ * @param plane Puntero a un objeto de tipo plano.
+ * @param i_list Lista de intersecciones del rayo.
+ * @return Nada. Añade la intersección del rayo con el plano, si la hay,
+ * 		a la lista de intersecciones del rayo.
+ */
+static void	ft_plane_inters(t_ray ray, t_oitem *plane, t_ray_inters **i_list)
+{
+	double	tan;
+
+	if (fabs(ray.direction.y) > __FLT_EPSILON__)
+	{
+		tan = -ray.origin.y / ray.direction.y;
+		if (!isnan(tan))
+			ft_add_inters_sorted(i_list, tan, plane);
+	}
 }

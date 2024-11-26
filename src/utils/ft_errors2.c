@@ -64,3 +64,14 @@ void	ft_matrix_view_transform_check(t_tuple from_p, t_tuple to_p, \
 		exit (1);
 	}
 }
+
+/** Retorna mensaje de error el vector `v_v` no está normalizado*/
+void	ft_normalized_vec_check(t_tuple v_v)
+{
+	if (ft_magnitude(v_v) < 0.9 || ft_magnitude(v_v) > 1.1)
+	{
+		ft_putstr_fd("ERROR - Vector normal, no normalizado. ", 2);
+		ft_putendl_fd("Magnitud distinta a 1.", 2);
+		exit (1);
+	}
+}

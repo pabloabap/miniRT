@@ -29,7 +29,7 @@ void	ft_sphere_inters(t_ray ray, t_oitem *sphere, t_ray_inters **i_list)
 	tan[1] = (-v[1] + sqrt(ft_discriminant(&v[0]))) / (2 * v[0]);
 	if (!isnan(tan[0]))
 		ft_add_inters_sorted(i_list, tan[0], sphere);
-	if (!isnan(tan[1]))
+	if (!isnan(tan[1]) && (!isnan(tan[0]) || tan[0] != tan[1]))
 		ft_add_inters_sorted(i_list, tan[1], sphere);
 }
 
