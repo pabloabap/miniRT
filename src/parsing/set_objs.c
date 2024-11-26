@@ -26,14 +26,19 @@ int	set_camera(char *line, t_scene *scene)
 	scene->camera = malloc(sizeof(t_camera));
 	scene->camera->position_p = read_point(&line[i]);
 	i += skip_vec(&line[i]);
-	to_p = read_vec(&line[i]);
-	ft_normalized_vec_check(to_p);
-	to_p = ft_sub_tuples(scene->camera->position_p, ft_negate_tuple(to_p));
+	scene->camera->orientation_v = read_vec(&line[i]);
+	ft_normalized_vec_check(scene->camera->orientation_v);
+	to_p = ft_sub_tuples(scene->camera->position_p, \
+		ft_negate_tuple(scene->camera->orientation_v));
 	i += skip_vec(&line[i]);
 	cam = ft_build_camera(HEIGHT, WIDTH, ft_atod_val(&line[i]));
 	i += skip_num(&line[i]);
+	cam.position_p = scene->camera->position_p;
+	cam.orientation_v = scene->camera->orientation_v;
 	cam.transformations_matrix = ft_matrix_view_transform(\
-		scene->camera->position_p, to_p, ft_build_tuple(0, 1, 0, VECTOR));
+		cam.position_p, to_p, ft_build_tuple(0, \
+			(cam.orientation_v.x != 0 || cam.orientation_v.z != 0), \
+			(cam.orientation_v.y < 0) - (cam.orientation_v.y > 0), VECTOR));
 	*(scene->camera) = cam;
 	return (check_line_end(&line[i]));
 }

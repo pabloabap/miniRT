@@ -72,5 +72,6 @@ t_tuple	ft_cross(t_tuple v1, t_tuple v2)
 	v_cross.x = v1.y * v2.z - v1.z * v2.y;
 	v_cross.y = v1.z * v2.x - v1.x * v2.z;
 	v_cross.z = v1.x * v2.y - v1.y * v2.x;
+	v_cross.w = VECTOR;
 	return (v_cross);
 }

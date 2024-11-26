@@ -56,6 +56,25 @@ static void	ft_set_pl_transformations_matrix(t_oitem *obj, t_plane *pl)
 {
 	double	x_deg;
 	double	y_deg;
+
+	x_deg = acos(ft_dot(pl->nrm_vector, ft_build_tuple(0, -1, 0, VECTOR))) \
+		* (180 / M_PI);
+	y_deg = acos(ft_dot(pl->nrm_vector, ft_build_tuple(0, 0, 1, VECTOR))) \
+		* (180 / M_PI);
+	ft_normalized_vec_check(pl->nrm_vector);
+	obj->transformations_matrix = ft_matrix_translation(\
+		ft_matrix_rotation(ft_matrix_rotation(\
+			ft_identity_matrix(4, 4), X, x_deg), Y, y_deg), \
+		pl->origin.x, pl->origin.y, pl->origin.z);
+	pl->origin = ft_build_tuple(0, 0, 0, POINT);
+}
+
+/*  CODIGO ANTIGUO QUE NO FUNCIONABA POR SI EL ANTERIOR DEJA DE FUNCIONAR COMO
+ * SE ESPERA TENER EN CUENTA LA TRANSFORMACION QUE HAGA FALTA EN EL EJE z.
+static void	ft_set_pl_transformations_matrix(t_oitem *obj, t_plane *pl)
+{
+	double	x_deg;
+	double	y_deg;
 	double	z_deg;
 
 	x_deg = acos(ft_dot(pl->nrm_vector, ft_build_tuple(0, 1, 0, VECTOR))) \
@@ -70,4 +89,4 @@ static void	ft_set_pl_transformations_matrix(t_oitem *obj, t_plane *pl)
 			ft_identity_matrix(4, 4), X, x_deg), Y, y_deg), Z, z_deg), \
 		pl->origin.x, pl->origin.y, pl->origin.z);
 	pl->origin = ft_build_tuple(0, 0, 0, POINT);
-}
+} */
