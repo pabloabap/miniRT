@@ -58,11 +58,44 @@ void	free_scene(t_scene *scene)
 	free(scene);
 }
 
-int	main(void)
+int	main2(void)
 {
 	t_scene	*scene;
 	char	*path = "./scenes/sphere.rt";
 
+	scene = scene_init();
+	if (!scene)
+		return (perror("Scene initialization: "), EXIT_FAILURE);
+	if (read_scene(path, scene))
+	{
+		free_scene(scene);
+		return (EXIT_FAILURE);
+	}
+	free_scene(scene);
+	return (0);
+}
+
+int	check_path(char *path)
+{
+	int	i;
+
+	i = 0;
+	while (path[i])
+		i++;
+	if (i > 3 && path[i - 3] == '.' && path[i - 2] == 'r' && path[i - 1] == 't')
+		return (EXIT_SUCCESS);
+	return (EXIT_FAILURE);
+}
+
+int	main(int ag, char **av)
+{
+	t_scene	*scene;
+	char	*path = av[1];
+
+	if (ag != 2)
+		exit(printf("Error\nOne file argument needed\n"));
+	if (check_path(av[1]))
+		exit(printf("Error\nInvalid file format\n"));
 	scene = scene_init();
 	if (!scene)
 		return (perror("Scene initialization: "), EXIT_FAILURE);

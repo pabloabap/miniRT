@@ -1,0 +1,815 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls   s/call   s/call  name    
+ 40.65      3.78     3.78 72000236     0.00     0.00  ft_inverse_matrix
+ 21.29      5.76     1.98 338251104     0.00     0.00  ft_build_matrix
+ 18.06      7.44     1.68 320001072     0.00     0.00  ft_submatrix
+  7.42      8.13     0.69 68000223     0.00     0.00  ft_matrix_det
+  3.55      8.46     0.33 324001087     0.00     0.00  ft_matrix_det_check
+  2.80      8.72     0.26 320001072     0.00     0.00  ft_cofactor
+  2.15      8.92     0.20  7000019     0.00     0.00  ft_matrix_mult
+  1.08      9.02     0.10   500000     0.00     0.00  ft_detect_ray_inters
+  0.65      9.08     0.06  9976928     0.00     0.00  ft_dot
+  0.43      9.12     0.04  1250004     0.00     0.00  ft_normalize
+  0.32      9.15     0.03  3988467     0.00     0.00  ft_sub_tuples
+  0.32      9.18     0.03        1     0.03     9.29  ft_render_scene
+  0.22      9.20     0.02  5476941     0.00     0.00  ft_scalar_mult
+  0.22      9.22     0.02  3000000     0.00     0.00  ft_sphere_inters
+  0.11      9.23     0.01 12965404     0.00     0.00  ft_vectors_op_check
+  0.11      9.24     0.01  4250013     0.00     0.00  ft_matrix_transpos
+  0.11      9.25     0.01  2298556     0.00     0.00  ft_add_inters_sorted
+  0.11      9.26     0.01  1611578     0.00     0.00  ft_build_tuple
+  0.11      9.27     0.01  1000000     0.00     0.00  ft_add_tuples
+  0.11      9.28     0.01   250000     0.00     0.00  ft_lighting
+  0.11      9.29     0.01   250000     0.00     0.00  ft_ray_for_pixel
+  0.11      9.30     0.01                             _init
+  0.00      9.30     0.00  7000019     0.00     0.00  ft_matrix_mult_check
+  0.00      9.30     0.00  7000000     0.00     0.00  ft_matrix_to_tuple
+  0.00      9.30     0.00  7000000     0.00     0.00  ft_tuple_to_matrix
+  0.00      9.30     0.00  4988467     0.00     0.00  ft_tuples_check
+  0.00      9.30     0.00  1000000     0.00     0.00  ft_get_b
+  0.00      9.30     0.00  1000000     0.00     0.00  ft_get_g
+  0.00      9.30     0.00  1000000     0.00     0.00  ft_get_r
+  0.00      9.30     0.00   750000     0.00     0.00  ft_create_trgb
+  0.00      9.30     0.00   500000     0.00     0.00  ft_free_ray_inters_list
+  0.00      9.30     0.00   500000     0.00     0.00  ft_identify_hit
+  0.00      9.30     0.00   488467     0.00     0.00  ft_negate_tuple
+  0.00      9.30     0.00   261531     0.00     0.00  ft_get_hit
+  0.00      9.30     0.00   250000     0.00     0.00  ft_is_shadowed
+  0.00      9.30     0.00   250000     0.00     0.00  ft_magnitude
+  0.00      9.30     0.00   250000     0.00     0.00  ft_mlx_pixel_put
+  0.00      9.30     0.00   250000     0.00     0.00  ft_sp_normal_at
+  0.00      9.30     0.00   250000     0.00     0.00  ft_sp_normal_at_check
+  0.00      9.30     0.00   238464     0.00     0.00  ft_reflection_vector
+  0.00      9.30     0.00      346     0.00     0.00  is_space
+  0.00      9.30     0.00      115     0.00     0.00  ft_isdigit
+  0.00      9.30     0.00       85     0.00     0.00  is_num
+  0.00      9.30     0.00       63     0.00     0.00  skip_space
+  0.00      9.30     0.00       36     0.00     0.00  ft_atod
+  0.00      9.30     0.00       32     0.00     0.00  ft_identity_matrix
+  0.00      9.30     0.00       25     0.00     0.00  skip_num
+  0.00      9.30     0.00       24     0.00     0.00  ft_atoi
+  0.00      9.30     0.00       17     0.00     0.00  is_vector
+  0.00      9.30     0.00       17     0.00     0.00  skip_vec
+  0.00      9.30     0.00       12     0.00     0.00  ft_print_matrix
+  0.00      9.30     0.00       11     0.00     0.00  ft_gnl_strchr
+  0.00      9.30     0.00       11     0.00     0.00  ft_gnl_strdup
+  0.00      9.30     0.00       11     0.00     0.00  ft_gnl_strjoin
+  0.00      9.30     0.00       10     0.00     0.00  ft_matrix_translation
+  0.00      9.30     0.00       10     0.00     0.00  get_next_line
+  0.00      9.30     0.00        9     0.00     0.00  check_line
+  0.00      9.30     0.00        9     0.00     0.00  check_line_end
+  0.00      9.30     0.00        9     0.00     0.00  read_obj
+  0.00      9.30     0.00        8     0.00     0.00  ft_atod_val
+  0.00      9.30     0.00        8     0.00     0.00  ft_gnl_substr
+  0.00      9.30     0.00        8     0.00     0.00  get_blue
+  0.00      9.30     0.00        8     0.00     0.00  get_green
+  0.00      9.30     0.00        8     0.00     0.00  get_red
+  0.00      9.30     0.00        8     0.00     0.00  is_val
+  0.00      9.30     0.00        8     0.00     0.00  read_color
+  0.00      9.30     0.00        8     0.00     0.00  read_point
+  0.00      9.30     0.00        6     0.00     0.00  ft_add_obj
+  0.00      9.30     0.00        6     0.00     0.00  ft_default_material
+  0.00      9.30     0.00        6     0.00     0.00  ft_obj_id_assignment
+  0.00      9.30     0.00        6     0.00     0.00  set_sphere
+  0.00      9.30     0.00        4     0.00     0.00  ft_cross
+  0.00      9.30     0.00        4     0.00     0.00  ft_matrix_rotation
+  0.00      9.30     0.00        3     0.00     0.00  ft_matrix_scalation
+  0.00      9.30     0.00        3     0.00     0.00  ft_mlx_failure_check
+  0.00      9.30     0.00        2     0.00     0.00  ft_build_camera
+  0.00      9.30     0.00        2     0.00     0.00  ft_matrix_view_transform
+  0.00      9.30     0.00        2     0.00     0.00  ft_matrix_view_transform_check
+  0.00      9.30     0.00        1     0.00     0.00  ft_prepare_canvas
+  0.00      9.30     0.00        1     0.00     0.00  print_objs
+  0.00      9.30     0.00        1     0.00     0.00  print_scene
+  0.00      9.30     0.00        1     0.00     0.00  read_scene
+  0.00      9.30     0.00        1     0.00     0.00  read_vec
+  0.00      9.30     0.00        1     0.00     0.00  set_ambient
+  0.00      9.30     0.00        1     0.00     0.00  set_camera
+  0.00      9.30     0.00        1     0.00     0.00  set_light
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+Copyright (C) 2012-2022 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 4 byte(s) for 0.11% of 9.30 seconds
+
+index % time    self  children    called     name
+                                                 <spontaneous>
+[1]     99.9    0.00    9.29                 main [1]
+                0.03    9.26       1/1           ft_render_scene [2]
+                0.00    0.00       1/1           read_scene [30]
+                0.00    0.00       1/2           ft_matrix_view_transform [32]
+                0.00    0.00       4/4           ft_matrix_rotation [35]
+                0.00    0.00       3/3           ft_matrix_scalation [36]
+                0.00    0.00       2/10          ft_matrix_translation [34]
+                0.00    0.00       3/1611578     ft_build_tuple [25]
+                0.00    0.00       3/32          ft_identity_matrix [59]
+                0.00    0.00       1/1           ft_prepare_canvas [85]
+                0.00    0.00       1/2           ft_build_camera [83]
+-----------------------------------------------
+                0.03    9.26       1/1           main [1]
+[2]     99.9    0.03    9.26       1         ft_render_scene [2]
+                0.00    3.49  250000/250000      ft_is_shadowed [7]
+                0.05    3.43  250000/500000      ft_detect_ray_inters [5]
+                0.01    1.12  250000/250000      ft_ray_for_pixel [9]
+                0.00    1.11  250000/250000      ft_sp_normal_at [10]
+                0.01    0.03  250000/250000      ft_lighting [18]
+                0.01    0.00  250000/1250004     ft_normalize [17]
+                0.01    0.00  500000/1000000     ft_add_tuples [26]
+                0.00    0.00  500000/5476941     ft_scalar_mult [22]
+                0.00    0.00  250000/9976928     ft_dot [16]
+                0.00    0.00  250000/500000      ft_free_ray_inters_list [48]
+                0.00    0.00  250000/500000      ft_identify_hit [49]
+                0.00    0.00  250000/261531      ft_get_hit [51]
+                0.00    0.00  250000/488467      ft_negate_tuple [50]
+                0.00    0.00  250000/250000      ft_mlx_pixel_put [52]
+-----------------------------------------------
+[3]     93.1    4.47    4.19 4000015+136000444 <cycle 1 as a whole> [3]
+                3.78    4.12 72000236+16000060     ft_inverse_matrix <cycle 1> [4]
+                0.69    0.07 68000223             ft_matrix_det <cycle 1> [11]
+-----------------------------------------------
+                             16000060             ft_inverse_matrix <cycle 1> [4]
+                             68000223             ft_matrix_det <cycle 1> [11]
+                0.00    0.00       1/4000015     set_camera [33]
+                0.00    0.00      12/4000015     set_sphere [31]
+                0.56    0.52  500000/4000015     ft_sp_normal_at [10]
+                0.56    0.52  500000/4000015     ft_ray_for_pixel [9]
+                3.35    3.14 3000000/4000015     ft_detect_ray_inters [5]
+[4]     85.0    3.78    4.12 72000236+16000060 ft_inverse_matrix <cycle 1> [4]
+                1.68    1.87 320001072/320001072     ft_submatrix [6]
+                0.26    0.00 256000864/324001087     ft_matrix_det_check [12]
+                0.26    0.00 320001072/320001072     ft_cofactor [13]
+                0.01    0.02 4000013/4250013     ft_matrix_transpos [20]
+                0.01    0.00 4000013/5476941     ft_scalar_mult [22]
+                             68000221             ft_matrix_det <cycle 1> [11]
+                             16000060             ft_inverse_matrix <cycle 1> [4]
+-----------------------------------------------
+                0.05    3.43  250000/500000      ft_is_shadowed [7]
+                0.05    3.43  250000/500000      ft_render_scene [2]
+[5]     74.7    0.10    6.85  500000         ft_detect_ray_inters [5]
+                3.35    3.14 3000000/4000015     ft_inverse_matrix <cycle 1> [4]
+                0.17    0.04 6000000/7000019     ft_matrix_mult [14]
+                0.02    0.09 3000000/3000000     ft_sphere_inters [15]
+                0.00    0.04 6000000/7000000     ft_tuple_to_matrix [19]
+                0.01    0.00 1149278/2298556     ft_add_inters_sorted [24]
+                0.00    0.00 6000000/7000000     ft_matrix_to_tuple [42]
+-----------------------------------------------
+                1.68    1.87 320001072/320001072     ft_inverse_matrix <cycle 1> [4]
+[6]     38.2    1.68    1.87 320001072         ft_submatrix [6]
+                1.87    0.00 320001072/338251104     ft_build_matrix [8]
+-----------------------------------------------
+                0.00    3.49  250000/250000      ft_render_scene [2]
+[7]     37.5    0.00    3.49  250000         ft_is_shadowed [7]
+                0.05    3.43  250000/500000      ft_detect_ray_inters [5]
+                0.01    0.00  250000/1250004     ft_normalize [17]
+                0.00    0.00  250000/3988467     ft_sub_tuples [21]
+                0.00    0.00  250000/250000      ft_magnitude [29]
+                0.00    0.00  250000/500000      ft_identify_hit [49]
+                0.00    0.00  250000/500000      ft_free_ray_inters_list [48]
+                0.00    0.00   11531/261531      ft_get_hit [51]
+-----------------------------------------------
+                0.02    0.00 4250013/338251104     ft_matrix_transpos [20]
+                0.04    0.00 7000000/338251104     ft_tuple_to_matrix [19]
+                0.04    0.00 7000019/338251104     ft_matrix_mult [14]
+                1.87    0.00 320001072/338251104     ft_submatrix [6]
+[8]     21.3    1.98    0.00 338251104         ft_build_matrix [8]
+-----------------------------------------------
+                0.01    1.12  250000/250000      ft_render_scene [2]
+[9]     12.1    0.01    1.12  250000         ft_ray_for_pixel [9]
+                0.56    0.52  500000/4000015     ft_inverse_matrix <cycle 1> [4]
+                0.01    0.00  500000/7000019     ft_matrix_mult [14]
+                0.01    0.00  250000/1250004     ft_normalize [17]
+                0.00    0.00  500000/1611578     ft_build_tuple [25]
+                0.00    0.00  500000/7000000     ft_tuple_to_matrix [19]
+                0.00    0.00  250000/3988467     ft_sub_tuples [21]
+                0.00    0.00  500000/7000000     ft_matrix_to_tuple [42]
+-----------------------------------------------
+                0.00    1.11  250000/250000      ft_render_scene [2]
+[10]    12.0    0.00    1.11  250000         ft_sp_normal_at [10]
+                0.56    0.52  500000/4000015     ft_inverse_matrix <cycle 1> [4]
+                0.01    0.00  500000/7000019     ft_matrix_mult [14]
+                0.01    0.00  250000/1250004     ft_normalize [17]
+                0.00    0.00  500000/7000000     ft_tuple_to_matrix [19]
+                0.00    0.00  250000/4250013     ft_matrix_transpos [20]
+                0.00    0.00  250000/1611578     ft_build_tuple [25]
+                0.00    0.00  500000/7000000     ft_matrix_to_tuple [42]
+                0.00    0.00  250000/250000      ft_sp_normal_at_check [53]
+-----------------------------------------------
+                             68000221             ft_inverse_matrix <cycle 1> [4]
+                0.00    0.00       2/4000015     ft_matrix_view_transform [32]
+[11]     8.2    0.69    0.07 68000223         ft_matrix_det <cycle 1> [11]
+                0.07    0.00 68000223/324001087     ft_matrix_det_check [12]
+                             68000223             ft_inverse_matrix <cycle 1> [4]
+-----------------------------------------------
+                0.07    0.00 68000223/324001087     ft_matrix_det <cycle 1> [11]
+                0.26    0.00 256000864/324001087     ft_inverse_matrix <cycle 1> [4]
+[12]     3.5    0.33    0.00 324001087         ft_matrix_det_check [12]
+-----------------------------------------------
+                0.26    0.00 320001072/320001072     ft_inverse_matrix <cycle 1> [4]
+[13]     2.8    0.26    0.00 320001072         ft_cofactor [13]
+-----------------------------------------------
+                0.00    0.00       2/7000019     ft_matrix_view_transform [32]
+                0.00    0.00       3/7000019     ft_matrix_scalation [36]
+                0.00    0.00       4/7000019     ft_matrix_rotation [35]
+                0.00    0.00      10/7000019     ft_matrix_translation [34]
+                0.01    0.00  500000/7000019     ft_sp_normal_at [10]
+                0.01    0.00  500000/7000019     ft_ray_for_pixel [9]
+                0.17    0.04 6000000/7000019     ft_detect_ray_inters [5]
+[14]     2.6    0.20    0.04 7000019         ft_matrix_mult [14]
+                0.04    0.00 7000019/338251104     ft_build_matrix [8]
+                0.00    0.00 7000019/7000019     ft_matrix_mult_check [41]
+-----------------------------------------------
+                0.02    0.09 3000000/3000000     ft_detect_ray_inters [5]
+[15]     1.2    0.02    0.09 3000000         ft_sphere_inters [15]
+                0.05    0.01 9000000/9976928     ft_dot [16]
+                0.02    0.00 3000000/3988467     ft_sub_tuples [21]
+                0.01    0.00 1149278/2298556     ft_add_inters_sorted [24]
+-----------------------------------------------
+                0.00    0.00  238464/9976928     ft_reflection_vector [28]
+                0.00    0.00  250000/9976928     ft_render_scene [2]
+                0.00    0.00  488464/9976928     ft_lighting [18]
+                0.05    0.01 9000000/9976928     ft_sphere_inters [15]
+[16]     0.7    0.06    0.01 9976928         ft_dot [16]
+                0.01    0.00 9976928/12965404     ft_vectors_op_check [23]
+-----------------------------------------------
+                0.00    0.00       4/1250004     ft_matrix_view_transform [32]
+                0.01    0.00  250000/1250004     ft_lighting [18]
+                0.01    0.00  250000/1250004     ft_sp_normal_at [10]
+                0.01    0.00  250000/1250004     ft_is_shadowed [7]
+                0.01    0.00  250000/1250004     ft_ray_for_pixel [9]
+                0.01    0.00  250000/1250004     ft_render_scene [2]
+[17]     0.5    0.04    0.00 1250004         ft_normalize [17]
+                0.00    0.00 2500008/12965404     ft_vectors_op_check [23]
+-----------------------------------------------
+                0.01    0.03  250000/250000      ft_render_scene [2]
+[18]     0.4    0.01    0.03  250000         ft_lighting [18]
+                0.01    0.00  250000/1250004     ft_normalize [17]
+                0.01    0.00  861559/1611578     ft_build_tuple [25]
+                0.01    0.00  500000/1000000     ft_add_tuples [26]
+                0.00    0.00  238464/238464      ft_reflection_vector [28]
+                0.00    0.00  488464/9976928     ft_dot [16]
+                0.00    0.00  738464/5476941     ft_scalar_mult [22]
+                0.00    0.00  250000/3988467     ft_sub_tuples [21]
+                0.00    0.00 1000000/1000000     ft_get_g [45]
+                0.00    0.00 1000000/1000000     ft_get_b [44]
+                0.00    0.00 1000000/1000000     ft_get_r [46]
+                0.00    0.00  750000/750000      ft_create_trgb [47]
+                0.00    0.00  238464/488467      ft_negate_tuple [50]
+-----------------------------------------------
+                0.00    0.00  500000/7000000     ft_sp_normal_at [10]
+                0.00    0.00  500000/7000000     ft_ray_for_pixel [9]
+                0.00    0.04 6000000/7000000     ft_detect_ray_inters [5]
+[19]     0.4    0.00    0.04 7000000         ft_tuple_to_matrix [19]
+                0.04    0.00 7000000/338251104     ft_build_matrix [8]
+-----------------------------------------------
+                0.00    0.00  250000/4250013     ft_sp_normal_at [10]
+                0.01    0.02 4000013/4250013     ft_inverse_matrix <cycle 1> [4]
+[20]     0.4    0.01    0.02 4250013         ft_matrix_transpos [20]
+                0.02    0.00 4250013/338251104     ft_build_matrix [8]
+-----------------------------------------------
+                0.00    0.00       1/3988467     set_camera [33]
+                0.00    0.00       2/3988467     ft_matrix_view_transform [32]
+                0.00    0.00  238464/3988467     ft_reflection_vector [28]
+                0.00    0.00  250000/3988467     ft_lighting [18]
+                0.00    0.00  250000/3988467     ft_is_shadowed [7]
+                0.00    0.00  250000/3988467     ft_ray_for_pixel [9]
+                0.02    0.00 3000000/3988467     ft_sphere_inters [15]
+[21]     0.3    0.03    0.00 3988467         ft_sub_tuples [21]
+                0.00    0.00 3988467/4988467     ft_tuples_check [43]
+-----------------------------------------------
+                0.00    0.00  238464/5476941     ft_reflection_vector [28]
+                0.00    0.00  500000/5476941     ft_render_scene [2]
+                0.00    0.00  738464/5476941     ft_lighting [18]
+                0.01    0.00 4000013/5476941     ft_inverse_matrix <cycle 1> [4]
+[22]     0.2    0.02    0.00 5476941         ft_scalar_mult [22]
+-----------------------------------------------
+                0.00    0.00       4/12965404     ft_cross [40]
+                0.00    0.00  238464/12965404     ft_reflection_vector [28]
+                0.00    0.00  250000/12965404     ft_magnitude [29]
+                0.00    0.00 2500008/12965404     ft_normalize [17]
+                0.01    0.00 9976928/12965404     ft_dot [16]
+[23]     0.1    0.01    0.00 12965404         ft_vectors_op_check [23]
+-----------------------------------------------
+                0.01    0.00 1149278/2298556     ft_sphere_inters [15]
+                0.01    0.00 1149278/2298556     ft_detect_ray_inters [5]
+[24]     0.1    0.01    0.00 2298556         ft_add_inters_sorted [24]
+-----------------------------------------------
+                0.00    0.00       1/1611578     read_vec [38]
+                0.00    0.00       1/1611578     set_camera [33]
+                0.00    0.00       3/1611578     main [1]
+                0.00    0.00       6/1611578     set_sphere [31]
+                0.00    0.00       8/1611578     read_point [37]
+                0.00    0.00  250000/1611578     ft_sp_normal_at [10]
+                0.00    0.00  500000/1611578     ft_ray_for_pixel [9]
+                0.01    0.00  861559/1611578     ft_lighting [18]
+[25]     0.1    0.01    0.00 1611578         ft_build_tuple [25]
+-----------------------------------------------
+                0.01    0.00  500000/1000000     ft_lighting [18]
+                0.01    0.00  500000/1000000     ft_render_scene [2]
+[26]     0.1    0.01    0.00 1000000         ft_add_tuples [26]
+                0.00    0.00 1000000/4988467     ft_tuples_check [43]
+-----------------------------------------------
+                                                 <spontaneous>
+[27]     0.1    0.01    0.00                 _init [27]
+-----------------------------------------------
+                0.00    0.00  238464/238464      ft_lighting [18]
+[28]     0.0    0.00    0.00  238464         ft_reflection_vector [28]
+                0.00    0.00  238464/3988467     ft_sub_tuples [21]
+                0.00    0.00  238464/9976928     ft_dot [16]
+                0.00    0.00  238464/5476941     ft_scalar_mult [22]
+                0.00    0.00  238464/12965404     ft_vectors_op_check [23]
+-----------------------------------------------
+                0.00    0.00  250000/250000      ft_is_shadowed [7]
+[29]     0.0    0.00    0.00  250000         ft_magnitude [29]
+                0.00    0.00  250000/12965404     ft_vectors_op_check [23]
+-----------------------------------------------
+                0.00    0.00       1/1           main [1]
+[30]     0.0    0.00    0.00       1         read_scene [30]
+                0.00    0.00       6/6           set_sphere [31]
+                0.00    0.00       1/1           set_camera [33]
+                0.00    0.00       1/1           set_light [39]
+                0.00    0.00      10/10          get_next_line [68]
+                0.00    0.00       9/9           check_line [69]
+                0.00    0.00       9/9           read_obj [71]
+                0.00    0.00       9/63          skip_space [57]
+                0.00    0.00       8/9           check_line_end [70]
+                0.00    0.00       1/1           set_ambient [88]
+                0.00    0.00       1/1           print_objs [86]
+                0.00    0.00       1/1           print_scene [87]
+-----------------------------------------------
+                0.00    0.00       6/6           read_scene [30]
+[31]     0.0    0.00    0.00       6         set_sphere [31]
+                0.00    0.00      12/4000015     ft_inverse_matrix <cycle 1> [4]
+                0.00    0.00       6/10          ft_matrix_translation [34]
+                0.00    0.00       6/1611578     ft_build_tuple [25]
+                0.00    0.00       6/8           read_point [37]
+                0.00    0.00      12/17          skip_vec [63]
+                0.00    0.00      12/12          ft_print_matrix [64]
+                0.00    0.00       6/63          skip_space [57]
+                0.00    0.00       6/36          ft_atod [58]
+                0.00    0.00       6/8           ft_atod_val [72]
+                0.00    0.00       6/25          skip_num [60]
+                0.00    0.00       6/8           read_color [78]
+                0.00    0.00       6/32          ft_identity_matrix [59]
+                0.00    0.00       6/6           ft_add_obj [79]
+-----------------------------------------------
+                0.00    0.00       1/2           main [1]
+                0.00    0.00       1/2           set_camera [33]
+[32]     0.0    0.00    0.00       2         ft_matrix_view_transform [32]
+                0.00    0.00       2/4000015     ft_matrix_det <cycle 1> [11]
+                0.00    0.00       4/1250004     ft_normalize [17]
+                0.00    0.00       2/10          ft_matrix_translation [34]
+                0.00    0.00       2/7000019     ft_matrix_mult [14]
+                0.00    0.00       2/3988467     ft_sub_tuples [21]
+                0.00    0.00       4/4           ft_cross [40]
+                0.00    0.00       4/32          ft_identity_matrix [59]
+                0.00    0.00       2/2           ft_matrix_view_transform_check [84]
+                0.00    0.00       2/488467      ft_negate_tuple [50]
+-----------------------------------------------
+                0.00    0.00       1/1           read_scene [30]
+[33]     0.0    0.00    0.00       1         set_camera [33]
+                0.00    0.00       1/2           ft_matrix_view_transform [32]
+                0.00    0.00       1/4000015     ft_inverse_matrix <cycle 1> [4]
+                0.00    0.00       1/3988467     ft_sub_tuples [21]
+                0.00    0.00       1/8           read_point [37]
+                0.00    0.00       1/1           read_vec [38]
+                0.00    0.00       1/1611578     ft_build_tuple [25]
+                0.00    0.00       2/17          skip_vec [63]
+                0.00    0.00       1/63          skip_space [57]
+                0.00    0.00       1/488467      ft_negate_tuple [50]
+                0.00    0.00       1/36          ft_atod [58]
+                0.00    0.00       1/8           ft_atod_val [72]
+                0.00    0.00       1/2           ft_build_camera [83]
+                0.00    0.00       1/25          skip_num [60]
+                0.00    0.00       1/9           check_line_end [70]
+-----------------------------------------------
+                0.00    0.00       2/10          main [1]
+                0.00    0.00       2/10          ft_matrix_view_transform [32]
+                0.00    0.00       6/10          set_sphere [31]
+[34]     0.0    0.00    0.00      10         ft_matrix_translation [34]
+                0.00    0.00      10/7000019     ft_matrix_mult [14]
+                0.00    0.00      10/32          ft_identity_matrix [59]
+-----------------------------------------------
+                0.00    0.00       4/4           main [1]
+[35]     0.0    0.00    0.00       4         ft_matrix_rotation [35]
+                0.00    0.00       4/7000019     ft_matrix_mult [14]
+                0.00    0.00       4/32          ft_identity_matrix [59]
+-----------------------------------------------
+                0.00    0.00       3/3           main [1]
+[36]     0.0    0.00    0.00       3         ft_matrix_scalation [36]
+                0.00    0.00       3/7000019     ft_matrix_mult [14]
+                0.00    0.00       3/32          ft_identity_matrix [59]
+-----------------------------------------------
+                0.00    0.00       1/8           set_camera [33]
+                0.00    0.00       1/8           set_light [39]
+                0.00    0.00       6/8           set_sphere [31]
+[37]     0.0    0.00    0.00       8         read_point [37]
+                0.00    0.00       8/1611578     ft_build_tuple [25]
+                0.00    0.00      24/36          ft_atod [58]
+                0.00    0.00       8/17          is_vector [62]
+-----------------------------------------------
+                0.00    0.00       1/1           set_camera [33]
+[38]     0.0    0.00    0.00       1         read_vec [38]
+                0.00    0.00       1/1611578     ft_build_tuple [25]
+                0.00    0.00       3/36          ft_atod [58]
+                0.00    0.00       1/17          is_vector [62]
+-----------------------------------------------
+                0.00    0.00       1/1           read_scene [30]
+[39]     0.0    0.00    0.00       1         set_light [39]
+                0.00    0.00       1/8           read_point [37]
+                0.00    0.00       2/17          skip_vec [63]
+                0.00    0.00       1/63          skip_space [57]
+                0.00    0.00       1/36          ft_atod [58]
+                0.00    0.00       1/25          skip_num [60]
+                0.00    0.00       1/8           read_color [78]
+-----------------------------------------------
+                0.00    0.00       4/4           ft_matrix_view_transform [32]
+[40]     0.0    0.00    0.00       4         ft_cross [40]
+                0.00    0.00       4/12965404     ft_vectors_op_check [23]
+-----------------------------------------------
+                0.00    0.00 7000019/7000019     ft_matrix_mult [14]
+[41]     0.0    0.00    0.00 7000019         ft_matrix_mult_check [41]
+-----------------------------------------------
+                0.00    0.00  500000/7000000     ft_sp_normal_at [10]
+                0.00    0.00  500000/7000000     ft_ray_for_pixel [9]
+                0.00    0.00 6000000/7000000     ft_detect_ray_inters [5]
+[42]     0.0    0.00    0.00 7000000         ft_matrix_to_tuple [42]
+-----------------------------------------------
+                0.00    0.00 1000000/4988467     ft_add_tuples [26]
+                0.00    0.00 3988467/4988467     ft_sub_tuples [21]
+[43]     0.0    0.00    0.00 4988467         ft_tuples_check [43]
+-----------------------------------------------
+                0.00    0.00 1000000/1000000     ft_lighting [18]
+[44]     0.0    0.00    0.00 1000000         ft_get_b [44]
+-----------------------------------------------
+                0.00    0.00 1000000/1000000     ft_lighting [18]
+[45]     0.0    0.00    0.00 1000000         ft_get_g [45]
+-----------------------------------------------
+                0.00    0.00 1000000/1000000     ft_lighting [18]
+[46]     0.0    0.00    0.00 1000000         ft_get_r [46]
+-----------------------------------------------
+                0.00    0.00  750000/750000      ft_lighting [18]
+[47]     0.0    0.00    0.00  750000         ft_create_trgb [47]
+-----------------------------------------------
+                0.00    0.00  250000/500000      ft_is_shadowed [7]
+                0.00    0.00  250000/500000      ft_render_scene [2]
+[48]     0.0    0.00    0.00  500000         ft_free_ray_inters_list [48]
+-----------------------------------------------
+                0.00    0.00  250000/500000      ft_is_shadowed [7]
+                0.00    0.00  250000/500000      ft_render_scene [2]
+[49]     0.0    0.00    0.00  500000         ft_identify_hit [49]
+-----------------------------------------------
+                0.00    0.00       1/488467      set_camera [33]
+                0.00    0.00       2/488467      ft_matrix_view_transform [32]
+                0.00    0.00  238464/488467      ft_lighting [18]
+                0.00    0.00  250000/488467      ft_render_scene [2]
+[50]     0.0    0.00    0.00  488467         ft_negate_tuple [50]
+-----------------------------------------------
+                0.00    0.00   11531/261531      ft_is_shadowed [7]
+                0.00    0.00  250000/261531      ft_render_scene [2]
+[51]     0.0    0.00    0.00  261531         ft_get_hit [51]
+-----------------------------------------------
+                0.00    0.00  250000/250000      ft_render_scene [2]
+[52]     0.0    0.00    0.00  250000         ft_mlx_pixel_put [52]
+-----------------------------------------------
+                0.00    0.00  250000/250000      ft_sp_normal_at [10]
+[53]     0.0    0.00    0.00  250000         ft_sp_normal_at_check [53]
+-----------------------------------------------
+                0.00    0.00       8/346         check_line_end [70]
+                0.00    0.00       9/346         read_obj [71]
+                0.00    0.00      16/346         is_val [77]
+                0.00    0.00      55/346         check_line [69]
+                0.00    0.00      88/346         skip_space [57]
+                0.00    0.00     170/346         is_num [56]
+[54]     0.0    0.00    0.00     346         is_space [54]
+-----------------------------------------------
+                0.00    0.00      11/115         is_val [77]
+                0.00    0.00     104/115         is_num [56]
+[55]     0.0    0.00    0.00     115         ft_isdigit [55]
+-----------------------------------------------
+                0.00    0.00      85/85          is_vector [62]
+[56]     0.0    0.00    0.00      85         is_num [56]
+                0.00    0.00     170/346         is_space [54]
+                0.00    0.00     104/115         ft_isdigit [55]
+-----------------------------------------------
+                0.00    0.00       1/63          set_ambient [88]
+                0.00    0.00       1/63          set_camera [33]
+                0.00    0.00       1/63          set_light [39]
+                0.00    0.00       6/63          set_sphere [31]
+                0.00    0.00       9/63          read_obj [71]
+                0.00    0.00       9/63          read_scene [30]
+                0.00    0.00      36/63          ft_atod [58]
+[57]     0.0    0.00    0.00      63         skip_space [57]
+                0.00    0.00      88/346         is_space [54]
+-----------------------------------------------
+                0.00    0.00       1/36          set_ambient [88]
+                0.00    0.00       1/36          set_camera [33]
+                0.00    0.00       1/36          set_light [39]
+                0.00    0.00       3/36          read_vec [38]
+                0.00    0.00       6/36          set_sphere [31]
+                0.00    0.00      24/36          read_point [37]
+[58]     0.0    0.00    0.00      36         ft_atod [58]
+                0.00    0.00      36/63          skip_space [57]
+-----------------------------------------------
+                0.00    0.00       2/32          ft_build_camera [83]
+                0.00    0.00       3/32          main [1]
+                0.00    0.00       3/32          ft_matrix_scalation [36]
+                0.00    0.00       4/32          ft_matrix_rotation [35]
+                0.00    0.00       4/32          ft_matrix_view_transform [32]
+                0.00    0.00       6/32          set_sphere [31]
+                0.00    0.00      10/32          ft_matrix_translation [34]
+[59]     0.0    0.00    0.00      32         ft_identity_matrix [59]
+-----------------------------------------------
+                0.00    0.00       1/25          set_ambient [88]
+                0.00    0.00       1/25          set_camera [33]
+                0.00    0.00       1/25          set_light [39]
+                0.00    0.00       6/25          set_sphere [31]
+                0.00    0.00      16/25          read_color [78]
+[60]     0.0    0.00    0.00      25         skip_num [60]
+-----------------------------------------------
+                0.00    0.00      24/24          read_color [78]
+[61]     0.0    0.00    0.00      24         ft_atoi [61]
+-----------------------------------------------
+                0.00    0.00       1/17          read_vec [38]
+                0.00    0.00       8/17          read_point [37]
+                0.00    0.00       8/17          read_color [78]
+[62]     0.0    0.00    0.00      17         is_vector [62]
+                0.00    0.00      85/85          is_num [56]
+-----------------------------------------------
+                0.00    0.00       1/17          set_ambient [88]
+                0.00    0.00       2/17          set_camera [33]
+                0.00    0.00       2/17          set_light [39]
+                0.00    0.00      12/17          set_sphere [31]
+[63]     0.0    0.00    0.00      17         skip_vec [63]
+-----------------------------------------------
+                0.00    0.00      12/12          set_sphere [31]
+[64]     0.0    0.00    0.00      12         ft_print_matrix [64]
+-----------------------------------------------
+                0.00    0.00      11/11          ft_gnl_strdup [66]
+[65]     0.0    0.00    0.00      11         ft_gnl_strchr [65]
+-----------------------------------------------
+                                  14             ft_gnl_strdup [66]
+                0.00    0.00      11/11          get_next_line [68]
+[66]     0.0    0.00    0.00      11+14      ft_gnl_strdup [66]
+                0.00    0.00      11/11          ft_gnl_strjoin [67]
+                0.00    0.00      11/11          ft_gnl_strchr [65]
+                0.00    0.00       8/8           ft_gnl_substr [73]
+                                  14             ft_gnl_strdup [66]
+-----------------------------------------------
+                0.00    0.00      11/11          ft_gnl_strdup [66]
+[67]     0.0    0.00    0.00      11         ft_gnl_strjoin [67]
+-----------------------------------------------
+                0.00    0.00      10/10          read_scene [30]
+[68]     0.0    0.00    0.00      10         get_next_line [68]
+                0.00    0.00      11/11          ft_gnl_strdup [66]
+-----------------------------------------------
+                0.00    0.00       9/9           read_scene [30]
+[69]     0.0    0.00    0.00       9         check_line [69]
+                0.00    0.00      55/346         is_space [54]
+-----------------------------------------------
+                0.00    0.00       1/9           set_camera [33]
+                0.00    0.00       8/9           read_scene [30]
+[70]     0.0    0.00    0.00       9         check_line_end [70]
+                0.00    0.00       8/346         is_space [54]
+-----------------------------------------------
+                0.00    0.00       9/9           read_scene [30]
+[71]     0.0    0.00    0.00       9         read_obj [71]
+                0.00    0.00       9/63          skip_space [57]
+                0.00    0.00       9/346         is_space [54]
+-----------------------------------------------
+                0.00    0.00       1/8           set_ambient [88]
+                0.00    0.00       1/8           set_camera [33]
+                0.00    0.00       6/8           set_sphere [31]
+[72]     0.0    0.00    0.00       8         ft_atod_val [72]
+                0.00    0.00       8/8           is_val [77]
+-----------------------------------------------
+                0.00    0.00       8/8           ft_gnl_strdup [66]
+[73]     0.0    0.00    0.00       8         ft_gnl_substr [73]
+-----------------------------------------------
+                0.00    0.00       2/8           print_scene [87]
+                0.00    0.00       6/8           print_objs [86]
+[74]     0.0    0.00    0.00       8         get_blue [74]
+-----------------------------------------------
+                0.00    0.00       2/8           print_scene [87]
+                0.00    0.00       6/8           print_objs [86]
+[75]     0.0    0.00    0.00       8         get_green [75]
+-----------------------------------------------
+                0.00    0.00       2/8           print_scene [87]
+                0.00    0.00       6/8           print_objs [86]
+[76]     0.0    0.00    0.00       8         get_red [76]
+-----------------------------------------------
+                0.00    0.00       8/8           ft_atod_val [72]
+[77]     0.0    0.00    0.00       8         is_val [77]
+                0.00    0.00      16/346         is_space [54]
+                0.00    0.00      11/115         ft_isdigit [55]
+-----------------------------------------------
+                0.00    0.00       1/8           set_ambient [88]
+                0.00    0.00       1/8           set_light [39]
+                0.00    0.00       6/8           set_sphere [31]
+[78]     0.0    0.00    0.00       8         read_color [78]
+                0.00    0.00      24/24          ft_atoi [61]
+                0.00    0.00      16/25          skip_num [60]
+                0.00    0.00       8/17          is_vector [62]
+-----------------------------------------------
+                0.00    0.00       6/6           set_sphere [31]
+[79]     0.0    0.00    0.00       6         ft_add_obj [79]
+                0.00    0.00       6/6           ft_obj_id_assignment [81]
+                0.00    0.00       6/6           ft_default_material [80]
+-----------------------------------------------
+                0.00    0.00       6/6           ft_add_obj [79]
+[80]     0.0    0.00    0.00       6         ft_default_material [80]
+-----------------------------------------------
+                0.00    0.00       6/6           ft_add_obj [79]
+[81]     0.0    0.00    0.00       6         ft_obj_id_assignment [81]
+-----------------------------------------------
+                0.00    0.00       3/3           ft_prepare_canvas [85]
+[82]     0.0    0.00    0.00       3         ft_mlx_failure_check [82]
+-----------------------------------------------
+                0.00    0.00       1/2           main [1]
+                0.00    0.00       1/2           set_camera [33]
+[83]     0.0    0.00    0.00       2         ft_build_camera [83]
+                0.00    0.00       2/32          ft_identity_matrix [59]
+-----------------------------------------------
+                0.00    0.00       2/2           ft_matrix_view_transform [32]
+[84]     0.0    0.00    0.00       2         ft_matrix_view_transform_check [84]
+-----------------------------------------------
+                0.00    0.00       1/1           main [1]
+[85]     0.0    0.00    0.00       1         ft_prepare_canvas [85]
+                0.00    0.00       3/3           ft_mlx_failure_check [82]
+-----------------------------------------------
+                0.00    0.00       1/1           read_scene [30]
+[86]     0.0    0.00    0.00       1         print_objs [86]
+                0.00    0.00       6/8           get_blue [74]
+                0.00    0.00       6/8           get_red [76]
+                0.00    0.00       6/8           get_green [75]
+-----------------------------------------------
+                0.00    0.00       1/1           read_scene [30]
+[87]     0.0    0.00    0.00       1         print_scene [87]
+                0.00    0.00       2/8           get_blue [74]
+                0.00    0.00       2/8           get_green [75]
+                0.00    0.00       2/8           get_red [76]
+-----------------------------------------------
+                0.00    0.00       1/1           read_scene [30]
+[88]     0.0    0.00    0.00       1         set_ambient [88]
+                0.00    0.00       1/63          skip_space [57]
+                0.00    0.00       1/36          ft_atod [58]
+                0.00    0.00       1/8           ft_atod_val [72]
+                0.00    0.00       1/25          skip_num [60]
+                0.00    0.00       1/8           read_color [78]
+                0.00    0.00       1/17          skip_vec [63]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function is in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+Copyright (C) 2012-2022 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+Index by function name
+
+  [27] _init                   [4] ft_inverse_matrix      [15] ft_sphere_inters
+  [69] check_line              [7] ft_is_shadowed         [21] ft_sub_tuples
+  [70] check_line_end         [55] ft_isdigit              [6] ft_submatrix
+  [24] ft_add_inters_sorted   [18] ft_lighting            [19] ft_tuple_to_matrix
+  [79] ft_add_obj             [29] ft_magnitude           [43] ft_tuples_check
+  [26] ft_add_tuples          [11] ft_matrix_det          [23] ft_vectors_op_check
+  [58] ft_atod                [12] ft_matrix_det_check    [74] get_blue
+  [72] ft_atod_val            [14] ft_matrix_mult         [75] get_green
+  [61] ft_atoi                [41] ft_matrix_mult_check   [68] get_next_line
+  [83] ft_build_camera        [35] ft_matrix_rotation     [76] get_red
+   [8] ft_build_matrix        [36] ft_matrix_scalation    [56] is_num
+  [25] ft_build_tuple         [42] ft_matrix_to_tuple     [54] is_space
+  [13] ft_cofactor            [34] ft_matrix_translation  [77] is_val
+  [47] ft_create_trgb         [20] ft_matrix_transpos     [62] is_vector
+  [40] ft_cross               [32] ft_matrix_view_transform [86] print_objs
+  [80] ft_default_material    [84] ft_matrix_view_transform_check [87] print_scene
+   [5] ft_detect_ray_inters   [82] ft_mlx_failure_check   [78] read_color
+  [16] ft_dot                 [52] ft_mlx_pixel_put       [71] read_obj
+  [48] ft_free_ray_inters_list [50] ft_negate_tuple       [37] read_point
+  [44] ft_get_b               [17] ft_normalize           [30] read_scene
+  [45] ft_get_g               [81] ft_obj_id_assignment   [38] read_vec
+  [51] ft_get_hit             [85] ft_prepare_canvas      [88] set_ambient
+  [46] ft_get_r               [64] ft_print_matrix        [33] set_camera
+  [65] ft_gnl_strchr           [9] ft_ray_for_pixel       [39] set_light
+  [66] ft_gnl_strdup          [28] ft_reflection_vector   [31] set_sphere
+  [67] ft_gnl_strjoin          [2] ft_render_scene        [60] skip_num
+  [73] ft_gnl_substr          [22] ft_scalar_mult         [57] skip_space
+  [49] ft_identify_hit        [10] ft_sp_normal_at        [63] skip_vec
+  [59] ft_identity_matrix     [53] ft_sp_normal_at_check   [3] <cycle 1>

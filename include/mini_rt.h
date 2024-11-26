@@ -14,20 +14,20 @@
 # define MINI_RT_H
 
 # ifndef WIDTH
-#  define WIDTH 500
+#  define WIDTH 700
 # endif
 # ifndef HEIGHT
-#  define HEIGHT 500
+#  define HEIGHT 700
 # endif
 # define BUFFER_SIZE 100
 
 # include <sys/types.h>	//open
 # include <sys/stat.h>	//open
 # include <fcntl.h>		//open
-# include <unistd.h>		//close, read, write
+# include <unistd.h>	//close, read, write
 # include <stdio.h>		//printf, perror
-# include <stdlib.h>		//malloc, free, exit
-# include <string.h>		//strerror
+# include <stdlib.h>	//malloc, free, exit
+# include <string.h>	//strerror
 # include <math.h>		//math
 # include "../lib/minilibx-linux/mlx.h"
 # include "../lib/libft/libft.h"
@@ -214,6 +214,7 @@ typedef struct s_camera
 	double		vsize;
 	double		fov; //[0, 180]
 	t_matrix	transformations_matrix;
+	t_matrix	inv_transform;
 	t_tuple		position_p;
 	t_tuple		orientation_v; //Rango[-1, 1]
 	double		half_width;

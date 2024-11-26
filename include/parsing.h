@@ -15,6 +15,7 @@ typedef enum e_error
 }	t_error;
 
 int		is_space(char c);
+int     is_space(char c);
 double	add_decimal(float n, char *line);
 double	ft_atod(char *line);
 double	ft_atod_val(char *line);
@@ -23,7 +24,7 @@ t_tuple	read_vec(char *line);
 int		skip_num(char *line);
 int		skip_vec(char *line);
 
-int read_scene(char *path, t_scene *scene);
+int     read_scene(char *path, t_scene *scene);
 void    print_scene(t_scene *scene);
 void    print_objs(t_oitem *o_lst);
 
