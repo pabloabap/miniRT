@@ -63,7 +63,7 @@ int	read_scene(char *path, t_scene *scene)
 
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
-		return (perror("File opening:"), EXIT_FAILURE);
+		return (perror("Error\nopen"), EXIT_FAILURE);
 	line = get_next_line(fd);
 	while (line)
 	{

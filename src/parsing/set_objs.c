@@ -31,6 +31,7 @@ int	set_camera(char *line, t_scene *scene)
 	cam = ft_build_camera(HEIGHT, WIDTH, ft_atod_val(&line[i]));
 	i += skip_num(&line[i]);
 	cam.transformations_matrix = ft_matrix_view_transform(origin_p, to_p, ft_build_tuple(0, 1, 0, VECTOR));
+	cam.inv_transform = ft_inverse_matrix(&cam.transformations_matrix);
 	*(scene->camera) = cam;
 	return (check_line_end(&line[i]));
 }
@@ -70,6 +71,12 @@ int set_sphere(char *line, t_scene *scene)
 	i += skip_vec(&line[i]);
 	sphere->transformations_matrix = ft_matrix_translation(ft_identity_matrix(4, 4),
 		sp_world_origin.x, sp_world_origin.y, sp_world_origin.z);
+	sphere->inv_transform = ft_inverse_matrix(&sphere->transformations_matrix);
+	printf("og:\n");
+	ft_print_matrix(ft_inverse_matrix(&sphere->transformations_matrix));
+	printf("ft:\n");
+	ft_print_matrix(sphere->inv_transform);
+	printf("\n");
 	ft_add_obj(&scene->objs_list, SPHERE, sphere, color);
 	return (check_line_end(&line[i]));
 }

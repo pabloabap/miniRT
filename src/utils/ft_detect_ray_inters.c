@@ -24,7 +24,7 @@
  * 		punto de la escena.
  * @return Resultado de la ejecucion.
  */
-int	ft_detect_ray_inters(t_oitem *o_list, t_ray_inters **i_list, t_ray ray)
+int	ft_detect_ray_inters2(t_oitem *o_list, t_ray_inters **i_list, t_ray ray)
 {
 	int		status;
 	t_ray	tmp;
@@ -40,6 +40,29 @@ int	ft_detect_ray_inters(t_oitem *o_list, t_ray_inters **i_list, t_ray ray)
 		tmp.direction = ft_matrix_to_tuple(ft_matrix_mult(\
 				ft_inverse_matrix(\
 				&((t_sphere *)(o_list->obj_struct))->transformations_matrix), \
+				ft_tuple_to_matrix(ray.direction)));
+		ft_sphere_inters(tmp, o_list, i_list);
+		o_list = o_list->next;
+	}
+	return (status);
+}
+
+int	ft_detect_ray_inters(t_oitem *o_list, t_ray_inters **i_list, t_ray ray)
+{
+	int		status;
+	t_ray	tmp;
+	t_matrix	inv;
+
+	status = EXIT_SUCCESS;
+	while (EXIT_SUCCESS == status && o_list)
+	{
+		//inv = ft_inverse_matrix(&((t_sphere *)(o_list->obj_struct))->transformations_matrix);
+		tmp = ray;
+		tmp.origin = ft_matrix_to_tuple(ft_matrix_mult(\
+				((t_sphere *)(o_list->obj_struct))->inv_transform, \
+				ft_tuple_to_matrix(ray.origin)));
+		tmp.direction = ft_matrix_to_tuple(ft_matrix_mult(\
+				((t_sphere *)(o_list->obj_struct))->inv_transform, \
 				ft_tuple_to_matrix(ray.direction)));
 		ft_sphere_inters(tmp, o_list, i_list);
 		o_list = o_list->next;

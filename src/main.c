@@ -75,12 +75,27 @@ int	main2(void)
 	return (0);
 }
 
+int	check_path(char *path)
+{
+	int	i;
 
-int	main(void)
+	i = 0;
+	while (path[i])
+		i++;
+	if (i > 3 && path[i - 3] == '.' && path[i - 2] == 'r' && path[i - 1] == 't')
+		return (EXIT_SUCCESS);
+	return (EXIT_FAILURE);
+}
+
+int	main(int ag, char **av)
 {
 	t_scene	*scene;
-	char	*path = "./scenes/sphere.rt";
+	char	*path = av[1];
 
+	if (ag != 2)
+		exit(printf("Error\nOne file argument needed\n"));
+	if (check_path(av[1]))
+		exit(printf("Error\nInvalid file format\n"));
 	scene = scene_init();
 	if (!scene)
 		return (perror("Scene initialization: "), EXIT_FAILURE);
@@ -93,6 +108,8 @@ int	main(void)
  	// floor
 	((t_sphere *)((*scene).objs_list->obj_struct))->transformations_matrix = \
 		ft_matrix_scalation(ft_identity_matrix(4, 4), 10, 0.01, 10);
+	((t_sphere *)((*scene).objs_list->obj_struct))->inv_transform = ft_inverse_matrix( \
+	&((t_sphere *)((*scene).objs_list->obj_struct))->transformations_matrix); 
 	scene->objs_list->material.specular = 0;
 	// left_wall
 	((t_sphere *)((*scene).objs_list->next->obj_struct))->transformations_matrix = \
@@ -103,6 +120,8 @@ int	main(void)
 						, X, 90)\
 					, Y, -45), \
 				0, 0, 5);
+	((t_sphere *)((*scene).objs_list->next->obj_struct))->inv_transform = ft_inverse_matrix( \
+	&((t_sphere *)((*scene).objs_list->next->obj_struct))->transformations_matrix); 
 	scene->objs_list->next->material.specular = 0;
 	// right_wall
 	((t_sphere *)((*scene).objs_list->next->next->obj_struct))->transformations_matrix = \
@@ -113,6 +132,8 @@ int	main(void)
 						, X, 90)\
 					, Y, 45), \
 				0, 0, 5);
+	((t_sphere *)((*scene).objs_list->next->next->obj_struct))->inv_transform = ft_inverse_matrix( \
+	&((t_sphere *)((*scene).objs_list->next->next->obj_struct))->transformations_matrix); 
 	scene->objs_list->next->next->material.specular = 0;
 	// Camera
 	*(scene->camera) = ft_build_camera(HEIGHT, WIDTH, 60);
@@ -121,6 +142,7 @@ int	main(void)
 	ft_render_scene(scene);
 	mlx_put_image_to_window(scene->canvas->mlx_init, \
 		scene->canvas->mlx_win, scene->canvas->img, 0, 0);
+	printf("done\n");
 	sleep(5);
 	return (0);
 }
