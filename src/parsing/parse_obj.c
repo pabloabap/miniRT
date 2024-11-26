@@ -74,6 +74,7 @@ static int	ft_fill_new_obj(t_oitem *new, int o_type, void *obj)
 			obj = (t_cylinder *)obj;
 		new->obj_struct = obj;
 		ft_set_transformations_matrix(new, o_type);
+		new->inv_transform = ft_inverse_matrix(&new->transformations_matrix);
 		return (EXIT_SUCCESS);
 	}
 	return (EXIT_FAILURE);

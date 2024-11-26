@@ -39,6 +39,7 @@ int	set_camera(char *line, t_scene *scene)
 		cam.position_p, to_p, ft_build_tuple(0, \
 			(cam.orientation_v.x != 0 || cam.orientation_v.z != 0), \
 			(cam.orientation_v.y < 0) - (cam.orientation_v.y > 0), VECTOR));
+	cam.inv_transform = ft_inverse_matrix(&cam.transformations_matrix);
 	*(scene->camera) = cam;
 	return (check_line_end(&line[i]));
 }

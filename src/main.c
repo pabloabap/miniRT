@@ -109,6 +109,6 @@ int	main(int ag, char **av)
 	mlx_put_image_to_window(scene->canvas->mlx_init, \
 		scene->canvas->mlx_win, scene->canvas->img, 0, 0);
 	ft_putendl_fd("TEMRINADO", 1);
-	sleep(50);
+	sleep(5);
 	return (0);
 }
