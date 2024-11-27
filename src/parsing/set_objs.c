@@ -43,6 +43,30 @@ int	set_camera(char *line, t_scene *scene)
 	return (check_line_end(&line[i]));
 }
 
+int	reset_camera(t_scene *scene, t_tuple new_orientation)
+{
+	t_camera	cam;
+	t_tuple		to_p;
+
+	scene->camera->orientation_v = new_orientation;
+	ft_normalized_vec_check(scene->camera->orientation_v);
+	to_p = ft_sub_tuples(scene->camera->position_p, \
+		ft_negate_tuple(scene->camera->orientation_v));
+	ft_print_tuple(scene->camera->position_p);
+	ft_print_tuple(to_p);
+	cam = ft_build_camera(HEIGHT, WIDTH, scene->camera->fov);
+	cam.position_p = scene->camera->position_p;
+	cam.orientation_v = scene->camera->orientation_v;
+	cam.transformations_matrix = ft_matrix_view_transform(\
+		cam.position_p, to_p, ft_build_tuple(0, \
+			(cam.orientation_v.x != 0 || cam.orientation_v.z != 0), \
+			(cam.orientation_v.y < 0) - (cam.orientation_v.y > 0), VECTOR));
+	cam.inv_transform = ft_inverse_matrix(&cam.transformations_matrix);
+	*(scene->camera) = cam;
+	return (EXIT_SUCCESS);
+}
+
+
 int	set_light(char *line, t_scene *scene)
 {
 	t_point_light	*light;

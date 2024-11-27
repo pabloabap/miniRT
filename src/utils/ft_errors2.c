@@ -17,24 +17,22 @@ void	ft_sp_normal_at_check(double w)
 {
 	if (VECTOR == w)
 	{
-		ft_putstr_fd("ERROR - Vector recibido, se necesita punto ", 2);
+		ft_putstr_fd("Error\nVector recibido, se necesita punto ", 2);
 		ft_putstr_fd("de la superfice de la esfera para obtener ", 2);
 		ft_putendl_fd("su vector de normalización.", 2);
-		exit (1);
+		exit (TUPLE_OPS_ERROR);
 	}
 }
 
 /** Retorna mensaje de error si alguna llamada a la librería mlx falla */
-int	ft_mlx_failure_check(void *p)
+void	ft_mlx_failure_check(void *p)
 {
 	if (NULL == p)
 	{
-		ft_putstr_fd("ERROR - Fallo en la API de mlx al peparar ", 2);
+		ft_putstr_fd("Error\nFallo en la API de mlx al peparar ", 2);
 		ft_putendl_fd("la ventana y las imagenes.", 2);
-		exit (1);
+		exit (MLX_ERROR);
 	}
-	else
-		return (EXIT_SUCCESS);
 }
 
 /**
@@ -47,21 +45,21 @@ void	ft_matrix_view_transform_check(t_tuple from_p, t_tuple to_p, \
 {
 	if (POINT != from_p.w)
 	{
-		ft_putstr_fd("ERROR - from_p argument of ft_matrix_view_transform", 2);
+		ft_putstr_fd("Error\nfrom_p argument of ft_matrix_view_transform", 2);
 		ft_putstr_fd(" function must be a POINT", 2);
-		exit (1);
+		exit (MATRIX_VIEW_ERROR);
 	}
 	if (POINT != to_p.w)
 	{
-		ft_putstr_fd("ERROR - to_p argument of ft_matrix_view_transform", 2);
+		ft_putstr_fd("Error\nto_p argument of ft_matrix_view_transform", 2);
 		ft_putstr_fd(" function must be a POINT", 2);
-		exit (1);
+		exit (MATRIX_VIEW_ERROR);
 	}
 	if (VECTOR != up_v.w)
 	{
-		ft_putstr_fd("ERROR - up_v argument of ft_matrix_view_transform", 2);
+		ft_putstr_fd("Error\nup_v argument of ft_matrix_view_transform", 2);
 		ft_putstr_fd(" function must be a VECTOR", 2);
-		exit (1);
+		exit (MATRIX_VIEW_ERROR);
 	}
 }
 
@@ -70,8 +68,8 @@ void	ft_normalized_vec_check(t_tuple v_v)
 {
 	if (ft_magnitude(v_v) < 0.9 || ft_magnitude(v_v) > 1.1)
 	{
-		ft_putstr_fd("ERROR - Vector normal, no normalizado. ", 2);
+		ft_putstr_fd("Error\nVector normal, no normalizado. ", 2);
 		ft_putendl_fd("Magnitud distinta a 1.", 2);
-		exit (1);
+		exit (NORMALIZATION_ERROR);
 	}
 }
