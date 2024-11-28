@@ -16,7 +16,7 @@ void	ft_vectors_op_check(t_tuple a, t_tuple b)
 {
 	if (a.w != VECTOR || b.w != VECTOR)
 	{
-		ft_putstr_fd("Error\nNo se pueden operar elementos distintos ", 2);
+		ft_putstr_fd("Error\nNo se pueden operar elementos distintos", 2);
 		ft_putendl_fd(" a vector en una operación vectorial.", 2);
 		exit (VECTOR_OPS_ERROR);
 	}

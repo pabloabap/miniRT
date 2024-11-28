@@ -5,10 +5,11 @@ My first RayTracer with miniLibX
 # REVISAR
 
 - [ ] Acne de imagen cuando luz en misma coordenada que el plano.
-- [ ] Comprobar que no pase la alerta de que no se puede multiplicar dos puntos en una operación vectorial en cualquier imagen. Ocurre cuando camara en (0,0,...)
-- [ ] Aplicar ambient color al color de los objetos para sacar un color final.
-- [ ] Aplicar las inversas de matrices de objetos como atributo del objeto en vez de calcularla en cada rayo.
-- [ ] Torcer el plano de fondo como si fuera una cuesta y_skewed_r_back.rt
+- [x] Comprobar que no pase la alerta de que no se puede multiplicar dos puntos en una operación vectorial en cualquier imagen.
+- [x] Aplicar ambient color al color de los objetos para sacar un color final.
+- [x] Aplicar las inversas de matrices de objetos como atributo del objeto en vez de calcularla en cada rayo.
+- [ ] Gestionar resolucion de objetos duplicados. Mismos objetos, misma posicion, mismas dimensiones. Combinacion de colores o solo mostramos uno de ellos?
+- [ ] Torcer el plano de fondo como si fuera una cuesta y_skewed_r_back.rt, ahora rota raro.
 > PRUEBA NO BUENOS RESULTADOS
 >
 > A 0.2 200,200,200   
