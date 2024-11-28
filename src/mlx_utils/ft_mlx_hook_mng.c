@@ -50,21 +50,21 @@ static int	ft_keyboard_hooks(int keycode, t_scene *scene)
 	printf("%i\n", keycode);
 	if (keycode == ESC)
 		ft_exit_mlx(scene->canvas);
-	/* else if (keycode == UP_ARROW)
+	else if (keycode == PLUS || keycode == MINUS)
 	{
-		reset_camera(scene, ft_build_tuple(0,1,0,VECTOR));
-		ft_render_scene(scene);
-		printf("ENTRA!\n");
-		mlx_put_image_to_window(scene->canvas->mlx_init, \
-		scene->canvas->mlx_win, scene->canvas->img, 0, 0);
+		if ((keycode == PLUS && (scene->camera->fov * 180 / M_PI - 10) > 0) \
+		|| (keycode == MINUS && (scene->camera->fov * 180 / M_PI + 10) < 180))
+		{
+			ft_zoom_camera(scene, scene->camera->fov * 180 / M_PI + 10 \
+				* (keycode + 1 - MINUS));
+			ft_render_scene(scene);
+			mlx_put_image_to_window(scene->canvas->mlx_init, \
+				scene->canvas->mlx_win, scene->canvas->img, 0, 0);
+		}
+		else
+			mlx_string_put(scene->canvas->mlx_init, scene->canvas->mlx_win, \
+				WIDTH / 2, HEIGHT / 2, set_rgb(255, 255, 255), \
+					"Max zoom reached");
 	}
-	else if (keycode == DOWN_ARROW)
-	{
-		reset_camera(scene, ft_build_tuple(0.0,0.0,1.0,VECTOR));
-		ft_render_scene(scene);
-		printf("ENTRA2!\n");
-		mlx_put_image_to_window(scene->canvas->mlx_init, \
-		scene->canvas->mlx_win, scene->canvas->img, 0, 0);
-	} */
 	return (0);
 }

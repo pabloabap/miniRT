@@ -62,13 +62,14 @@ typedef enum e_x_mask
 
 typedef enum e_keycodes
 {
-	ESC 		= 0xff1b,
+	ESC			= 0xff1b,
 	LEFT_ARROW	= 0xff51,
-	UP_ARROW 	= 0xff52,
+	UP_ARROW	= 0xff52,
 	RIGHT_ARROW = 0xff54,
-	DOWN_ARROW 	= 0xff54
+	DOWN_ARROW	= 0xff54,
+	PLUS		= 65451,
+	MINUS		= 65453,
 }	t_keycodes;
-
 
 typedef enum e_coor
 {
@@ -290,6 +291,7 @@ unsigned char	ft_get_t(int trgb);
 unsigned char	ft_get_r(int trgb);
 unsigned char	ft_get_g(int trgb);
 unsigned char	ft_get_b(int trgb);
+void			ft_zoom_camera(t_scene *scene, double fov);
 
 //___OPERACIONES GENERALES___
 
@@ -405,8 +407,6 @@ void			ft_print_matrix(t_matrix m);
 void			ft_print_tuple(t_tuple t);
 void			ft_fill_matrix(t_matrix *m, char *arr);
 void			ft_print_i_list(t_ray_inters *i_list);
-
-int				reset_camera(t_scene *scene, t_tuple new_orientation);
 
 # include "parsing.h"
 #endif
