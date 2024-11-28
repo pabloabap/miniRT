@@ -33,8 +33,7 @@ int	ft_render_scene(t_scene *scene)
 	{
 		while (canvas_axis[X] < WIDTH)
 		{
-			ray = ft_ray_for_pixel(*(scene->camera), canvas_axis[X], \
-					canvas_axis[Y]);
+			ray = ft_ray_for_pixel(*(scene->camera), canvas_axis[X], canvas_axis[Y]);
 			ft_color_at(ray, scene, &(*canvas_axis));
 			canvas_axis[X]++;
 		}
@@ -92,12 +91,10 @@ static t_pre_comp	ft_prepare_computation(t_ray ray, t_ray_inters *inters)
 	hitted = ft_get_hit(inters);
 	comps.inter_point = hitted->inter_point;
 	comps.obj = hitted->obj;
-	ft_scalar_mult(&(ray.direction), hitted->inter_point, \
-			VECTOR);
+	ft_scalar_mult(&(ray.direction), hitted->inter_point, VECTOR);
 	comps.hit_point = ft_add_tuples(ray.origin, ray.direction);
 	comps.inters_vecs[NORMAL_V] = \
-			ft_sp_normal_at(*(hitted->obj), \
-				comps.hit_point);
+			ft_sp_normal_at(*(hitted->obj), comps.hit_point);
 	comps.inters_vecs[EYE_V] = ft_negate_tuple(ft_normalize(ray.direction));
 	if (0.0 > ft_dot(comps.inters_vecs[NORMAL_V], comps.inters_vecs[EYE_V]))
 	{

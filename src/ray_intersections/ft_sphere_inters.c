@@ -12,7 +12,7 @@
 
 #include "../../include/mini_rt.h"
 
-static double	ft_discriminant(double *v);
+double	ft_discriminant(double *v);
 static void		ft_fill_v(t_ray ray, t_sphere sp, double *v);
 
 /**
@@ -37,7 +37,7 @@ void	ft_sphere_inters(t_ray ray, t_oitem *sphere, t_ray_inters **i_list)
  * Define en que punto intersecciona `ray`y `sphere`.
  * @return Discriminante.
  */
-static double	ft_discriminant(double *v)
+double	ft_discriminant(double *v)
 {
 	return (v[1] * v[1] - 4 * v[0] * v[2]);
 }

@@ -25,7 +25,8 @@ void	ft_set_transformations_matrix(t_oitem *obj_item, int o_type)
 			((t_plane *)obj_item->obj_struct));
 	else if (CYLINDER == o_type)
 	{
-		return ;
+		ft_set_cy_transformations_matrix(obj_item, \
+			((t_cylinder *)obj_item->obj_struct));
 	}
 }
 
@@ -67,6 +68,33 @@ static void	ft_set_pl_transformations_matrix(t_oitem *obj, t_plane *pl)
 			ft_identity_matrix(4, 4), X, x_deg), Y, y_deg), \
 		pl->origin.x, pl->origin.y, pl->origin.z);
 	pl->origin = ft_build_tuple(0, 0, 0, POINT);
+}
+
+
+void ft_set_cy_transformations_matrix(t_oitem *obj, t_cylinder *cy)
+{
+    double x_deg;
+    double y_deg;
+    double z_deg;
+
+    // Calcular los ángulos de rotación en los ejes X, Y y Z
+	x_deg = acos(ft_dot(cy->nrm_vector, ft_build_tuple(1, 0, 0, VECTOR))) * (180 / M_PI);  // Rotación en X
+	y_deg = acos(ft_dot(cy->nrm_vector, ft_build_tuple(0, 1, 0, VECTOR))) * (180 / M_PI);  // Rotación en Y
+	z_deg = acos(ft_dot(cy->nrm_vector, ft_build_tuple(0, 0, 1, VECTOR))) * (180 / M_PI);  // Rotación en Z
+
+	// Print the calculated angles
+	printf("x_deg: %f, y_deg: %f, z_deg: %f\n", x_deg, y_deg, z_deg);
+
+    ft_normalized_vec_check(cy->nrm_vector); // Asegurarse de que el vector normal esté normalizado
+
+    // Calcular la matriz de transformaciones: traslación y rotaciones
+    obj->transformations_matrix = ft_matrix_translation(
+        ft_matrix_rotation(ft_matrix_rotation(ft_matrix_rotation(
+            ft_identity_matrix(4, 4), X, x_deg), Y, y_deg), Z, z_deg),
+        cy->origin.x, cy->origin.y, cy->origin.z);
+
+    // Ajustar el origen del cilindro para que esté en el centro
+    cy->origin = ft_build_tuple(0, 0, 0, POINT);
 }
 
 /*  CODIGO ANTIGUO QUE NO FUNCIONABA POR SI EL ANTERIOR DEJA DE FUNCIONAR COMO
