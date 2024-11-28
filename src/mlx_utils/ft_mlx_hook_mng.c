@@ -12,8 +12,8 @@
 
 #include "mini_rt.h"
 
-static void	ft_exit_mlx(t_canvas *canvas);
-static void	ft_keyboard_hooks(int keycode, t_scene *scene);
+static int	ft_exit_mlx(t_canvas *canvas);
+static int	ft_keyboard_hooks(int keycode, t_scene *scene);
 
 /**
  * Maneja los eventos recibidos por el programa.
@@ -32,11 +32,12 @@ void	ft_mlx_hook_mng(t_scene *scene)
  * generadas.
  * @param canvas Estructura con atributos de la mlx.
  */
-static void	ft_exit_mlx(t_canvas *canvas)
+static int	ft_exit_mlx(t_canvas *canvas)
 {
 	mlx_destroy_image(canvas->mlx_init, canvas->img);
 	mlx_destroy_window(canvas->mlx_init, canvas->mlx_win);
 	exit(0);
+	return (0);
 }
 
 /**
@@ -44,7 +45,7 @@ static void	ft_exit_mlx(t_canvas *canvas)
  * @param keycode Codigo identificativo de una tecla.
  * @param scene Estructura con los atributos de la escena.
  */
-static void	ft_keyboard_hooks(int keycode, t_scene *scene)
+static int	ft_keyboard_hooks(int keycode, t_scene *scene)
 {
 	printf("%i\n", keycode);
 	if (keycode == ESC)
@@ -65,4 +66,5 @@ static void	ft_keyboard_hooks(int keycode, t_scene *scene)
 		mlx_put_image_to_window(scene->canvas->mlx_init, \
 		scene->canvas->mlx_win, scene->canvas->img, 0, 0);
 	} */
+	return (0);
 }
