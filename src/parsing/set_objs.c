@@ -1,4 +1,15 @@
-//CABECERA!!
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set_objs.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pabad-ap <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/28 11:07:09 by pabad-ap          #+#    #+#             */
+/*   Updated: 2024/11/28 11:07:44 by pabad-ap         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "mini_rt.h"
 
 int	set_ambient(char *line, t_scene *scene)
@@ -66,7 +77,6 @@ int	reset_camera(t_scene *scene, t_tuple new_orientation)
 	*(scene->camera) = cam;
 	return (EXIT_SUCCESS);
 }
-
 
 int	set_light(char *line, t_scene *scene)
 {
