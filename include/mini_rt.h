@@ -200,7 +200,7 @@ typedef struct s_plane
 typedef struct s_cylinder
 {
 	t_tuple		origin;
-	t_tuple		nrm_vector;//Rango [-1, 1]
+	t_tuple		nrm_vector;
 	double		diameter;
 	double		height;
 }	t_cylinder;
@@ -339,8 +339,10 @@ t_matrix		ft_inverse_matrix(t_matrix *m);
 //___RAYTRACING___
 
 t_tuple			ft_rc_position(t_ray ray, double position);
+double			ft_discriminant(double *v);
 void			ft_sphere_inters(t_ray ray, t_oitem *sphere, \
 					t_ray_inters **i_list);
+void			ft_cylinder_inters(t_ray ray, t_oitem *sphere, t_ray_inters **i_list);
 int				ft_add_inters_sorted(t_ray_inters **i_list, double inter_point, \
 					t_oitem *obj);
 int				ft_identify_hit(t_ray_inters *i_list);
@@ -408,5 +410,6 @@ void			ft_print_tuple(t_tuple t);
 void			ft_fill_matrix(t_matrix *m, char *arr);
 void			ft_print_i_list(t_ray_inters *i_list);
 
+void ft_set_cy_transformations_matrix(t_oitem *obj, t_cylinder *cy);
 # include "parsing.h"
 #endif

@@ -25,16 +25,30 @@ t_tuple	ft_sp_normal_at(t_oitem obj, t_tuple surface_point)
 	t_tuple	obj_normal;
 	t_tuple	world_normal;
 
-	ft_sp_normal_at_check(surface_point.w);
-	obj_point = ft_matrix_to_tuple(ft_matrix_mult(\
-		obj.inv_transform, \
-		ft_tuple_to_matrix(surface_point)));
-	obj_normal = ft_build_tuple(obj_point.x, obj_point.y, obj_point.z, VECTOR);
-	world_normal = ft_matrix_to_tuple(ft_matrix_mult(\
-		ft_matrix_transpos(obj.inv_transform), \
-		ft_tuple_to_matrix(obj_normal)));
+	if (obj.obj_type == SPHERE)
+	{
+		ft_sp_normal_at_check(surface_point.w);
+		obj_point = ft_matrix_to_tuple(ft_matrix_mult(\
+			obj.inv_transform, \
+			ft_tuple_to_matrix(surface_point)));
+		obj_normal = ft_build_tuple(obj_point.x, obj_point.y, obj_point.z, VECTOR);
+		world_normal = ft_matrix_to_tuple(ft_matrix_mult(\
+			ft_matrix_transpos(obj.inv_transform), \
+			ft_tuple_to_matrix(obj_normal)));
+	}
 	if (obj.obj_type == PLANE)
 		world_normal = ((t_plane *)(obj.obj_struct))->nrm_vector;
+	if (obj.obj_type == CYLINDER)
+	{
+		//check
+		obj_point = ft_matrix_to_tuple(ft_matrix_mult(\
+			obj.inv_transform, \
+			ft_tuple_to_matrix(surface_point)));
+		obj_normal = ft_build_tuple(obj_point.x, 0, obj_point.z, VECTOR);
+		world_normal = ft_matrix_to_tuple(ft_matrix_mult(\
+			ft_matrix_transpos(obj.inv_transform), \
+			ft_tuple_to_matrix(obj_normal)));
+	}
 	world_normal.w = 0;
 	return (ft_normalize(world_normal));
 }
