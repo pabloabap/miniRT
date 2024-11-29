@@ -345,7 +345,7 @@ int				ft_obj_id_assignment(void);
 t_material		ft_default_material(int color, t_ambient *ambt);
 int				ft_render_scene(t_scene *scene);
 void			ft_set_transformations_matrix(t_oitem *obj_item, int o_type);
-void			ft_prepare_canvas(t_canvas **canvas);
+void			ft_prepare_canvas(t_canvas **canvas, char *title);
 t_matrix		ft_tuple_to_matrix(t_tuple tuple);
 t_tuple			ft_matrix_to_tuple(t_matrix tuple);
 t_tuple			ft_normalize_color(int color);
