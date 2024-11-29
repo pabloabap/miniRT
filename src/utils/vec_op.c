@@ -38,6 +38,8 @@ t_tuple	ft_normalize(t_tuple v)
 
 	ft_vectors_op_check(v, v);
 	v_lenght = ft_magnitude(v);
+	if (0 == v_lenght)
+		v_lenght = __DBL_EPSILON__;
 	v.x = v.x / v_lenght;
 	v.y = v.y / v_lenght;
 	v.z = v.z / v_lenght;

@@ -24,6 +24,7 @@ SRCS		=	$(MAIN)\
 				./debug/ft_print_i_list.c \
 				./debug/ft_print_matrix.c \
 				./debug/ft_print_tuple.c \
+				./src/mlx_utils/ft_mlx_hook_mng.c \
 				./src/mlx_utils/mlx_utils.c \
 				./src/gnl/ft_get_next_line_utils.c \
 				./src/gnl/ft_get_next_line.c \

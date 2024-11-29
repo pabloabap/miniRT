@@ -32,6 +32,45 @@
 # include "../lib/minilibx-linux/mlx.h"
 # include "../lib/libft/libft.h"
 
+typedef enum e_errors
+{
+	VECTOR_OPS_ERROR = 1,
+	TUPLE_OPS_ERROR,
+	MATRIX_DET_ERROR,
+	MATRIX_OPS_ERROR,
+	MATRIX_VIEW_ERROR,
+	MLX_ERROR,
+	NORMALIZATION_ERROR
+}	t_errors;
+
+typedef enum e_x_event
+{
+	ON_KEYPRESS = 2,
+	ON_KEYRELEASE = 3,
+	ON_BUTTON_PRESS = 4,
+	ON_BUTTON_RELEASE = 5,
+	ON_EXPOSE = 12,
+	ON_DESTROY = 17,
+	ON_RESIZE_REQUEST = 25
+}	t_x_event;
+
+typedef enum e_x_mask
+{
+	NO_EVENT = 0,
+	KEYPRESS = 1L<<0
+}	t_x_mask;
+
+typedef enum e_keycodes
+{
+	ESC			= 0xff1b,
+	LEFT_ARROW	= 0xff51,
+	UP_ARROW	= 0xff52,
+	RIGHT_ARROW = 0xff54,
+	DOWN_ARROW	= 0xff54,
+	PLUS		= 65451,
+	MINUS		= 65453,
+}	t_keycodes;
+
 typedef enum e_coor
 {
 	X,
@@ -139,7 +178,7 @@ typedef struct s_oitem
 	int				obj_type;
 	t_material		material;
 	t_matrix		transformations_matrix;
-	t_matrix 		inv_transform;
+	t_matrix		inv_transform;
 	void			*obj_struct;
 	struct s_oitem	*prev;
 	struct s_oitem	*next;
@@ -244,6 +283,7 @@ typedef struct s_scene
 
 // ___MLX___
 
+void			ft_mlx_hook_mng(t_scene *scene);
 void			ft_mlx_pixel_put(t_canvas *img, int x, int y, int color);
 int				ft_create_trgb(unsigned char t, unsigned char r, \
 					unsigned char g, unsigned char b);
@@ -251,6 +291,7 @@ unsigned char	ft_get_t(int trgb);
 unsigned char	ft_get_r(int trgb);
 unsigned char	ft_get_g(int trgb);
 unsigned char	ft_get_b(int trgb);
+void			ft_zoom_camera(t_scene *scene, double fov);
 
 //___OPERACIONES GENERALES___
 
@@ -327,7 +368,7 @@ void			ft_matrix_det_check(t_matrix m);
 void			ft_matrix_mult_check(t_matrix m1, t_matrix m2);
 void			ft_matrix_to_tuple_check(t_matrix m);
 void			ft_sp_normal_at_check(double w);
-int				ft_mlx_failure_check(void *p);
+void			ft_mlx_failure_check(void *p);
 void			ft_matrix_view_transform_check(t_tuple from_p, t_tuple to_p, \
 					t_tuple up_v);
 void			ft_normalized_vec_check(t_tuple v_v);

@@ -6,7 +6,7 @@
 /*   By: pabad-ap <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 23:13:28 by pabad-ap          #+#    #+#             */
-/*   Updated: 2024/11/12 23:14:04 by pabad-ap         ###   ########.fr       */
+/*   Updated: 2024/11/28 11:09:10 by pabad-ap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ t_ray	ft_ray_for_pixel(t_camera camera, double px, double py)
 	pixel_p = ft_matrix_to_tuple(ft_matrix_mult(\
 		camera.inv_transform, \
 		ft_tuple_to_matrix(ft_build_tuple(world[X], world[Y], -1, POINT))));
-	ray.origin = ft_matrix_to_tuple(ft_matrix_mult(
-		camera.inv_transform, \
+	ray.origin = ft_matrix_to_tuple(ft_matrix_mult(camera.inv_transform, \
 		ft_tuple_to_matrix(ft_build_tuple(0, 0, 0, POINT))));
 	ray.direction = ft_normalize(ft_sub_tuples(pixel_p, ray.origin));
 	return (ray);

@@ -58,23 +58,6 @@ void	free_scene(t_scene *scene)
 	free(scene);
 }
 
-int	main2(void)
-{
-	t_scene	*scene;
-	char	*path = "./scenes/sphere.rt";
-
-	scene = scene_init();
-	if (!scene)
-		return (perror("Scene initialization: "), EXIT_FAILURE);
-	if (read_scene(path, scene))
-	{
-		free_scene(scene);
-		return (EXIT_FAILURE);
-	}
-	free_scene(scene);
-	return (0);
-}
-
 int	check_path(char *path)
 {
 	int	i;
@@ -90,8 +73,9 @@ int	check_path(char *path)
 int	main(int ag, char **av)
 {
 	t_scene	*scene;
-	char	*path = av[1];
+	char	*path;
 
+	path = av[1];
 	if (ag != 2)
 		exit(printf("Error\nOne file argument needed\n"));
 	if (check_path(av[1]))
@@ -104,11 +88,12 @@ int	main(int ag, char **av)
 		free_scene(scene);
 		return (EXIT_FAILURE);
 	}
-	ft_prepare_canvas(&scene->canvas, ft_strrchr(av[1], '/'));
+	ft_prepare_canvas(&scene->canvas, ft_strrchr(path, '/') + 1);
 	ft_render_scene(scene);
 	mlx_put_image_to_window(scene->canvas->mlx_init, \
 		scene->canvas->mlx_win, scene->canvas->img, 0, 0);
 	ft_putendl_fd("TEMRINADO", 1);
-	sleep(5000);
+	ft_mlx_hook_mng(scene);
+	mlx_loop(scene->canvas->mlx_init);
 	return (0);
 }
