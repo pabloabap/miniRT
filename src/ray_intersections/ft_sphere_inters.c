@@ -12,7 +12,7 @@
 
 #include "../../include/mini_rt.h"
 
-double	ft_discriminant(double *v);
+double			ft_discriminant(double *v);
 static void		ft_fill_v(t_ray ray, t_sphere sp, double *v);
 
 /**
