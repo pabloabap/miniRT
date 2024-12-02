@@ -19,9 +19,10 @@ t_scene	*scene_init(void)
 	s = malloc(sizeof(t_scene));
 	if (!s)
 		return (NULL);
+	s->ambient_light = NULL;
 	s->camera = NULL;
-	s->canvas = NULL;
 	s->light = NULL;
+	s->canvas = NULL;
 	s->objs_list = NULL;
 	return (s);
 }

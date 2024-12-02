@@ -41,11 +41,11 @@ int	add_object(char *line, t_scene *scene)
 	i = skip_space(line);
 	if (obj < 0)
 		return (EXIT_FAILURE);
-	if (obj == AMBIENT)
+	if (obj == AMBIENT && !scene->ambient_light)
 		return (set_ambient(&line[i + 1], scene));
-	if (obj == CAMERA)
+	if (obj == CAMERA && !scene->camera)
 		return (set_camera(&line[i + 1], scene));
-	if (obj == LIGHT)
+	if (obj == LIGHT && !scene->light)
 		return (set_light(&line[i + 1], scene));
 	if (obj == SPHERE)
 		return (set_sphere(&line[i + 2], scene));
