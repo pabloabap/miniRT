@@ -393,6 +393,10 @@ t_tuple			ft_normalize_color(int color);
 t_ray			ft_ray_for_pixel(t_camera camera, double px, double py);
 double			ft_rad_to_deg(double radians);
 
+int 			check_height(t_ray ray, double t, t_cylinder cy);
+void 			ft_cylinder_caps(t_ray ray, t_oitem *cy, t_ray_inters **i_list);
+void 			ft_cylinder_inters(t_ray ray, t_oitem *cy, t_ray_inters **i_list);
+
 //___GNL___
 
 char			*get_next_line(int fd);

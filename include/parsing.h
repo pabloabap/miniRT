@@ -35,6 +35,13 @@ int set_sphere(char *line, t_scene *scene);
 int set_cylinder(char *line, t_scene *scene);
 int set_plane(char *line, t_scene *scene);
 
+
+int check_line_end(char *line);
+int valid_char(char c);
+int check_line(char *line, int obj);
+int skip_space(char *line);
+int skip_num2(char *line);
+
 int check_line(char *line, int obj);
 int check_line_end(char *line);
 

@@ -33,7 +33,8 @@ int	ft_render_scene(t_scene *scene)
 	{
 		while (canvas_axis[X] < WIDTH)
 		{
-			ray = ft_ray_for_pixel(*(scene->camera), canvas_axis[X], canvas_axis[Y]);
+			ray = ft_ray_for_pixel(*(scene->camera), \
+				canvas_axis[X], canvas_axis[Y]);
 			ft_color_at(ray, scene, &(*canvas_axis));
 			canvas_axis[X]++;
 		}

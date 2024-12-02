@@ -79,6 +79,5 @@ int	read_scene(char *path, t_scene *scene)
 		line = get_next_line(fd);
 	}
 	close(fd);
-	print_scene(scene);
 	return (EXIT_SUCCESS);
 }

@@ -55,98 +55,66 @@ static void	ft_set_sp_transformations_matrix(t_oitem *obj, t_sphere *sp)
 	sp->origin = ft_build_tuple(0, 0, 0, POINT);
 }
 
+t_matrix	ft_matrix_rotation_axis_angle(t_tuple a, double theta)
+{
+	double		cos_theta;
+	double		sin_theta;
+	t_matrix	rotation;
 
-t_matrix ft_matrix_rotation_axis_angle(t_tuple axis, double theta) {
-    // Normalización del eje (por si acaso)
-    double magnitude = sqrt(axis.x * axis.x + axis.y * axis.y + axis.z * axis.z);
-    double ux = axis.x / magnitude;
-    double uy = axis.y / magnitude;
-    double uz = axis.z / magnitude;
-
-    double cos_theta = cos(theta);
-    double sin_theta = sin(theta);
-    double one_minus_cos = 1.0 - cos_theta;
-
-    t_matrix rotation;
-
-    // Inicializa dimensiones
-    rotation.rows = 4;
-    rotation.cols = 4;
-    rotation.det = 1.0;  // La rotación no cambia el determinante de una matriz ortogonal
-
-    // Construir la matriz de rotación
-    rotation.val[0][0] = cos_theta + ux * ux * one_minus_cos;
-    rotation.val[0][1] = ux * uy * one_minus_cos - uz * sin_theta;
-    rotation.val[0][2] = ux * uz * one_minus_cos + uy * sin_theta;
-    rotation.val[0][3] = 0.0;
-
-    rotation.val[1][0] = uy * ux * one_minus_cos + uz * sin_theta;
-    rotation.val[1][1] = cos_theta + uy * uy * one_minus_cos;
-    rotation.val[1][2] = uy * uz * one_minus_cos - ux * sin_theta;
-    rotation.val[1][3] = 0.0;
-
-    rotation.val[2][0] = uz * ux * one_minus_cos - uy * sin_theta;
-    rotation.val[2][1] = uz * uy * one_minus_cos + ux * sin_theta;
-    rotation.val[2][2] = cos_theta + uz * uz * one_minus_cos;
-    rotation.val[2][3] = 0.0;
-
-    // Última fila para matriz 4x4 (transformaciones homogéneas)
-    rotation.val[3][0] = 0.0;
-    rotation.val[3][1] = 0.0;
-    rotation.val[3][2] = 0.0;
-    rotation.val[3][3] = 1.0;
-
-    return rotation;
+	a = ft_normalize(a);
+	cos_theta = cos(theta);
+	sin_theta = sin(theta);
+	rotation = ft_build_matrix(4, 4);
+	rotation.det = 1.0;
+	rotation.val[0][0] = cos_theta + a.x * a.x * (1.0 - cos_theta);
+	rotation.val[0][1] = a.x * a.y * (1.0 - cos_theta) - a.z * sin_theta;
+	rotation.val[0][2] = a.x * a.z * (1.0 - cos_theta) + a.y * sin_theta;
+	rotation.val[1][0] = a.y * a.x * (1.0 - cos_theta) + a.z * sin_theta;
+	rotation.val[1][1] = cos_theta + a.y * a.y * (1.0 - cos_theta);
+	rotation.val[1][2] = a.y * a.z * (1.0 - cos_theta) - a.x * sin_theta;
+	rotation.val[2][0] = a.z * a.x * (1.0 - cos_theta) - a.y * sin_theta;
+	rotation.val[2][1] = a.z * a.y * (1.0 - cos_theta) + a.x * sin_theta;
+	rotation.val[2][2] = cos_theta + a.z * a.z * (1.0 - cos_theta);
+	rotation.val[3][3] = 1.0;
+	return (rotation);
 }
 
-void ft_set_cy_transformations_matrix(t_oitem *obj, t_cylinder *cy) {
-    t_tuple up = ft_build_tuple(0, 1, 0, VECTOR);
-    t_tuple axis = ft_cross(up, cy->nrm_vector);
-    double angle = acos(ft_dot(up, cy->nrm_vector));
+void	ft_set_cy_transformations_matrix(t_oitem *obj, t_cylinder *cy)
+{
+	t_tuple	up;
+	t_tuple	axis;
+	double	angle;
 
-    if (ft_magnitude(axis) < 1e-6) {
-        axis = ft_build_tuple(1, 0, 0, VECTOR);
-    }
-    obj->transformations_matrix = ft_matrix_translation(
-        ft_matrix_rotation_axis_angle(axis, angle),
-        cy->origin.x, cy->origin.y, cy->origin.z);
-    cy->origin = ft_build_tuple(0, 0, 0, POINT);
+	up = ft_build_tuple(0, 1, 0, VECTOR);
+	axis = ft_cross(up, cy->nrm_vector);
+	angle = acos(ft_dot(up, cy->nrm_vector));
+	if (ft_magnitude(axis) < 1e-6)
+		axis = ft_build_tuple(1, 0, 0, VECTOR);
+	obj->transformations_matrix = ft_matrix_translation(
+			ft_matrix_rotation_axis_angle(axis, angle),
+			cy->origin.x, cy->origin.y, cy->origin.z);
+	cy->origin = ft_build_tuple(0, 0, 0, POINT);
 }
-
 
 static void	ft_set_pl_transformations_matrix(t_oitem *obj, t_plane *pl)
 {
-    t_tuple up = ft_build_tuple(0, 1, 0, VECTOR);
-    t_tuple axis = ft_cross(up, pl->nrm_vector);
-    double angle = acos(ft_dot(up, pl->nrm_vector));
-    if (fabs(angle) < 1e-6 || fabs(angle) == M_PI)
-        obj->transformations_matrix = ft_matrix_translation(ft_identity_matrix(4, 4), pl->origin.x, pl->origin.y, pl->origin.z);
+	t_tuple		up;
+	t_tuple		axis;
+	double		angle;
+	t_matrix	rotation;
+
+	up = ft_build_tuple(0, 1, 0, VECTOR);
+	axis = ft_cross(up, pl->nrm_vector);
+	angle = acos(ft_dot(up, pl->nrm_vector));
+	if (fabs(angle) < 1e-6 || fabs(angle) == M_PI)
+		obj->transformations_matrix = ft_matrix_translation(
+				ft_identity_matrix(4, 4),
+				pl->origin.x, pl->origin.y, pl->origin.z);
 	else
 	{
-        t_matrix rotation = ft_matrix_rotation_axis_angle(axis, angle);
-        obj->transformations_matrix = ft_matrix_translation(rotation, pl->origin.x, pl->origin.y, pl->origin.z);
-    }
-    pl->origin = ft_build_tuple(0, 0, 0, POINT);
-}
-
-/*  CODIGO ANTIGUO QUE NO FUNCIONABA POR SI EL ANTERIOR DEJA DE FUNCIONAR COMO
- * SE ESPERA TENER EN CUENTA LA TRANSFORMACION QUE HAGA FALTA EN EL EJE z.
-static void	ft_set_pl_transformations_matrix(t_oitem *obj, t_plane *pl)
-{
-	double	x_deg;
-	double	y_deg;
-	double	z_deg;
-
-	x_deg = acos(ft_dot(pl->nrm_vector, ft_build_tuple(0, 1, 0, VECTOR))) \
-		* (180 / M_PI);
-	y_deg = acos(ft_dot(pl->nrm_vector, ft_build_tuple(0, 0, 1, VECTOR))) \
-		* (180 / M_PI);
-	z_deg = acos(ft_dot(pl->nrm_vector, ft_build_tuple(1, 1, 0, VECTOR))) \
-		* (180 / M_PI);
-	ft_normalized_vec_check(pl->nrm_vector);
-	obj->transformations_matrix = ft_matrix_translation(\
-		ft_matrix_rotation(ft_matrix_rotation(ft_matrix_rotation(\
-			ft_identity_matrix(4, 4), X, x_deg), Y, y_deg), Z, z_deg), \
-		pl->origin.x, pl->origin.y, pl->origin.z);
+		rotation = ft_matrix_rotation_axis_angle(axis, angle);
+		obj->transformations_matrix = ft_matrix_translation(
+				rotation, pl->origin.x, pl->origin.y, pl->origin.z);
+	}
 	pl->origin = ft_build_tuple(0, 0, 0, POINT);
-} */
+}

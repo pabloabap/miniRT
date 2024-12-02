@@ -58,6 +58,7 @@ SRCS		=	$(MAIN)\
 				./src/utils/ft_color_utils.c \
 				./src/utils/ft_color_utils_2.c \
 				./src/utils/ft_detect_ray_inters.c \
+				./src/utils/cylinder_utils.c \
 				./src/utils/ft_errors.c \
 				./src/utils/ft_errors2.c \
 				./src/utils/ft_free_ray_inters_list.c \
@@ -75,8 +76,10 @@ SRCS		=	$(MAIN)\
 				./src/parsing/parse_obj.c \
 				./src/parsing/parsing_utils.c \
 				./src/parsing/set_objs.c \
-				./src/parsing/print_scene.c	\
+				./src/parsing/set_lights.c \
+				./src/parsing/.print_scene.c	\
 				./src/parsing/format_check.c \
+				./src/parsing/format_check_2.c \
 				./src/parsing/ft_atod.c \
 				./src/parsing/parse_color.c
 
