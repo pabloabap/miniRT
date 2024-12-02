@@ -177,4 +177,10 @@ profile: fclean
 valg:
 	valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all ./miniRT scenes/test.rt 
 
-.PHONY: all clean fclean re libft mlx
+cameras:
+	for scene in $$(ls ./scenes/cam_rotations); do ./$(NAME) "./scenes/cam_rotations/$$scene" & done
+
+planes:
+	for scene in $$(ls ./scenes/pl_rotations); do ./$(NAME) "./scenes/pl_rotations/$$scene" & done
+
+.PHONY: all clean fclean re libft mlx cameras planes
