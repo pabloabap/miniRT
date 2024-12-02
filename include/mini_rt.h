@@ -14,13 +14,13 @@
 # define MINI_RT_H
 
 # ifndef WIDTH
-#  define WIDTH 700
+#  define WIDTH 1000
 # endif
 # ifndef HEIGHT
-#  define HEIGHT 700
+#  define HEIGHT 1000
 # endif
 # define BUFFER_SIZE 100
-
+# define CY_EPSILON 1e-6
 # include <sys/types.h>	//open
 # include <sys/stat.h>	//open
 # include <fcntl.h>		//open
