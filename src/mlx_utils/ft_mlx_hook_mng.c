@@ -66,5 +66,25 @@ static int	ft_keyboard_hooks(int keycode, t_scene *scene)
 				WIDTH / 2, HEIGHT / 2, set_rgb(255, 255, 255), \
 					"Max zoom reached");
 	}
+	if (keycode == RIGHT_ARROW)
+	{
+		float	angle = acos((scene->light->position.z) / (scene->light->position.x));
+		scene->light->position.x = 10 * cos(angle + (10 * M_PI / 180));
+		scene->light->position.z= 10 * sin(angle + (10 * M_PI / 180));
+		ft_render_scene(scene);
+			mlx_put_image_to_window(scene->canvas->mlx_init, \
+				scene->canvas->mlx_win, scene->canvas->img, 0, 0);
+	}
+	if (keycode == LEFT_ARROW)
+	{
+		float	angle = acos((scene->light->position.z) / (scene->light->position.x));
+		scene->light->position.x = 10 * cos(angle - (10 * M_PI / 180));
+		scene->light->position.z= 10 * sin(angle - (10 * M_PI / 180));
+		ft_render_scene(scene);
+			mlx_put_image_to_window(scene->canvas->mlx_init, \
+				scene->canvas->mlx_win, scene->canvas->img, 0, 0);
+
+	}
+	
 	return (0);
 }

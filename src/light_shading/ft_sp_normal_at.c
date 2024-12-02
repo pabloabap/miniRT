@@ -40,11 +40,18 @@ t_tuple	ft_sp_normal_at(t_oitem obj, t_tuple surface_point)
 		world_normal = ((t_plane *)(obj.obj_struct))->nrm_vector;
 	if (obj.obj_type == CYLINDER)
 	{
+		t_cylinder cy = *(t_cylinder *)obj.obj_struct;
+		float cap = cy.height / 2.0;
 		//check
 		obj_point = ft_matrix_to_tuple(ft_matrix_mult(\
 			obj.inv_transform, \
 			ft_tuple_to_matrix(surface_point)));
-		obj_normal = ft_build_tuple(obj_point.x, 0, obj_point.z, VECTOR);
+		if (fabs(obj_point.y - cap) < CY_EPSILON)
+     	  	obj_normal = ft_build_tuple(0, 1, 0, VECTOR);
+		else if (fabs(obj_point.y + cap) < CY_EPSILON)
+     	  	obj_normal = ft_build_tuple(0, -1, 0, VECTOR);
+    	else
+        	obj_normal = ft_build_tuple(obj_point.x, 0, obj_point.z, VECTOR);
 		world_normal = ft_matrix_to_tuple(ft_matrix_mult(\
 			ft_matrix_transpos(obj.inv_transform), \
 			ft_tuple_to_matrix(obj_normal)));
