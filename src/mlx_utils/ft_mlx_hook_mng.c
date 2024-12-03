@@ -47,7 +47,6 @@ static int	ft_exit_mlx(t_canvas *canvas)
  */
 static int	ft_keyboard_hooks(int keycode, t_scene *scene)
 {
-	printf("%i\n", keycode);
 	if (keycode == ESC)
 		ft_exit_mlx(scene->canvas);
 	else if (keycode == PLUS || keycode == MINUS)
@@ -55,6 +54,8 @@ static int	ft_keyboard_hooks(int keycode, t_scene *scene)
 		if ((keycode == PLUS && (scene->camera->fov * 180 / M_PI - 10) > 0) \
 		|| (keycode == MINUS && (scene->camera->fov * 180 / M_PI + 10) < 180))
 		{
+			mlx_destroy_image(scene->canvas->mlx_init, scene->canvas->img);
+			scene->canvas->img = mlx_new_image(scene->canvas->mlx_init, WIDTH, HEIGHT);
 			ft_zoom_camera(scene, scene->camera->fov * 180 / M_PI + 10 \
 				* (keycode + 1 - MINUS));
 			ft_render_scene(scene);
