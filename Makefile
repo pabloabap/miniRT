@@ -87,7 +87,6 @@ SRCS		=	$(MAIN)\
 				./src/parsing/parsing_utils.c \
 				./src/parsing/set_objs.c \
 				./src/parsing/set_lights.c \
-				./src/parsing/.print_scene.c	\
 				./src/parsing/format_check.c \
 				./src/parsing/format_check_2.c \
 				./src/parsing/ft_atod.c \
@@ -160,11 +159,6 @@ $(DIR_OBJS)%.o: $(DIR_PARSING)%.c $(HEADERS) Makefile | $(DIR_OBJS)
 $(DIR_OBJS)%.o: $(MAIN) $(HEADERS) Makefile | $(DIR_OBJS)
 	$(CC) -c $(CFLAGS) $(INCLUDE) $< -o $@
 
--include $(DEPS)
-
-dependencies.d: $(SRCS)
-	$(CC) -MM $^ -MF $@ -MP
-
 libft:
 	make -C $(DIR_LIBFT)
 
@@ -181,15 +175,8 @@ fclean: clean
 
 re: fclean all
 
-do:
-	./miniRT
-
 profile: fclean
 	$(MAKE) CFLAGS="$(CFLAGS) -pg" all
-
-
-valg:
-	valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all ./miniRT scenes/test.rt 
 
 cameras:
 	for scene in $$(ls ./scenes/cam_rotations); do ./$(NAME) "./scenes/cam_rotations/$$scene" & done
