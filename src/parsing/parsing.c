@@ -41,11 +41,11 @@ int	add_object(char *line, t_scene *scene)
 	i = skip_space(line);
 	if (obj < 0)
 		return (EXIT_FAILURE);
-	if (obj == AMBIENT && !scene->ambient_light)
+	if (obj == AMBIENT)
 		return (set_ambient(&line[i + 1], scene));
-	if (obj == CAMERA && !scene->camera)
+	if (obj == CAMERA)
 		return (set_camera(&line[i + 1], scene));
-	if (obj == LIGHT && !scene->light)
+	if (obj == LIGHT)
 		return (set_light(&line[i + 1], scene));
 	if (obj == SPHERE)
 		return (set_sphere(&line[i + 2], scene));
@@ -63,17 +63,14 @@ int	read_scene(char *path, t_scene *scene)
 
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
-		return (perror("Error\nopen"), EXIT_FAILURE);
+		parsing_error(FD_ERROR);
 	line = get_next_line(fd);
 	while (line)
 	{
 		if (line[0] != '\n')
 		{
 			if (add_object(line, scene))
-			{
-				printf("Unrecognized parameters\n");
-				exit(1);
-			}
+				parsing_error(FALSE_OBJECT);
 		}
 		free(line);
 		line = get_next_line(fd);

@@ -52,10 +52,7 @@ t_tuple	read_vec(char *line)
 	t_tuple	vec;
 
 	if (is_vector(line))
-	{
-		printf("vector format error\n");
-		exit(1);
-	}
+		parsing_error(VEC_FORMAT);
 	x = ft_atod(line);
 	line += skip_num(line) + 1;
 	y = ft_atod(line);
@@ -73,10 +70,7 @@ t_tuple	read_point(char *line)
 	t_tuple	point;
 
 	if (is_vector(line))
-	{
-		printf("point format error\n");
-		exit(1);
-	}
+		parsing_error(POINT_FORMAT);
 	x = ft_atod(line);
 	line += skip_num(line) + 1;
 	y = ft_atod(line);

@@ -20,7 +20,7 @@ int	check_line_end(char *line)
 	while (line[i])
 	{
 		if (!is_space(line[i]) && line[i] != '\n')
-			return (EXIT_FAILURE);
+			parsing_error(EXTRA_PARAM);
 		i++;
 	}
 	return (EXIT_SUCCESS);

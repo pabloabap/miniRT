@@ -12,11 +12,18 @@
 
 #include "mini_rt.h"
 
+void	check_repeat(void *obj)
+{
+	if (obj)
+		parsing_error(EXTRA_OBJ);
+}
+
 int	set_ambient(char *line, t_scene *scene)
 {
 	int			i;
 	t_ambient	*amb;
 
+	check_repeat(scene->ambient_light);
 	amb = malloc(sizeof(t_ambient));
 	i = skip_space(line);
 	amb->ratio = ft_atod_val(&line[i]);
@@ -33,6 +40,7 @@ int	set_camera(char *line, t_scene *scene)
 	int			i;
 	t_tuple		to_p;
 
+	check_repeat(scene->camera);
 	i = skip_space(line);
 	scene->camera = malloc(sizeof(t_camera));
 	scene->camera->position_p = read_point(&line[i]);
@@ -60,6 +68,7 @@ int	set_light(char *line, t_scene *scene)
 	t_point_light	*light;
 	int				i;
 
+	check_repeat(scene->light);
 	light = malloc(sizeof(t_point_light));
 	i = skip_space(line);
 	light->position = read_point(&line[i]);

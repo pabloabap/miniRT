@@ -81,7 +81,8 @@ SRCS		=	$(MAIN)\
 				./src/parsing/format_check.c \
 				./src/parsing/format_check_2.c \
 				./src/parsing/ft_atod.c \
-				./src/parsing/parse_color.c
+				./src/parsing/parse_color.c\
+				./src/parsing/ft_errors3.c
 
 				
 #Object files

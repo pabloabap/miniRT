@@ -20,10 +20,7 @@ int	read_color(char *line)
 	int	b;
 
 	if (is_vector(line))
-	{
-		printf("color format error\n");
-		exit(1);
-	}
+		parsing_error(COLOR_FORMAT);
 	r = ft_atoi(line);
 	line += skip_num(line) + 1;
 	g = ft_atoi(line);

@@ -40,7 +40,14 @@ typedef enum e_errors
 	MATRIX_OPS_ERROR,
 	MATRIX_VIEW_ERROR,
 	MLX_ERROR,
-	NORMALIZATION_ERROR
+	NORMALIZATION_ERROR,
+	EXTRA_OBJ,
+	EXTRA_PARAM,
+	POINT_FORMAT,
+	VEC_FORMAT,
+	COLOR_FORMAT,
+	FALSE_OBJECT,
+	FD_ERROR
 }	t_errors;
 
 typedef enum e_x_event
@@ -420,15 +427,8 @@ void			ft_print_i_list(t_ray_inters *i_list);
 void			ft_set_cy_transformations_matrix(t_oitem *obj, t_cylinder *cy);
 
 //__PARSING___
-typedef enum e_error
-{
-	FD_ERROR,
-	VAL_ERROR,
-	VEC_ERROR,
-	COL_ERROR,
-	LINE_ERROR
-}	t_error;
 
+void    		parsing_error(int code);
 int				is_space(char c);
 int				is_space(char c);
 double			add_decimal(float n, char *line);
