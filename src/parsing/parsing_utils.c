@@ -53,7 +53,8 @@ t_tuple	read_vec(char *line)
 
 	if (is_vector(line))
 	{
-		printf("vector format error\n");
+		ft_putstr_fd("Error\nVector format error ", 2);
+		ft_putendl_fd(line, 2);
 		exit(1);
 	}
 	x = ft_atod(line);
