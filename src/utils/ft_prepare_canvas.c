@@ -18,8 +18,12 @@
 void	ft_prepare_canvas(t_canvas **canvas, char *title)
 {
 	t_canvas	*initialized_canvas;
+	char		*file_name;
 
 	initialized_canvas = (t_canvas *)malloc(sizeof(t_canvas));
+	file_name = ft_strrchr(title, '/');
+	if (file_name)
+		title = ++file_name;
 	(*canvas) = initialized_canvas;
 	(*canvas)->mlx_init = mlx_init();
 	ft_mlx_failure_check((*canvas)->mlx_init);

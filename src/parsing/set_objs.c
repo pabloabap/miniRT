@@ -41,6 +41,7 @@ int	set_cylinder(char *line, t_scene *scene)
 	cylinder->origin = read_vec(&line[i]);
 	i += skip_vec(&line[i]);
 	cylinder->nrm_vector = read_vec(&line[i]);
+	ft_normalized_vec_check(cylinder->nrm_vector);
 	i += skip_vec(&line[i]);
 	cylinder->diameter = ft_atod_val(&line[i]);
 	i += skip_num(&line[i]);
@@ -63,6 +64,7 @@ int	set_plane(char *line, t_scene *scene)
 	plane->origin = read_vec(&line[i]);
 	i += skip_vec(&line[i]);
 	plane->nrm_vector = read_vec(&line[i]);
+	ft_normalized_vec_check(plane->nrm_vector);
 	i += skip_vec(&line[i]);
 	color = read_color(&line[i]);
 	i += skip_vec(&line[i]);

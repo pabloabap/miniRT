@@ -89,11 +89,10 @@ int	main(int ag, char **av)
 		free_scene(scene);
 		return (EXIT_FAILURE);
 	}
-	ft_prepare_canvas(&scene->canvas, ft_strrchr(path, '/') + 1);
+	ft_prepare_canvas(&scene->canvas, path);
 	ft_render_scene(scene);
 	mlx_put_image_to_window(scene->canvas->mlx_init, \
 		scene->canvas->mlx_win, scene->canvas->img, 0, 0);
-	ft_putendl_fd("TEMRINADO", 1);
 	ft_mlx_hook_mng(scene);
 	mlx_loop(scene->canvas->mlx_init);
 	return (0);
