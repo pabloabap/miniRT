@@ -61,8 +61,6 @@ t_tuple	cy_normal(t_oitem obj, t_tuple s_point)
  */
 t_tuple	ft_sp_normal_at(t_oitem obj, t_tuple surface_point)
 {
-	t_tuple	obj_point;
-	t_tuple	obj_normal;
 	t_tuple	world_normal;
 
 	if (obj.obj_type == SPHERE)

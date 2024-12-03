@@ -14,9 +14,6 @@
 
 static void	ft_fill_v_cy(t_ray ray, t_cylinder cy, double *v)
 {
-	t_tuple	v_cy_to_ray;
-
-	v_cy_to_ray = ft_sub_tuples(ray.origin, cy.origin);
 	v[0] = ray.direction.x * ray.direction.x + \
 			ray.direction.z * ray.direction.z;
 	v[1] = 2 * (ray.origin.x * ray.direction.x + \

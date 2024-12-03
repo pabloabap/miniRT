@@ -342,7 +342,8 @@ t_tuple			ft_rc_position(t_ray ray, double position);
 double			ft_discriminant(double *v);
 void			ft_sphere_inters(t_ray ray, t_oitem *sphere, \
 					t_ray_inters **i_list);
-void			ft_cylinder_inters(t_ray ray, t_oitem *sphere, t_ray_inters **i_list);
+void			ft_cylinder_inters(t_ray ray, t_oitem *sphere, \
+					t_ray_inters **i_list);
 int				ft_add_inters_sorted(t_ray_inters **i_list, double inter_point, \
 					t_oitem *obj);
 int				ft_identify_hit(t_ray_inters *i_list);
@@ -393,9 +394,11 @@ t_tuple			ft_normalize_color(int color);
 t_ray			ft_ray_for_pixel(t_camera camera, double px, double py);
 double			ft_rad_to_deg(double radians);
 
-int 			check_height(t_ray ray, double t, t_cylinder cy);
-void 			ft_cylinder_caps(t_ray ray, t_oitem *cy, t_ray_inters **i_list);
-void 			ft_cylinder_inters(t_ray ray, t_oitem *cy, t_ray_inters **i_list);
+int				check_height(t_ray ray, double t, t_cylinder cy);
+void			ft_cylinder_caps(t_ray ray, t_oitem *cy, \
+					t_ray_inters **i_list);
+void			ft_cylinder_inters(t_ray ray, t_oitem *cy, \
+					t_ray_inters **i_list);
 
 //___GNL___
 
@@ -414,6 +417,58 @@ void			ft_print_tuple(t_tuple t);
 void			ft_fill_matrix(t_matrix *m, char *arr);
 void			ft_print_i_list(t_ray_inters *i_list);
 
-void ft_set_cy_transformations_matrix(t_oitem *obj, t_cylinder *cy);
-# include "parsing.h"
+void			ft_set_cy_transformations_matrix(t_oitem *obj, t_cylinder *cy);
+
+//__PARSING___
+typedef enum e_error
+{
+	FD_ERROR,
+	VAL_ERROR,
+	VEC_ERROR,
+	COL_ERROR,
+	LINE_ERROR
+}	t_error;
+
+int				is_space(char c);
+int				is_space(char c);
+double			add_decimal(float n, char *line);
+double			ft_atod(char *line);
+double			ft_atod_val(char *line);
+t_tuple			read_point(char *line);
+t_tuple			read_vec(char *line);
+int				skip_num(char *line);
+int				skip_vec(char *line);
+
+int				read_scene(char *path, t_scene *scene);
+void			print_scene(t_scene *scene);
+void			print_objs(t_oitem *o_lst);
+
+int				set_ambient(char *line, t_scene *scene);
+int				set_camera(char *line, t_scene *scene);
+int				set_light(char *line, t_scene *scene);
+int				set_sphere(char *line, t_scene *scene);
+int				set_cylinder(char *line, t_scene *scene);
+int				set_plane(char *line, t_scene *scene);
+
+int				check_line_end(char *line);
+int				valid_char(char c);
+int				check_line(char *line, int obj);
+int				skip_space(char *line);
+int				skip_num2(char *line);
+
+int				check_line(char *line, int obj);
+int				check_line_end(char *line);
+
+int				skip_space(char *line);
+int				skip_num2(char *line);
+int				is_num(char *line, int end);
+int				is_val(char *line);
+int				is_vector(char *line);
+
+int				read_color(char *line);
+int				set_rgb(int r, int g, int b);
+int				get_red(int c);
+int				get_green(int c);
+int				get_blue(int c);
+//-------------------------------------------------
 #endif
