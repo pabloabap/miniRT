@@ -428,7 +428,7 @@ void			ft_set_cy_transformations_matrix(t_oitem *obj, t_cylinder *cy);
 
 //__PARSING___
 
-void    		parsing_error(int code);
+void			parsing_error(int code);
 int				is_space(char c);
 int				is_space(char c);
 double			add_decimal(float n, char *line);
