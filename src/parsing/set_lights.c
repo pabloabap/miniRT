@@ -27,6 +27,7 @@ int	set_ambient(char *line, t_scene *scene)
 	amb = malloc(sizeof(t_ambient));
 	i = skip_space(line);
 	amb->ratio = ft_atod_val(&line[i]);
+	ft_check_brightness(amb->ratio);
 	i += skip_num(&line[i]);
 	amb->color = read_color(&line[i]);
 	i += skip_vec(&line[i]);
@@ -88,6 +89,7 @@ int	set_light(char *line, t_scene *scene)
 	light->position = read_point(&line[i]);
 	i += skip_vec(&line[i]);
 	light->brightness = ft_atod(&line[i]);
+	ft_check_brightness(light->brightness);
 	i += skip_num(&line[i]);
 	if (check_l_color(&line[i]))
 	{

@@ -40,16 +40,30 @@ void	ft_empty_mandatory_items_check(t_scene *scene)
 	if (NULL == scene->camera)
 	{
 		ft_putendl_fd("Error\nMissing camera params", 2);
-		exit(MISSING_MANDATORY_PARAM);
+		exit(PARSING_ERROR);
 	}
 	if (NULL == scene->light)
 	{
 		ft_putendl_fd("Error\nMissing light params", 2);
-		exit(MISSING_MANDATORY_PARAM);
+		exit(PARSING_ERROR);
 	}
 	if (NULL == scene->ambient_light)
 	{
 		ft_putendl_fd("Error\nMissing ambient params", 2);
-		exit(MISSING_MANDATORY_PARAM);
+		exit(PARSING_ERROR);
+	}
+}
+
+/**
+ * Comprueba que el ratio de brillo de la luz y de la luz ambiente estén en
+ * el rango 0 a 1 incluidos.
+ */
+void	ft_check_brightness(double brightness)
+{
+	if (brightness < 0 || brightness > 1)
+	{
+		ft_putstr_fd("Error\nEl ratio de luminosidad tiene que estar en ", 2);
+		ft_putendl_fd("el intervalo 0.0 - 1.0 para luz y luz ambiente.", 2);
+		exit(PARSING_ERROR);
 	}
 }

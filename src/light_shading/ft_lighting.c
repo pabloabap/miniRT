@@ -110,16 +110,21 @@ static int	ft_final_color(t_tuple ambt, t_tuple diff, t_tuple spec, \
 
 /**
  * Normaliza los valores del color del objeto, para poder aplicar la 
- * influencia de la luz en el color del objeto, y define los valores por 
+ * influencia de la luz en el color y define los valores por 
  * defecto de las distintasluces (ambiente, difusa y especular).
  */
 static void	ft_default_light_values(t_tuple *light_types, \
 	t_material material, t_point_light light)
 {
-	light_types[EFECTIVE_COLOR] = ft_normalize_color(material.color);
-	ft_scalar_mult(&(light_types[EFECTIVE_COLOR]), light.brightness, COLOR);
-	light_types[AMBIENT] = light_types[EFECTIVE_COLOR];
-	ft_scalar_mult(&(light_types[AMBIENT]), material.ambient, COLOR);
-	light_types[DIFFUSE] = ft_normalize_color(ft_create_trgb(0, 0, 0, 0));
-	light_types[SPECULAR] = ft_normalize_color(ft_create_trgb(0, 0, 0, 0));
+	if (light.color)
+	{
+		light_types[EFECTIVE_COLOR] = ft_normalize_color(material.color);
+		ft_scalar_mult(&(light_types[EFECTIVE_COLOR]), light.brightness, COLOR);
+		light_types[AMBIENT] = ft_mult_tuples(\
+			ft_normalize_color(material.color), \
+			ft_normalize_color(material.ambient));
+		light_types[AMBIENT].w = COLOR;
+		light_types[DIFFUSE] = ft_normalize_color(ft_create_trgb(0, 0, 0, 0));
+		light_types[SPECULAR] = ft_normalize_color(ft_create_trgb(0, 0, 0, 0));
+	}
 }

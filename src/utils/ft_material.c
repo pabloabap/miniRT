@@ -31,10 +31,8 @@ t_material	ft_default_material(int color)
 }
 
 /**
- * Calcula el color final de los objetos de la escena, obtenido de la 
- * combinación del color original del objeto y el color de la luz ambiente. 
- * Primero se normalizan para operarlos y luego se escalan al rango 0-255 para 
- * conseguir el color final.
+ * Calcula el color ambiente de los objetos de la escena, obtenido de la 
+ * combinación del color ambiente y su ratio de luminosidad. 
  * @param obj Puntero al primer elemento de la lista de objetos para iterar y
  * 	calcular sus colores finales.
  * @param ambt Punteor a la estructura `t_ambient` que contine la información
@@ -44,18 +42,14 @@ t_material	ft_default_material(int color)
  */
 void	ft_final_material_color(t_oitem *obj, t_ambient *ambt)
 {
-	t_tuple	mat_color_t;
 	t_tuple	ambt_color_t;
-	t_tuple	final_color_t;
 
+	ambt_color_t = ft_build_tuple(ft_get_r(ambt->color), \
+		ft_get_g(ambt->color), ft_get_b(ambt->color), COLOR);
 	while (obj)
 	{
-		mat_color_t = ft_normalize_color(obj->material.color);
-		ambt_color_t = ft_normalize_color(ambt->color);
-		final_color_t = ft_mult_tuples(mat_color_t, ambt_color_t);
-		obj->material.color = ft_create_trgb(0, final_color_t.x * 255, \
-			final_color_t.y * 255, final_color_t.z * 255);
-		obj->material.ambient = ambt->ratio;
+		obj->material.ambient = ft_create_trgb(0, ambt_color_t.x * ambt->ratio, \
+			ambt_color_t.y * ambt->ratio, ambt_color_t.z * ambt->ratio);
 		obj = obj->next;
 	}
 }

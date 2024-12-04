@@ -49,7 +49,7 @@ typedef enum e_errors
 	COLOR_FORMAT,
 	FALSE_OBJECT,
 	FD_ERROR,
-	MISSING_MANDATORY_PARAM
+	PARSING_ERROR
 }	t_errors;
 
 typedef enum e_x_event
@@ -385,6 +385,7 @@ void			ft_matrix_view_transform_check(t_tuple from_p, t_tuple to_p, \
 void			ft_normalized_vec_check(t_tuple v_v);
 void			ft_malloc_check(void *p);
 void			ft_empty_mandatory_items_check(t_scene *scene);
+void			ft_check_brightness(double brightness);
 
 //___UTILS___
 

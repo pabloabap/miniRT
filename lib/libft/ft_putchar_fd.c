@@ -14,5 +14,6 @@
 
 void	ft_putchar_fd(char c, int fd)
 {
-	write(fd, &c, 1);
+	if (0 == write(fd, &c, 1))
+		ft_putendl_fd("Write error", 2);
 }

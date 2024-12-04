@@ -186,4 +186,7 @@ cameras:
 planes:
 	for scene in $$(ls ./scenes/pl_rotations); do ./$(NAME) "./scenes/pl_rotations/$$scene" & done
 
-.PHONY: all clean fclean re libft mlx profile norminette cameras planes
+lights:
+	for scene in $$(ls ./scenes/lights); do ./$(NAME) "./scenes/lights/$$scene" & done
+
+.PHONY: all clean fclean re libft mlx profile norminette cameras planes lights
