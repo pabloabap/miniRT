@@ -44,7 +44,7 @@ int	ft_add_obj(t_scene *scene, int o_type, void *obj, int color)
 		tmp->next = new;
 		new->prev = tmp;
 	}
-	new->material = ft_default_material(color, scene->ambient_light);
+	new->material = ft_default_material(color);
 	return (status);
 }
 

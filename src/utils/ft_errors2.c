@@ -73,3 +73,14 @@ void	ft_normalized_vec_check(t_tuple v_v)
 		exit (NORMALIZATION_ERROR);
 	}
 }
+
+/** Retorna mensaje de error si falla malloc.*/
+void	ft_malloc_check(void *p)
+{
+	if (NULL == p)
+	{
+		ft_putstr_fd("Error\n", 2);
+		ft_putendl_fd(strerror(errno), 2);
+		exit (errno);
+	}
+}

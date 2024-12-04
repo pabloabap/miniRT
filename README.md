@@ -4,8 +4,9 @@ My first RayTracer with miniLibX
 
 # REVISAR
 
-- [ ] Fichero .rt vacion -> Seg fault
-- [ ] Fichero sin ./ -> Seg fault titulo
-- [ ] Normalizacion de vectores que tienen que estar normalizados.
-- [ ] Escena sin luz ambiente ni luz normal -> Seg fault
-- [ ] Inicializar luz y luz ambiente a cero o a error -> Seg fault.
+- [x] Fichero .rt vacio -> Seg fault
+- [x] Fichero sin ./ -> Seg fault titulo
+- [x] Normalizacion de vectores que tienen que estar normalizados.
+- [x] Escena sin luz ambiente ni luz normal -> Seg fault
+- [x] Inicializar luz y luz ambiente despues de objetos -> Seg fault.
+- [ ] Carpeta cuyo nombre acaba en .rt la lee como si fuera un archivo.

@@ -62,7 +62,6 @@ SRCS		=	$(MAIN)\
 				./src/ray_intersections/ft_sphere_inters.c \
 				./src/shadows/ft_is_shadowed.c \
 				./src/utils/ft_build_camera.c \
-				./src/utils/ft_build_light.c \
 				./src/utils/ft_build_matrix.c \
 				./src/utils/ft_build_tuple.c \
 				./src/utils/ft_color_utils.c \
@@ -178,10 +177,13 @@ re: fclean all
 profile: fclean
 	$(MAKE) CFLAGS="$(CFLAGS) -pg" all
 
+norminette:
+	norminette debug include lib/libft src;
+
 cameras:
 	for scene in $$(ls ./scenes/cam_rotations); do ./$(NAME) "./scenes/cam_rotations/$$scene" & done
 
 planes:
 	for scene in $$(ls ./scenes/pl_rotations); do ./$(NAME) "./scenes/pl_rotations/$$scene" & done
 
-.PHONY: all clean fclean re libft mlx cameras planes
+.PHONY: all clean fclean re libft mlx profile norminette cameras planes

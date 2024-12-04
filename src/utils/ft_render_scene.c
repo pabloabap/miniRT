@@ -26,6 +26,8 @@ int	ft_render_scene(t_scene *scene)
 	int		canvas_axis[2];
 	t_ray	ray;
 
+	ft_empty_mandatory_items_check(scene);
+	ft_final_material_color(scene->objs_list, scene->ambient_light);
 	ray.origin = scene->camera->position_p;
 	canvas_axis[X] = 0;
 	canvas_axis[Y] = 0;

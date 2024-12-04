@@ -31,3 +31,25 @@ void	parsing_error(int code)
 		ft_putstr_fd("File descriptor invalido\n", 2);
 	exit (code);
 }
+
+/**
+ * Comprueba que el input tiene definidos la camara. la luz y la luz ambiente.
+ */
+void	ft_empty_mandatory_items_check(t_scene *scene)
+{
+	if (NULL == scene->camera)
+	{
+		ft_putendl_fd("Error\nMissing camera params", 2);
+		exit(MISSING_MANDATORY_PARAM);
+	}
+	if (NULL == scene->light)
+	{
+		ft_putendl_fd("Error\nMissing light params", 2);
+		exit(MISSING_MANDATORY_PARAM);
+	}
+	if (NULL == scene->ambient_light)
+	{
+		ft_putendl_fd("Error\nMissing ambient params", 2);
+		exit(MISSING_MANDATORY_PARAM);
+	}
+}
