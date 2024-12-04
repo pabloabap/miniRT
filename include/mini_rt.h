@@ -97,7 +97,8 @@ typedef enum e_elemet_type
 	LIGHT,
 	AMBIENT_LIGHT,
 	CAMERA,
-	COLOR
+	COLOR,
+	EMPTY
 }	t_element_type;
 
 typedef enum e_light_types

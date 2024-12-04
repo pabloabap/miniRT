@@ -63,6 +63,20 @@ int	set_camera(char *line, t_scene *scene)
 	return (check_line_end(&line[i]));
 }
 
+int	check_l_color(char	*line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (!is_space(line[i]) && line[i] != '\n')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 int	set_light(char *line, t_scene *scene)
 {
 	t_point_light	*light;
@@ -75,8 +89,13 @@ int	set_light(char *line, t_scene *scene)
 	i += skip_vec(&line[i]);
 	light->brightness = ft_atod(&line[i]);
 	i += skip_num(&line[i]);
-	light->color = read_color(&line[i]);
-	i += skip_vec(&line[i]);
+	if (check_l_color(&line[i]))
+	{
+		light->color = read_color(&line[i]);
+		i += skip_vec(&line[i]);
+	}
+	else
+		light->color = ft_create_trgb(0, 255, 255, 255);
 	scene->light = light;
 	return (check_line_end(&line[i]));
 }

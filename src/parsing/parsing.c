@@ -29,6 +29,8 @@ int	read_obj(char *line)
 		return (check_line(&line[i + 2], PLANE));
 	if (line[i] == 'c' && line[i + 1] == 'y' && is_space(line[i + 2]))
 		return (check_line(&line[i + 2], CYLINDER));
+	if (line[i] == '\n')
+		return (EMPTY);
 	return (-1);
 }
 
