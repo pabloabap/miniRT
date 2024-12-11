@@ -67,3 +67,17 @@ void	ft_check_brightness(double brightness)
 		exit(PARSING_ERROR);
 	}
 }
+
+/**
+ * Comprueba que los parametros `r`, `g` y `b` de un color estén en el rango 
+ * [0 - 255].
+ */
+void	ft_check_color(int r, int g, int b)
+{
+	if ((r < 0 || r > 255) || (g < 0 || g > 255) || (b < 0 || b > 255))
+	{
+		ft_putstr_fd("Error\nParametros RGB de color fuera ", 2);
+		ft_putendl_fd("del rango [0 - 255].", 2);
+		exit(PARSING_ERROR);
+	}
+}

@@ -386,6 +386,7 @@ void			ft_normalized_vec_check(t_tuple v_v);
 void			ft_malloc_check(void *p);
 void			ft_empty_mandatory_items_check(t_scene *scene);
 void			ft_check_brightness(double brightness);
+void			ft_check_color(int r, int g, int b);
 
 //___UTILS___
 

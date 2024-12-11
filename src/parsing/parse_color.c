@@ -26,6 +26,7 @@ int	read_color(char *line)
 	g = ft_atoi(line);
 	line += skip_num(line) + 1;
 	b = ft_atoi(line);
+	ft_check_color(r, g, b);
 	c = ft_create_trgb(0, r, g, b);
 	return (c);
 }
