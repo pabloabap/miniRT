@@ -59,6 +59,6 @@ double	ft_atod(char *line)
 double	ft_atod_val(char *line)
 {
 	if (is_val(line) == -1)
-		exit(printf("value format error\n"));
+		exit(printf("Error\nValue format error\n"));
 	return (ft_atod(line));
 }

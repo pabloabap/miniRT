@@ -171,6 +171,7 @@ clean:
 fclean: clean
 	rm -rf miniRT
 	make fclean -C $(DIR_LIBFT)
+	make clean -C $(DIR_MLX)
 
 re: fclean all
 

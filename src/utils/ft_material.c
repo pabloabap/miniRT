@@ -6,7 +6,7 @@
 /*   By: pabad-ap <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 10:29:17 by pabad-ap          #+#    #+#             */
-/*   Updated: 2024/11/12 23:14:31 by pabad-ap         ###   ########.fr       */
+/*   Updated: 2024/12/12 00:51:58 by pabad-ap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_material	ft_default_material(int color)
 	m.ambient = 0;
 	m.diffuse = 0.7;
 	m.specular = 0.3;
-	m.shininess = 200.0;
+	m.shininess = 100.0;
 	return (m);
 }
 

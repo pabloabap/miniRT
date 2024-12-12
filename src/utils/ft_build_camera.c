@@ -26,6 +26,8 @@ t_camera	ft_build_camera(int hsize, int vsize, int fov_deg)
 	double		half_view;
 	double		aspect;
 
+	if (fov_deg < 0 || fov_deg > 180)
+		exit(printf("Error\nFOV out of range\n"));
 	camera.hsize = hsize;
 	camera.vsize = vsize;
 	camera.fov = M_PI * fov_deg / 180;

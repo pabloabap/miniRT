@@ -31,7 +31,7 @@ int	is_val(char *line)
 			return (-1);
 		i += skip_num2(&line[i + 1]) + 1;
 	}
-	if (!is_space(line[i]) && line[i] != '\n')
+	if (line[i] && !is_space(line[i]) && line[i] != '\n')
 		return (-1);
 	return (i);
 }
